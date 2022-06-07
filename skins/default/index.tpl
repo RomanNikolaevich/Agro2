@@ -8,8 +8,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Roma Agro test site</title>
+    <meta name="description" content="<?php echo hsc(Core::$META['description']); ?>">
+    <meta name="keywords" content="<?php echo hsc(Core::$META['keywords']);?>">
+    <title><?php echo hsc(Core::$META['title']); ?></title>
     <link href="/skins/default/css/bootstrap.min.css" rel="stylesheet">
     <link href="/skins/default/css/normalize.css" rel="stylesheet"/>
     <link href="/skins/default/css/style.css" rel="stylesheet">
