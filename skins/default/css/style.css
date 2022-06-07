@@ -1,0 +1,212 @@
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  color: rgba(76, 82, 82, 0.959);
+  /*основной цвет текста*/
+  background-color: orange;
+  margin: 0;
+
+}
+
+.block {
+  background-color: rgb(241, 240, 231);
+  width: 1300px;
+  height: auto;
+  margin: auto;
+
+}
+
+span {
+  /*задание части текст цвета оранжевым цветом*/
+  color: orange;
+}
+
+.container-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  /* Просто для демонстрации */
+  background-color: rgb(241, 240, 231);
+  color: white;
+  font-size: 1.8rem;
+  padding: 10px;
+}
+
+.item :hover {
+  background-color:#ffcc04;
+/*  font-size: 2rem;*/
+  padding: 30px 0 15px 0;
+  color: white;
+
+}
+
+.item a {
+  text-decoration: none;
+  color: rgba(76, 82, 82, 0.959);
+}
+
+.item2 {
+  /* Просто для демонстрации */
+  background-color: rgb(241, 240, 231);
+  color: white;
+  padding: 10px;
+  list-style: none;
+  line-height: 170%;
+}
+
+.item2 a {
+
+  background: url("/skins/default/img/marker_01.png") no-repeat 0 3px;
+  padding-left: 20px;
+  /*отступы картинки от текста*/
+  text-decoration: none;
+  color: rgba(76, 82, 82, 0.959);
+}
+
+.item2 a:hover {
+  text-decoration: solid;
+}
+
+.container-logo {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+}
+
+.conteiner-content {
+  display: flex;
+  justify-content: center;
+}
+
+.conteiner-content2 {
+  display: flex;
+  justify-content: left;
+  margin: 0 0 -16px 0;
+  padding: 0 0 0 89px;
+}
+
+.conteiner-content-block {
+  margin: 40px 15px;
+  padding: 33px;
+  width: 288px;
+  background-image: url(/skins/default/img/block-1_shape.jpg);
+}
+
+.button {
+  display: inline-block;
+  background-image: url(/skins/default/img/button1.jpg);
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+
+}
+
+.button:hover {
+  display: inline-block;
+  background-image: url(/skins/default/img/button2.jpg);
+  width: 100px;
+  height: 40px;
+ border: none;
+  border-radius: 5px;
+
+}
+
+.conteiner-content-block2 {
+  justify-content: left;
+  margin: 10px 15px;
+  padding: 0 0 5px;
+  width: 343px;
+  border-bottom-style: solid;
+
+}
+
+.conteiner-content-block3 {
+  justify-content: left;
+  margin: 10px 15px;
+  padding: 0 0 5px;
+  width: 693px;
+  border-bottom-style: solid;
+  border-color: grey;
+
+}
+
+.conteiner-content-block4 {
+  justify-content: left;
+  margin: 10px 15px;
+  padding: 0 0 5px;
+  width: 343px;
+}
+
+
+.conteiner-content3 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
+.container-nav2 {
+  display: flex;
+  justify-content: left;
+  margin: 10px 0 10px 97px;
+  padding: 0 0 6px;
+  width: 1230px;
+}
+.conteiner-content-block5 {
+  justify-content: right;
+  margin: 4px 0 10px -188px;
+  padding: 0 0 5px;
+  width: 603px;
+}
+
+.item3 {
+  /* Просто для демонстрации */
+  background-image: url(/skins/default/img/menu2_shape.jpg);
+  color: white;
+  font-size: 1.8rem;
+  padding: 10px;
+  }
+
+.item3 :hover {
+  color: rgba(165, 42, 42, 0.26);
+  font-size: 1.8rem;
+  /* color: rgba(76, 82, 82, 0.959);*/
+}
+
+.item3 a {
+  text-decoration: none;
+  color: white;
+}
+.conteiner-footer {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-suc {
+  color:#fff;
+  background-color: orange;
+  border-color:#ffa500;
+  text-decoration: none;
+}
+
+.btn-suc:hover {
+  color: #fff;
+  background-color: orange;
+  border-color: #ed8f0ddb;
+  text-decoration: none;
+}
+
+.card-columns {
+@include media-breakpoint-only(lg) {
+    column-count: 2;
+}
+@include media-breakpoint-only(xl) {
+    column-count: 5;
+}
+}

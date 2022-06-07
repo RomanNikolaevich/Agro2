@@ -1,0 +1,59 @@
+Папки:
+/.diea - сюда не лезим
+/css - стили
+/img - картинки для шкурки сайта
+/js - скрипты JS
+/libs - папка с функциями: libs в ней создаем файл default.php - тут пока одна функция на распечатку.
+/modules - в нее добавляем все классы, функции, пагинатор (навигация по страницам - внизу экрана 1, 2, ...898),
+ аплоадер картинок - все делаем отдельными файлами с понятным названием (файлы в формате *.php)
+/modules/admin - админка
+/modules/auth - авиризация и регистрация
+/modules/comments - комментарии
+/modules/error - ошибки
+/modules/game - игра
+/modules/news - новости
+/modules/static/pages - логика страничек
+/modules/voting - голосовалка
+
+/skins - шкурки сайта (файлы в формате *.tpl)
+/skins/default/ - стандартная шкурка3
+/skins/default/admin - админка
+/skins/default/auth - авторизация
+/skins/default/comments - комментарии
+/skins/default/errors - ошибки
+/skins/default/game - игра
+/skins/default/news - новости
+/skins/default/static/menu - страницы меню
+/skins/default/static/pages - страницы сайта
+/skins/default/voting - голосовалка
+
+/vendor - плагины
+
+/work - здесь будут архивы для скачки, галаерея и прочее 
+
+Файлы в корневой:
+.gitignore - скрываем файлы для гитхаба
+.htaccess - файл дополнительной конфигурации веб-сервера.
+composer.json - компосер
+composer.lock - компосер
+config.php - константы
+db_config - подключение БД
+index.php - через него собирается все страницы сайта
+variables.php - функции с главной страницы
+
+GET:
+    Модули (Controllers)
+        index.php?module=auth&page=login
+            /module/auth/login.php
+        index.php?module=auth&page=logout
+            /module/auth/logout.php
+    Шаблон (Views)
+        index.php?module=auth&page=login
+            /skins/default/auth/login.tpl
+        index.php?module=auth&page=logout
+            /skins/default/auth/logout.tpl
+
+module/название_модуля/название_страницы.php
+    для модуля без указания страницы будет загружаться main.php
+skins/название_шаблона/название_модуля/название_страницы.tpl
+    для модуля без указания страницы будет загружаться main.tpl

@@ -1,0 +1,19 @@
+AddDefaultCharset UTF-8
+php_flag display_errors ON
+
+RewriteEngine on
+
+#RewriteRule ^admin/(.*)$ admin/index.php?route=$1 [L,QSA]
+
+php_value memory_limit 128M
+php_value upload_max_filesize 50M
+php_value post_max_filesize 50M
+php_value max_input_time 3000
+
+RewriteCond %{REQUEST_URI} !^/forum
+RewriteCond %{REQUEST_URI} !^/ckeditor
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
