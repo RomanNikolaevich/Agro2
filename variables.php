@@ -35,4 +35,3 @@ if(!isset($_GET['module'])) {
 if(!isset($_GET['page'])) {
 	$_GET['page'] = 'main';
 }
-

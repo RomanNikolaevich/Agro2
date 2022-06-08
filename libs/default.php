@@ -45,27 +45,6 @@ function trimArray($elem) {
     return $elem; //массив не будем трогать
 }
 
-//Приводим к числу
-function intArray($elem) {
-    if(!is_array($elem)) {
-        $elem = (int)($elem); //приводим к типу int
-    } else {
-        $elem = array_map('intArray', $elem);
-        // делаем замыкание функции самой себя и каждый раз залазит глубже в массив
-    }
-    return $elem; //массив не будем трогать
-}
-
-//Приводим к float
-function floatArray($elem) {
-    if(!is_array($elem)) {
-        $elem = (float)($elem); //приводим к типу float
-    } else {
-        $elem = array_map('floatArray', $elem);
-    }
-    return $elem; //массив не будем трогать
-}
-
 /*Безопасность записываемой в БД информации. Экранирует специальные символы в строке для использования
 в SQL-выражении, используя текущий набор символов соединения*/
 function mres($elem) {
@@ -127,4 +106,25 @@ function myHash($var) {
 	$salt2 = 'CBA';
 	$var = crypt(md5($var.$salt), $salt2);
 	return $var;
+}
+
+//Приводим к числу
+function intArray($elem) {
+    if(!is_array($elem)) {
+        $elem = (int)($elem); //приводим к типу int
+    } else {
+        $elem = array_map('intArray', $elem);
+        // делаем замыкание функции самой себя и каждый раз залазит глубже в массив
+    }
+    return $elem; //массив не будем трогать
+}
+
+//Приводим к float
+function floatArray($elem) {
+    if(!is_array($elem)) {
+        $elem = (float)($elem); //приводим к типу float
+    } else {
+        $elem = array_map('floatArray', $elem);
+    }
+    return $elem; //массив не будем трогать
 }

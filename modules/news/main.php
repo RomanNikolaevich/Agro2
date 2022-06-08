@@ -1,4 +1,5 @@
 <?php
+
 //удаление новости:
 if (isset($_POST['delete'])){
 /*    foreach($_POST['ids'] as $k=>$v) {
