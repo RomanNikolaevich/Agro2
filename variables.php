@@ -30,16 +30,22 @@ if(isset($_GET['route'])) {
 //wtf($_GET); //проверка вывода ЧПУ
 
 //Проверка на существование страниц
-$allowed = array('static', 'admin','auth', 'comments', 'contacts', 'errors', 'game', 'goods', 'news','partners', 'services', 'voting');
+if(Core::$SKIN != 'admin') {
+    $allowed = array('static', 'auth', 'comments', 'contacts', 'errors', 'game', 'goods', 'news','partners', 'services', 'voting');
 
-if(!isset($_GET['module'])) {
-	$_GET['module'] = 'static';
-} elseif(!in_array($_GET['module'],$allowed)) {
-	//exit();
-	header("Location: /errors/404");
-	exit();
+    if(!isset($_GET['module'])) {
+        $_GET['module'] = 'static';
+    } elseif(!in_array($_GET['module'],$allowed) && Core::$SKIN != 'admin') {
+        header("Location: /errors/404");
+        exit();
+    }
 }
 
 if(!isset($_GET['page'])) {
 	$_GET['page'] = 'main';
+}
+
+//Обрезаем пост - проверить потом как работает
+if(isset($_POST)) {
+    $_POST =trimAll($_POST);
 }

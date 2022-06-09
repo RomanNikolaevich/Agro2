@@ -35,7 +35,7 @@ function q($query) {
 } // пример применения: $result = q("SELECT * FROM `users` ORDER BY `id`");
 
 //Удаляет пробелы (или другие символы) из начала и конца строки
-function trimArray($elem) {
+function trimAll($elem) {
     if(!is_array($elem)) { //если это не массив
         $elem = trim($elem); //то мы его обработаем тримом
     } else {
