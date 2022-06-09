@@ -13,8 +13,8 @@ include_once './variables.php';
 
 // Роутер
 ob_start();
-include './modules/allpages.php';
-include './modules/'.$_GET['module'].'/'.$_GET['page'].'.php';
+include './'.Core::$CONT.'/allpages.php';
+include './'.Core::$CONT.'/'.$_GET['module'].'/'.$_GET['page'].'.php';
 include './skins/'.Core::$SKIN.'/'.$_GET['module'].'/'.$_GET['page'].'.tpl';
 $content = ob_get_contents();
 ob_end_clean();

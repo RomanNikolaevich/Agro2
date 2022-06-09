@@ -3,12 +3,20 @@
 //ЧПУ
 if(isset($_GET['route'])) {
 	$temp = explode('/', $_GET['route']);
+    //подключаем админку:
+    if($temp[0] == 'admin') {
+        Core::$CONT = Core::$CONT.'/admin'; //заменяем папку modules на modules/admin
+        Core::$SKIN = 'admin'; //заменяем папку default на admin
+        unset($temp[0]);
+    }
+    //ЧПУ для сайта
+    $i = 0;
 	foreach ($temp as $k=>$v) {
-		if($k == 0) {
+		if($i == 0) {
 			if(!empty($v)) {
 				$_GET['module'] = $v;
 			}
-		} elseif($k == 1) {
+		} elseif($i == 1) {
 			if(!empty($v)) {
 				$_GET['page'] = $v;
 			}

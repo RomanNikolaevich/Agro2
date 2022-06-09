@@ -2,6 +2,7 @@
 
 class Core {
     static $SKIN       = 'default'; //можно пробелами выравнивать в столбик, без табов!
+    static $CONT       = 'modules';
     static $DB_HOST    = 'localhost';
     static $DB_LOGIN   = 'roman';
     static $DB_PASS    = 'yAjD8lu4SHe';
