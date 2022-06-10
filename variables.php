@@ -5,8 +5,8 @@ if(isset($_GET['route'])) {
 	$temp = explode('/', $_GET['route']);
     //подключаем админку:
     if($temp[0] == 'admin') {
-        Core::$CONT = Core::$CONT.'/admin'; //заменяем папку modules на modules/admin
-        Core::$SKIN = 'admin'; //заменяем папку default на admin
+        Core::$SKIN = 'admin'; //заменяем папку default на admin - для скинов
+        Core::$CONT = Core::$CONT.'/admin'; //заменяем папку modules на modules/admin - для плагинов
         unset($temp[0]);
     }
     //ЧПУ для сайта
@@ -23,11 +23,12 @@ if(isset($_GET['route'])) {
 		} else {
 			$_GET['key'.($k-1)] = $v;
 		}
-		++$k;
+		++$i;
 	}
 	unset($_GET['route']);
 }
 //wtf($_GET); //проверка вывода ЧПУ
+//exit();
 
 //Проверка на существование страниц
 if(Core::$SKIN != 'admin') {
@@ -36,6 +37,7 @@ if(Core::$SKIN != 'admin') {
     if(!isset($_GET['module'])) {
         $_GET['module'] = 'static';
     } elseif(!in_array($_GET['module'],$allowed) && Core::$SKIN != 'admin') {
+        //exit();
         header("Location: /errors/404");
         exit();
     }
@@ -49,3 +51,4 @@ if(!isset($_GET['page'])) {
 if(isset($_POST)) {
     $_POST =trimAll($_POST);
 }
+

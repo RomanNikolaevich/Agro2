@@ -4,27 +4,29 @@
         <div class="form-group">
             <form action="" method="post">
                 <div>
-                    Заголовок новости *:
+                    <h4>Заголовок новости *:</h4>
                     <input type="text" class="form-control" name="title" value="<?=
                      htmlspecialchars($_POST['title'] ?? ''); ?>">
                 </div>
                 <div>
-                    Категория новости:
+                    <h4>Категория новости:</h4>
                     <input type="text" class="form-control" name="cat" value="<?=
                      htmlspecialchars($_POST['cat'] ?? ''); ?>">
                 </div>
                 <div>
-                    Описание новости:
+                    <h4>Описание новости:</h4>
                     <textarea class="form-control" name="description"><?=
                          htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
                 </div>
                 <div>
-                    Полный текст новости:
+                    <h4>Полный текст новости:</h4>
                     <textarea class="form-control" name="text"><?=
                          htmlspecialchars($_POST['text'] ?? '');?></textarea>
                 </div>
-                <input type="submit" name="add" value="Добавить новость">
+                <br>
+                <input class="btn btn-primary" type="submit" name="add" value="Добавить новость">
             </form>
+            <br>
         </div>
     </div>
 </div>

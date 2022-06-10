@@ -22,6 +22,8 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
 		$access = mysqli_fetch_assoc($res);
 		if ($access['active'] == 1) {
 			$_SESSION['user'] = $access;
+            $_SESSION['reg'] = 'Поздравляю, Вы авторизированы';
+
 			//если галочку согласия с автоавторизацией пользователь отметил:
 			if (!empty($_POST['autoauthconfirm'])) {
 				$autoauthhash = myHash($_SESSION['user']['id'] . $_SESSION['user']['login'] . $_SESSION['user']['email']);

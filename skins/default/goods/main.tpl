@@ -22,9 +22,9 @@
                             </div>
                             <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { //только для админов видно ?>
                             <div class="card-footer">
-                                <a class="btn btn-warning" href="/index.php?module=goods&page=edit&id=<?php echo $row['id'];
+                                <a class="btn btn-warning" href="/goods/edit&id=<?php echo $row['id'];
                                 ?>">Изменить</a>
-                                <a class="btn btn-danger" href="/index.php?module=goods&action=delete&id=<?php echo $row['id'];
+                                <a class="btn btn-danger" href="/goods&action=delete&id=<?php echo $row['id'];
                                 ?> ">Удалить</a>
                             </div>
                             <?php } ?>

@@ -28,11 +28,9 @@
 				   href="/auth/regin">Зарегистрироваться</a>
 			</div>
 			<?php } else {?>
-                <div class="col">Позравляю, Вы авторизированы</div>
+                <div class="col"><?= $_SESSION['reg'] ?? '' ?></div>
 			<?php } ?>
             <!-- Конец формы авторизации -->
-			<p></p>
-			<p>Вернуться на <a href="<?php echo $_SERVER['PHP_SELF']; ?>">главную</a>.</p>
 		</div>
 	</div>
 </div>

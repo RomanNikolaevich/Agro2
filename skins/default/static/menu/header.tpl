@@ -16,10 +16,10 @@
 		if(empty($_SESSION['user'])) { ?>
 			<div class="item"><a href="/auth/login">login</a></div>
 			<?php
-		} ?>
-		<?php
-		if(!empty($_SESSION['user'])) { ?>
-			<div class="item"><a href="/auth/logout">logout</a></div>
+		}
+		elseif(!empty($_SESSION['user'])) { ?>
+            <div class="item"><a href="/admin/static/main">admin</a></div>
+            <div class="item"><a href="/auth/logout">logout</a></div>
 			<?php
 			if(!empty($_SESSION['user'])) {
 				echo 'welcome '.$_SESSION['user']['login'];
