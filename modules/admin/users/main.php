@@ -1,29 +1,48 @@
 <?php
-if(isset($_POST['1']) || isset($_POST['2']) || isset($_POST['5'])) {
-    $access = $_POST['1'] ?? $_POST['2'] ?? $_POST['5'] ?? '';
-    q("
-		UPDATE `users` SET
-		`access` = '".mres(intArray($access))."',
-		WHERE `news`.`id` = ".(int)$_GET['id']."
-	");
-    $_SESSION['info'] = 'Запись была изменена';
-    header('Location: /admin/users');
-    exit();
-}
 
-//вывод товаров из БД в main.tpl
+//вывод пользователей из БД в main.tpl
 $userDb = q("
     SELECT *
     FROM `users`
     ORDER BY `id` DESC
 ");
 
-//делаем проверку сессии
+//Выставляем права пользователям:
+//Обычный пользователь:
+if(isset($_GET['action']) && $_GET['action']=='regular'){
+    q("
+        UPDATE `users` SET
+       `access` = 1
+		WHERE `id` = ".(int)$_GET['id']."
+	");
+    header("Location: /admin/users");
+    exit();
+}
+
+//Админ пользователь:
+if(isset($_GET['action']) && $_GET['action']=='admin'){
+    q("
+        UPDATE `users` SET
+       `access` = 2
+		WHERE `id` = ".(int)$_GET['id']."
+	");
+    header("Location: /admin/users");
+    exit();
+}
+
+//Заблокированный пользователь:
+if(isset($_GET['action']) && $_GET['action']=='blocked'){
+    q("
+        UPDATE `users` SET
+       `access` = 5
+		WHERE `id` = ".(int)$_GET['id']."
+	");
+    header("Location: /admin/users");
+    exit();
+}
+
+//выводим сообщение и чистим сессии
 if(isset($_SESSION['info'])) {
     $info = $_SESSION['info']; //передаем содержимое сессии в переменную инфо
     unset($_SESSION['info']); //удаляем сессию за ненужностью.
 }
-
-
-
-

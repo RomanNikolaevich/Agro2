@@ -61,17 +61,16 @@ if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
             <?php echo $row['access']; ?>
         </td>
         <td class="" style="text-align: center;">
-            <input name="1" type="image" src="/skins/admin/img/main-user-1.png" style="width:25px"
-                   value="<?php echo $row['id']; ?>" alt="regular">
+            <a class="" href="/admin/users&action=regular&id=<?php echo $row['id'];
+            ?>"><img style="width:40px" src="/skins/admin/img/main-user-1.png"></a>
         </td>
         <td class="" style="text-align: center;">
-            <input name="2" type="image" src="/skins/admin/img/admin-user-3.png" style="width:25px"
-                   value="<?php echo $row['id']; ?>" alt="admin">
+            <a class="" href="/admin/users&action=admin&id=<?php echo $row['id'];
+            ?>"><img style="width:40px" src="/skins/admin/img/admin-user-3.png"></a>
         </td>
         <td class="" style="text-align: center;">
-            <!--<a class="" href="" type=""><img style="width:40px" src="/skins/admin/img/blocked-user.png"> </a>-->
-            <input name="5" type="image" src="/skins/admin/img/blocked-user.png" style="width:35px"
-                   value="<?php echo $row['id']; ?>" alt="blocked">
+            <a class="" href="/admin/users&action=blocked&id=<?php echo $row['id'];
+            ?>"><img style="width:40px" src="/skins/admin/img/blocked-user.png"></a>
         </td>
     </tr>
     <?php } ?>

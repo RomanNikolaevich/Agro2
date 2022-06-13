@@ -17,7 +17,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
             <a class="btn btn-primary" href="/admin/news/add">Добавить новость</a>
             <input class="btn btn-danger" type="submit" name="delete" value="Удалить отмеченные записи">
         </div>
-        <form action="" method="post">
+        <form action="" method="get">
             <table class="mytable">
                 <tr class="mytable-header">
                     <th rowspan="2">
@@ -40,6 +40,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
                     <tr style="font-family:Tahoma, sans-serif, font-size:13px; text-align: justify;">
                         <td class="">
                             <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>">
+                            <a href=""
                         </td>
                         <td class="">
                             <?php echo $row['id']; ?>
