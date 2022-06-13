@@ -9,8 +9,22 @@
                     htmlspecialchars($row['title']); ?>">
                 </div>
                 <div>
-                    Категория новости:
-                    <input type="text" class="form-control" name="cat" value="<?= htmlspecialchars($row['cat']);?>">
+                    Категория новости (выберите из списка):
+                    <select class="form-control" name="cat" selected="selected">
+                        <?php
+                        $category = [
+                                'Функционал сайта',
+                                'Новые поступления, новинки',
+                                'Информация для поставщиков',
+                                'Информация для оптовых покупателей',
+                                'Информация для розничных покупателей',
+                        ];
+                        //wtf($category);
+
+                        foreach ($category as $v) {
+                            echo '<option>'.htmlspecialchars($v).'</option>';
+                        } ?>
+                    </select>
                 </div>
                 <div>
                     Описание новости:

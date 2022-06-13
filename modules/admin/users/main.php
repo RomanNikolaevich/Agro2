@@ -1,8 +1,9 @@
 <?php
-if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['description'])) {
+if(isset($_POST['1']) || isset($_POST['2']) || isset($_POST['5'])) {
+    $access = $_POST['1'] ?? $_POST['2'] ?? $_POST['5'] ?? '';
     q("
 		UPDATE `users` SET
-		`access` = '".mres(trimAll($_POST['***']))."',
+		`access` = '".mres(intArray($access))."',
 		WHERE `news`.`id` = ".(int)$_GET['id']."
 	");
     $_SESSION['info'] = 'Запись была изменена';

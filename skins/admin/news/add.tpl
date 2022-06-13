@@ -9,9 +9,22 @@
                      htmlspecialchars($_POST['title'] ?? ''); ?>">
                 </div>
                 <div>
-                    <h4>Категория новости:</h4>
-                    <input type="text" class="form-control" name="cat" value="<?=
-                     htmlspecialchars($_POST['cat'] ?? ''); ?>">
+                    <h4>Категория новости (выберите из списка):</h4>
+                    <select class="form-control" name="cat" selected="selected">
+                        <?php
+                        $category = [
+                                'Функционал сайта',
+                                'Новые поступления, новинки',
+                                'Информация для поставщиков',
+                                'Информация для оптовых покупателей',
+                                'Информация для розничных покупателей',
+                        ];
+                        //wtf($category);
+
+                        foreach ($category as $v) {
+                            echo '<option>'.htmlspecialchars($v).'</option>';
+                        } ?>
+                    </select>
                 </div>
                 <div>
                     <h4>Описание новости:</h4>

@@ -16,15 +16,16 @@ if (isset($_POST['delete'])){
 }
 
 //удаление новости
-if(isset($_GET['key1'], $_GET['key2']) && $_GET['key1']=='delete'){
+if(isset($_GET['action']) && $_GET['action']=='delete'){
     q("
 		DELETE FROM `news`
-		WHERE `id` = ".(int)$_GET['key2']."
+		WHERE `id` = ".(int)$_GET['id']."
 	");
-    $_SESSION['info'] = 'Новость была удалена';
+    $_SESSION['info'] = 'Новость id = '.$_GET['id'].' успешно удалена';
     header("Location: /admin/news");
     exit();
 }
+
 //вывод новостей (переменная для main.tpl
 $news = q("
 SELECT *

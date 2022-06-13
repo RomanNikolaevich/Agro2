@@ -180,6 +180,7 @@ span {
   text-decoration: none;
   color: white;
 }
+
 .conteiner-footer {
   display: flex;
   justify-content: flex-start;
@@ -208,3 +209,19 @@ span {
 @include media-breakpoint-only(xl) {
     column-count: 5;
 }*/
+
+/*картинка для раздела товаров*/
+.goods-link{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.goods-link a{
+    text-decoration: none;
+    font-weight: bold;
+}
+.goods-link a:hover{
+    text-decoration: underline;
+    color: red;
+    font-weight: bold;
+}

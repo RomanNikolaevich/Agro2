@@ -14,7 +14,7 @@
         <form action="" method="post">
         <?php while($row = mysqli_fetch_assoc($news)) { ?>
         <div class="card mb-3">
-            <img class="card-img-top" src="/skins/default/img/azot-2a.jpg" alt="Card image cap">
+            <img class="rounded float-md-left" style="width:350px" src="/skins/default/img/azot4.jpg" alt="Card image cap">
             <div class="card-body">
                 <!--Start: Доступ только админам: кнопки для каждой отдельной новости-->
                 <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
@@ -27,9 +27,12 @@
                 <!--End: Доступ только админам: кнопки для каждой отдельной новости-->
                 <b><?php echo $row['title']; ?></b> <!--вывод заглавия-->
                 <span style="color:#5c636a; font-size:10px;"><?= $row['date'] ?></span><!-- и даты, серым-->
+
             </div>
             <div class="card-footer">
                 <p><?php echo $row['description']; ?></p>
+                <?php echo mb_strimwidth($row['text'], 0, 450, "..."); ?> <a class="" href="/index.php?module=news&page=full&id=<?php echo $row['id'];
+                ?>">(полная версия)</a>
             </div>
         </div>
             <hr>

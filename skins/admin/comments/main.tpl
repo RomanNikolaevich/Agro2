@@ -10,45 +10,14 @@
      * @var $offset integer
      * @var $currentCommentNumber integer
      */
-
     ?>
-    <!--Форма ввода отзывов:-->
-    <div class="container mt-4">
-        <div class="row">
-            <div class="form-group">
-                <h2>ОТЗЫВЫ</h2>
-                <h5>Если Вы остались довольны услугами <span>"AGRO.UNITED"</span> или вам что-то не понравилось,
-                    то можете оставить свой отзыв</h5>
-                <?php if(isset($_SESSION['user'])) { ?>
-                    <!-- Start "Видимый блок отзывов для авторизированных пользователей" -->
-                    <?php if (!isset($_SESSION['commentOk'])) { ?>
-                        <form action="" method="post">
-					<textarea class="form-control" name="comment"
-                              placeholder="Оставьте свой отзыв *"></textarea><br>
-                            <?php if (!empty($errors['comment'])): ?>
-                                <span style="color:red"><?=$errors['comment']?></span><br>
-                            <?php endif ?>
-                            <p style="font-size:12px;">* - поле обязательное для заполнения</p>
-                            <button class="btn btn-suc" name="do_signup" type="submit">Отправить</button>
-                        </form>
-                    <?php } else {
-                        unset($_SESSION['commentOk']); ?>
-                        <div>Спасибо за Ваш отзыв!</div>
-                    <?php } ?>
-                    <br>
-                    <!-- End "Видимый блок отзывов для авторизированных пользователей" -->
-                <?php } else { ?>
-                    <span>Отзывы могут оставлять только зарегистрированные
-                    пользователи.</span><br>
-                    <span>Для регистрации перейдите по ссылке: </span><a style=" text-decoration: none; color: red;"
-                                                                         href="/auth/regin">Регистрация</a><br>
-                    <span>если вы уже зарегистрированы, то пройдите авторизацию:</span>
-                    <a style=" text-decoration: none; color: red;"
-                       href="/auth/login">Авторизация</a><br>
-                <?php } ?>
-            </div>
-        </div>
-    </div>
+<!--Вывод уведомления об изменениях-->
+    <?php
+    if (isset($info)) { ?>
+        <h2><?php
+            echo $info; ?></h2> <!--уведомление, о добавлении новой записи-->
+        <?php
+    } ?><br>
     <!--Вывод отзывов из БД на экран:-->
     <div class="container mt-4">
         <div class="row">
@@ -57,100 +26,72 @@
                 <div class="comment-body">
                     <p>
                         <?=$commentCount
-                                ? 'Всего '.$commentCount.' отзывов:<br>'
+                                ? 'Всего отзывов:' .$commentCountAll.'<br>'
+                                : 'Отзывов пока еще нет, вы будете первым';?>
+                        <?=$commentCount
+                                ? 'из них одобрено: '.$commentCount.'<br>'
                                 : 'Отзывов пока еще нет, вы будете первым';?>
                     </p>
-                    <div>
-                        <?php foreach ($comments as $comment):?>
-                            <!--Start "Блок вывода отзывов из БД:"-->
-                            <div>
-                                <!--Start: Общий просмотр "Одобренные отзывы"-->
-                                <?php if($comment['active'] == 1) { ?>
-                                    # <?php //порядковый номер отзыва
-                                    if ($currentCommentNumber > 0) {
-                                        echo $currentCommentNumber--;
-                                    } ?> |
-                                    user: <u><?= htmlspecialchars($comment['name'])?></u> |
-                                                                                          date: <u><?= $comment['date']?></u> | :
-                                    <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
-                                        <span style="color: green">отзыв одобрен</span><br>
-                                    <?php } ?>
-                                    <i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
-                                <?php }
-                                //End: Общий просмотр "Одобренные отзывы"
-                                //Start: Доступ админа "Скрытые отзывы"
-                                else {
-                                    if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
-                                        # <?php //порядковый номер отзыва
-                                        if ($currentCommentNumber > 0) {
-                                            echo $currentCommentNumber--;
-                                        } ?> |
-                                        user: <u><?= htmlspecialchars($comment['name'])?></u> |
-                                                                                              date: <u><?= $comment['date']?></u> | :
-                                        <span style="color: red">отзыв скрыт</span><br>
-                                        <i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
-                                    <?php } ?>
-                                <?php } ?> <br>
-                                <!--End: "Блок админа: вывод уведомления о статусе отзыва"-->
-                            </div>
-                            <!--End "Блок вывода отзывов из БД"-->
-                            <!--Start "Блок админов"-->
-                            <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2){?>
-                                <form method="post" action="/index.php?module=comments&action=main&id=<?php echo $comment['id'];?>">
-                                    <input class="btn btn-secondary" name="hidecomment" type="submit" value="Скрыть">
-                                    <input class="btn btn-success" name="showcomment" type="submit" value="Одобрить">
-                                </form>
-                            <?php }?>
-                            <!--End "Блок админов"-->
-                            <p></p>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <br>
-            </div>
-        </div>
-    </div>
 
-    <!--Пагинатор:-->
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="?module=comments&pageno=1">First</a>
-                    </li>
-                    <?php if ($pageno > 1): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?module=comments&pageno=
-							<?= ($pageno - 1); ?>">Prev</a>
-                        </li>
-                    <?php endif;
-                    if ($pageno > 1): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?module=comments&pageno=<?= ($pageno - 1); ?>">
-                                <?= ($pageno - 1); ?></a>
-                        </li>
-                    <?php endif; ?>
-                    <li class="page-item">
-                        <a class="page-link" href="?module=comments&pageno=<?= $pageno; ?>">
-                            <?= $pageno; ?></a>
-                    </li>
-                    <?php
-                    if ($pageno < $totalPages): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?module=comments&pageno=<?= ($pageno + 1); ?>">
-                                <?= ($pageno + 1); ?></a>
-                        </li>
-                    <?php endif;
-                    if ($pageno < $totalPages): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?module=comments&pageno=<?= ($pageno + 1); ?>">Next</a>
-                        </li>
-                    <?php endif; ?>
-                    <li class="page-item">
-                        <a class="page-link" href='?module=comments&pageno=<?= $totalPages?>'>Last</a>
-                    </li>
-                </ul>
+                        <table class="mytable">
+                            <tr class="mytable-header">
+                                <th rowspan="2">
+                                    <!-- th тег применяется для шапки таблицы-->
+                                </th>
+                                <th colspan="5" style="text-align: center;">Содержимое новостей</th><!--растягивает ячейку на ширину трех нижних-->
+                                <th colspan="2" style="text-align: center;">Редактирование новостей</th>
+                            </tr>
+                            <tr class="mytable-header" style="text-align: center;">
+                                <th>id</th>
+                                <th>дата</th>
+                                <th>пользователь</th>
+                                <th>отзыв</th>
+                                <th>статус</th>
+                                <th>show</th>
+                                <th>hide</th>
+                            </tr>
+                            <?php while($row = mysqli_fetch_assoc($comments)) { ?>
+                                <tr style="font-family:Tahoma, sans-serif, font-size:13px; text-align: justify;">
+                                    <td class="">
+                                        <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>">
+                                    </td>
+                                    <td class="">
+                                        <?php echo $row['id']; ?>
+                                    </td>
+                                    <td class="">
+                                        <?php echo $row['date']; ?>
+                                    </td>
+                                    <td class="">
+                                        <?php echo $row['name']; ?>
+                                    </td>
+                                    <td class="">
+                                        <?php echo mb_strimwidth($row['text'], 0, 150, "..."); ?>
+                                        <a class="" href="/admin/comments/full&id=<?php echo $row['id'];
+                                        ?>">(полная версия)</a>
+                                    </td>
+                                    <td class="" style="text-align: center;">
+                                        <?php echo $row['active'] == 1 ? 'show' : 'hide'; ?>
+                                    </td>
+                                    <td class="" style="text-align: center;">
+                                        <form method="post" action="/admin/comments&action=main&id=<?php echo $comment['id'];?>">
+                                            <input type="image" name="showcomment" width="40px"
+                                                   src="/skins/admin/img/show-button.png">
+                                        </form>
+                                    </td>
+                                    <td class="" style="text-align: center;">
+                                        <form method="post" action="/admin/comments&action=main&id=<?php echo $comment['id'];?>">
+                                            <input type="image" name="hidecomment" width="40px"
+                                                   src="/skins/admin/img/hide-button.png">
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </table>
+
+                </div>
+                <div class="more-free-space">
+
+                </div>
             </div>
         </div>
     </div>

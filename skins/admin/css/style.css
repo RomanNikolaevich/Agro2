@@ -235,7 +235,7 @@ main {
     font-size: 12px;
 }
 
-/*Формат таблиц:*/
+/*ТАБЛИЦЫ:*/
 .mytable {
     margin: 20px 0 80px;
     border-collapse: collapse;
@@ -247,34 +247,19 @@ main {
     padding: 10px;
 }
 
-.mytable .red {
+/*.mytable .red {
     background-color: #ff9090;
 }
 
 .mytable .green {
     background-color: #90ff90;
-}
+}*/
 
 .mytable-header {
     background-color: #0d6efd;
 }
 
-.w100 {
-    width: 100px;
-}
-
-
-main {
-    min-height: 1000px;
-}
-
-ul li {
-    list-style: none;
-    background: url("img/smile.png") no-repeat center;
-    padding-left: 20px;
-}
-
-.center {
+/*.center {
     max-width: 970px;
     width: 100%;
     margin: auto;
@@ -286,7 +271,7 @@ ul li {
     left: 0;
     top: 0;
     z-index: 2;
-}
+}*/
 
 .main-nav {
     text-align: center;

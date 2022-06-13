@@ -9,6 +9,6 @@ if(isset($_POST['add'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['
 		`date`        = NOW()
 	") or exit(mysqli_error());
     $_SESSION['info'] = 'Запись была добавлена'; //уведомление пользователя, что его новость была добавлена
-    header('Location: /news'); //переадресацию на главную страничку на main
+    header('Location: /admin/news'); //переадресацию на главную страничку на main
     exit();
 }

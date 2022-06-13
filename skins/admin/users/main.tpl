@@ -42,7 +42,7 @@ if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
         <td class="">
             <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>">
         </td>
-        <td class="">
+        <td class="" style="text-align: center;">
             <?php echo $row['id']; ?>
         </td>
         <td class="">
@@ -51,24 +51,25 @@ if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
         <td class="">
             <?php echo $row['email']; ?>
         </td>
-        <td class="">
+        <td class="" style="text-align: center;">
             <?php echo $row['age']; ?>
         </td>
-        <td class="">
+        <td class="" style="text-align: center;">
             <?php echo $row['active']; ?>
         </td>
-        <td class="">
+        <td class="" style="text-align: center;">
             <?php echo $row['access']; ?>
         </td>
-        <td class="">
+        <td class="" style="text-align: center;">
             <input name="1" type="image" src="/skins/admin/img/main-user-1.png" style="width:25px"
                    value="<?php echo $row['id']; ?>" alt="regular">
         </td>
-        <td class="">
+        <td class="" style="text-align: center;">
             <input name="2" type="image" src="/skins/admin/img/admin-user-3.png" style="width:25px"
                    value="<?php echo $row['id']; ?>" alt="admin">
         </td>
-        <td class="">
+        <td class="" style="text-align: center;">
+            <!--<a class="" href="" type=""><img style="width:40px" src="/skins/admin/img/blocked-user.png"> </a>-->
             <input name="5" type="image" src="/skins/admin/img/blocked-user.png" style="width:35px"
                    value="<?php echo $row['id']; ?>" alt="blocked">
         </td>

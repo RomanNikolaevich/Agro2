@@ -14,7 +14,7 @@ if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['d
 	") or exit(mysqli_error());
 
     $_SESSION['info'] = 'Запись была изменена';
-    header('Location: /news');
+    header('Location: /admin/news');
     exit();
 }
 
@@ -27,7 +27,7 @@ $news = mysqli_query($link,"
 
 if(!mysqli_num_rows($news)) {
     $_SESSION['info'] = 'Данной новости не существует!';
-    header("Location: /news");
+    header("Location: /admin/news");
     exit();
 }
 

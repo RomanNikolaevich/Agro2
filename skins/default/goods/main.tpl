@@ -8,14 +8,17 @@
                 <?php while($row = mysqli_fetch_assoc($goods)) { ?>
                     <div class="product col-md-4 col-sm-4 col-xs-12">
                         <div class="card">
-                            <img class="card-img-top" src="/skins/default/img/azot-1.jpg" alt="Card image cap">
+                                <img class="card-img-top" src="/skins/default/img/azot-1.jpg" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { //только для админов видно ?>
                                     <input type="checkbox" name="ids[]" value="<?php echo $row['id'];
-                                    ?>">  <?php } echo $row['title']; ?>
+                                    ?>">  <?php } ?> <a class="link-dark" style="text-decoration: none;"
+                                        href="/index.php?module=goods&page=full&id=<?php
+                                    echo $row['id']; ?>"><?php echo $row['title']; ?></a>
                                 </h5>
-                                <p class="card-text"><?php echo $row['description']; ?></p>
+                                <p class="card-text"><?php echo mb_strimwidth($row['description'], 0, 150, "..."); ?> <a class="link-dark" href="/index.php?module=goods&page=full&id= <?php
+                                    echo $row['id']; ?>">(полное описание)</a></p>
                             </div>
                             <div class="card-footer">
                                 <h5 class="text-center">Цена: <?php echo $row['price']; ?> грн.</h5>
