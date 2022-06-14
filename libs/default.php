@@ -34,18 +34,21 @@ function q($query) {
     }
 } // пример применения: $result = q("SELECT * FROM `users` ORDER BY `id`");
 
-//Удаляет пробелы (или другие символы) из начала и конца строки
-function trimAll($elem) {
-    if(!is_array($elem)) { //если это не массив
-        $elem = trim($elem); //то мы его обработаем тримом
+/*Защищаем данные от пользователя в *.tpl.
+ * В input добавляем в параметр value: value="<?php echo hsc($_POST[...])
+ * Безопасность выводимой на экран информации. Преобразует специальные символы в HTML-сущности*/
+function hsc($elem) {
+    if(!is_array($elem)) {
+        $elem = htmlspecialchars ($elem);
     } else {
-        $elem = array_map('trimAll', $elem); // делаем замыкание функции самой себя и каждый раз
-		// залазит глубже в массив
+        $elem = array_map('hsc', $elem);
     }
-    return $elem; //массив не будем трогать
+    return $elem;
 }
 
-/*Безопасность записываемой в БД информации. Экранирует специальные символы в строке для использования
+/*Защищаем передаваемые в SQL запросы.
+ * Пример: UPDATE `news` SET `cat` = '".mres(trim($_POST['cat']))."',
+ *Экранирует специальные символы в строке для использования
 в SQL-выражении, используя текущий набор символов соединения*/
 function mres($elem) {
     global $link;
@@ -57,15 +60,15 @@ function mres($elem) {
     return $elem;
 }
 
-/*Безопасность выводимой на экран информации (между echo и переменной ставим). Преобразует специальные
-символы в HTML-сущности*/
-function hsc($elem) {
-    if(!is_array($elem)) {
-        $elem = htmlspecialchars ($elem);
+//Удаляет пробелы (или другие символы) из начала и конца строки
+function trimAll($elem) {
+    if(!is_array($elem)) { //если это не массив
+        $elem = trim($elem); //то мы его обработаем тримом
     } else {
-        $elem = array_map('hsc', $elem);
+        $elem = array_map('trimAll', $elem); // делаем замыкание функции самой себя и каждый раз
+        // залазит глубже в массив
     }
-    return $elem;
+    return $elem; //массив не будем трогать
 }
 
 function getComments($link, int $limit, int $offset) {

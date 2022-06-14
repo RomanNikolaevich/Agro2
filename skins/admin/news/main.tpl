@@ -13,11 +13,12 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
             <?php
         } ?><br>
         <h3> Все существующие новости: </h3>
+        <form action="" method="post">
         <div class="more-free-space">
             <a class="btn btn-primary" href="/admin/news/add">Добавить новость</a>
             <input class="btn btn-danger" type="submit" name="delete" value="Удалить отмеченные записи">
         </div>
-        <form action="" method="get">
+
             <table class="mytable">
                 <tr class="mytable-header">
                     <th rowspan="2">

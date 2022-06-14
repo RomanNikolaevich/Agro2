@@ -1,25 +1,18 @@
 <?php
 
-//удаление новости:
+//удаление новостей помеченных чекбоксом:
 if (isset($_POST['delete'])){
-/*    foreach($_POST['ids'] as $k=>$v) {
-        q("
-		DELETE FROM `news`
-		WHERE `id` = ".(int)$v."
-	");
-    }*/
-	//измененный код из 26-го урока
-	foreach ($_POST['ids'] as $k => $v) {
-		$_POST['ids']['$k'] = (int)$v;
-	}
-	$ids = implode('/', $_POST['ids']);
-		q("
+    foreach ($_POST['ids'] as $k => $v) {
+        $_POST['ids'][$k] = (int)$v;
+    }
+    $ids = implode(',', $_POST['ids']);
+    q("
 			DELETE FROM `news`
 			WHERE `id` IN (".$ids.")
 		");
-	$_SESSION['info'] = 'Новости были удалены';
-	header("Location: /news");
-	exit();
+    $_SESSION['info'] = 'Новости были удалены';
+    header("Location: /news");
+    exit();
 }
 
 //измененный код из 26-го урока:

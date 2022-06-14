@@ -13,12 +13,12 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
                         <h4>Категория товара (выберите из списка):</h4>
                         <select class="form-control" name="cat" selected="selected">
                             <?php
-                            $category = [
+                            hsc($category = [
                                     'Азотные удобрения',
                                     'Фосфорные удобрения',
                                     'Калийные удобрения',
                                     'Комплексные минеральные удобрения',
-                            ];
+                            ]);
                             foreach ($category as $v) {
                                 echo '<option>'.htmlspecialchars($v).'</option>';
                             } ?>

@@ -1,8 +1,9 @@
 <?php
+
 //удаление новостей помеченных чекбоксом:
 if (isset($_POST['delete'])){
     foreach ($_POST['ids'] as $k => $v) {
-        $_POST['ids']['$k'] = (int)$v;
+        $_POST['ids'][$k] = (int)$v;
     }
     $ids = implode(',', $_POST['ids']);
     q("
@@ -25,7 +26,7 @@ if(isset($_GET['action']) && $_GET['action']=='delete'){
     exit();
 }
 
-//вывод новостей (переменная для main.tpl
+//вывод новостей (переменная для main.tpl)
 $news = q("
 SELECT *
 FROM `news`
@@ -37,4 +38,3 @@ if(isset($_SESSION['info'])) {
     $info = $_SESSION['info']; //передаем содержимое сессии в переменную инфо
     unset($_SESSION['info']); //удаляем сессию за ненужностью.
 }
-wtf($_GET);

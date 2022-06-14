@@ -6,13 +6,12 @@
             echo $info; ?></h2> <!--уведомление, о добавлении новой записи-->
         <?php
     } ?><br>
-    <div class="">
-        <form method="post">
-            <a class="btn btn-success" href="/admin/goods/add">Добавить товар</a>
-            <button type="button" class="btn btn-danger" name="delete">Удалить товары</button>
-        </form>
-    </div>
+
     <form action="" method="post">
+        <div class="more-free-space">
+            <a class="btn btn-success" href="/admin/goods/add">Добавить товар</a>
+            <input class="btn btn-danger" type="submit" name="delete" value="Удалить товары">
+        </div>
         <table class="mytable">
             <tr class="mytable-header">
                 <th rowspan="2">

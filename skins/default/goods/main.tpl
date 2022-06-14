@@ -36,13 +36,13 @@
                 <?php } ?>
         </div>
     </div>
+    <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { //только для админов видно ?>
+        <div class="product col-md-4 col-sm-4 col-xs-12">
+            <a class="btn btn-success" href="/goods/add">Добавить товар</a>
+            <input class="btn btn-danger" type="submit" name="delete" value="Удалить товары">
+        </div>
+    <?php } ?>
 </form>
-<?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { //только для админов видно ?>
-    <div class="product col-md-4 col-sm-4 col-xs-12">
-        <button type="button" class="btn btn-success" onclick="window.location.href =
-            '/goods/add';">Добавить товар</button>
-        <button type="button" class="btn btn-danger" name="delete">Удалить товары</button>
-    </div>
-<?php } ?>
+
 
 

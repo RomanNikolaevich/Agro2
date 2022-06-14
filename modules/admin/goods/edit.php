@@ -3,7 +3,7 @@
  * @var $link
  */
 if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['price'], $_POST['description'])) {
-    $sql = "
+    q("
 		UPDATE `goods` SET
 		`cat`         = '" . mysqli_real_escape_string($link, trim($_POST['cat'])) . "',
 		`title`       = '" . mysqli_real_escape_string($link, trim($_POST['title'])) . "',
@@ -11,21 +11,19 @@ if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['p
 		`description` = '" . mysqli_real_escape_string($link, trim($_POST['description'])) . "',
 		`price`       = '" . mysqli_real_escape_string($link, trim($_POST['price'])) . "'
 		WHERE `id`    = " . (int)$_GET['id'] . "
-	";
-    //dd($sql);
-    mysqli_query($link, $sql) or exit(mysqli_error());
+	");
 
     $_SESSION['info'] = 'Запись была изменена';
     header('Location: /admin/goods');
     exit();
 }
 
-$goods = mysqli_query($link,"
+$goods = q("
 	SELECT *
 	FROM `goods`
 	WHERE 	`id` = ".(int)$_GET['id']."
 	Limit 1
-	") or exit(mysqli_error());
+	");
 
 if(!mysqli_num_rows($goods)) {
     $_SESSION['info'] = 'Данного товара не существует!';

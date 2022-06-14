@@ -56,17 +56,16 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
                 while ($row = mysqli_fetch_assoc($comments)) { ?>
                     <tr style="font-size:15px; text-align: justify;">
                         <td class="">
-                            <input type="checkbox" name="ids[]" value="<?php
-                            echo $row['id']; ?>">
+                            <input type="checkbox" name="ids[]" value="<?= hsc($row['id']); ?>">
                         </td>
                         <td class="">
-                            <?= $row['id']; ?>
+                            <?= hsc($row['id']); ?>
                         </td>
                         <td class="">
-                            <?= $row['date']; ?>
+                            <?= hsc($row['date']); ?>
                         </td>
                         <td class="">
-                            <?= $row['name']; ?>
+                            <?= hsc($row['name']); ?>
                         </td>
                         <td class="">
                             <?= mb_strimwidth($row['text'], 0, 150, "..."); ?>

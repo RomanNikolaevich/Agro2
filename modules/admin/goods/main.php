@@ -1,12 +1,18 @@
 <?php
-//удаление товара:
+
+//удаление товаров помеченных чекбоксом:
 if (isset($_POST['delete'])){
-    foreach($_POST['ids'] as $k=>$v) {
-        q("
-		DELETE FROM `news`
-		WHERE `id` = ".(int)$v."
-	");
+    foreach ($_POST['ids'] as $k => $v) {
+        $_POST['ids'][$k] = (int)$v;
     }
+    $ids = implode(',', $_POST['ids']);
+    q("
+			DELETE FROM `goods`
+			WHERE `id` IN (".$ids.")
+		");
+    $_SESSION['info'] = 'Товары были удалены';
+    header("Location: /admin/goods");
+    exit();
 }
 
 //Удаление товара
@@ -32,7 +38,3 @@ if(isset($_SESSION['info'])) {
     $info = $_SESSION['info']; //передаем содержимое сессии в переменную инфо
     unset($_SESSION['info']); //удаляем сессию за ненужностью.
 }
-
-
-
-

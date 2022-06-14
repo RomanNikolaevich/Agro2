@@ -16,13 +16,12 @@
                 Категория товара (выберите из списка):
                 <select class="form-control" name="cat" selected="selected">
                     <?php
-                    $category = [
+                    hsc($category = [
                             'Азотные удобрения',
                             'Фосфорные удобрения',
                             'Калийные удобрения',
                             'Комплексные минеральные удобрения',
-                    ];
-                    //wtf($category);
+                    ]);
 
                     foreach ($category as $v) {
                         echo '<option>'.htmlspecialchars($v).'</option>';
