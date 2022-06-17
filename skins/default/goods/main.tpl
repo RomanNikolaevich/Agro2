@@ -11,23 +11,24 @@
                                 <img class="card-img-top" src="/skins/default/img/azot-1.jpg" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { //только для админов видно ?>
+                                    <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
                                     <input type="checkbox" name="ids[]" value="<?php echo $row['id'];
                                     ?>">  <?php } ?> <a class="link-dark" style="text-decoration: none;"
-                                        href="/index.php?module=goods&page=full&id=<?php
-                                    echo $row['id']; ?>"><?php echo $row['title']; ?></a>
+                                        href="/goods/full?id=<?php
+                                    echo $row['id']; ?>"><?php echo hsc($row['title']); ?></a>
                                 </h5>
-                                <p class="card-text"><?php echo mb_strimwidth($row['description'], 0, 150, "..."); ?> <a class="link-dark" href="/index.php?module=goods&page=full&id= <?php
+                                <p class="card-text"><?php echo hsc(mb_strimwidth($row['description'], 0, 150,
+                                            "...")); ?> <a class="link-dark" href="/goods/full?id=<?php
                                     echo $row['id']; ?>">(полное описание)</a></p>
                             </div>
                             <div class="card-footer">
-                                <h5 class="text-center">Цена: <?php echo $row['price']; ?> грн.</h5>
+                                <h5 class="text-center">Цена: <?php echo hsc($row['price']); ?> грн.</h5>
                             </div>
-                            <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { //только для админов видно ?>
+                            <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
                             <div class="card-footer">
-                                <a class="btn btn-warning" href="/goods/edit&id=<?php echo $row['id'];
+                                <a class="btn btn-warning" href="/goods/edit?id=<?php echo $row['id'];
                                 ?>">Изменить</a>
-                                <a class="btn btn-danger" href="/goods&action=delete&id=<?php echo $row['id'];
+                                <a class="btn btn-danger" href="/goods/main?action=delete&id=<?php echo $row['id'];
                                 ?> ">Удалить</a>
                             </div>
                             <?php } ?>

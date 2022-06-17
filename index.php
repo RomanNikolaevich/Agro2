@@ -4,6 +4,14 @@ ini_set('display_errors', 'on');
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 
+if (isset($_SERVER['REQUEST_URI'])) {
+    $tmp = trim($_SERVER['REQUEST_URI'], '/');
+    $tmp = explode('?', $tmp);
+    if ($tmp[0] != 'index.php') {
+        $_GET['route'] = $tmp[0];
+    }
+}
+
 // Конфиг сайта
 include_once __DIR__ . '/vendor/autoload.php';
 include_once './config.php';

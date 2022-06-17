@@ -38,3 +38,4 @@ if(isset($_SESSION['info'])) {
     $info = $_SESSION['info']; //передаем содержимое сессии в переменную инфо
     unset($_SESSION['info']); //удаляем сессию за ненужностью.
 }
+//wtf($_GET, 1);

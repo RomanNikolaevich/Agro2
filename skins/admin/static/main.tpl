@@ -1,8 +1,5 @@
 <h4 style="margin-left: 150px;">Главная страница</h4>
-<?php if(!isset($_SESSION['user']) || $_SESSION['user']['access'] != 5) {
-    //авторизация
-    include './skins/default/auth/login.tpl';
-}  if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
+<?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
     <p style="margin-left: 50px;">
                Контент для тех кто с правами админа. Управлять контентом админы могут как непосредственно из админки
         так и непосредственно со страниц сайта.

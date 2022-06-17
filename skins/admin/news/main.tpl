@@ -44,33 +44,33 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
                             <a href=""
                         </td>
                         <td class="">
-                            <?php echo $row['id']; ?>
+                            <?= (int)$row['id']; ?>
                         </td>
                         <td class="">
-                            <?php echo $row['date']; ?>
+                            <?= hsc($row['date']); ?>
                         </td>
                         <td class="">
-                            <?php echo $row['title']; ?>
+                            <?= hsc($row['title']); ?>
                         </td>
                         <td class="">
-                            <?php echo $row['cat']; ?>
+                            <?= hsc($row['cat']); ?>
                         </td>
                         <td class="">
-                            <?php echo mb_strimwidth($row['description'], 0, 150, "..."); ?>
-                            <a class="" href="/admin/news/full&id=<?php echo $row['id'];
+                            <?= hsc(mb_strimwidth($row['description'], 0, 150, "...")); ?>
+                            <a class="" href="/admin/news/full&id=<?= (int)$row['id'];
                             ?>">(полная версия)</a>
                         </td>
                         <td class="">
-                            <?php echo mb_strimwidth($row['text'], 0, 150, "..."); ?>
-                            <a class="" href="/admin/news/full&id=<?php echo $row['id'];
+                            <?= hsc(mb_strimwidth($row['text'], 0, 150, "...")); ?>
+                            <a class="" href="/admin/news/full?id=<?= (int)$row['id'];
                             ?>">(полная версия)</a>
                         </td>
                         <td class="" style="text-align: center;">
-                            <a class="" href="/admin/news/edit&id=<?php echo $row['id'];
+                            <a class="" href="/admin/news/edit?id=<?= (int)$row['id'];
                             ?>"><img style="width:40px" src="/skins/admin/img/rewrite-button-2.png"></a>
                         </td>
                         <td class="" style="text-align: center;">
-                            <a class="" href="/admin/news&action=delete&id=<?php echo $row['id'];
+                            <a class="" href="/admin/news/main?action=delete&id=<?= (int)$row['id'];
                             ?>"><img style="width:40px" src="/skins/admin/img/delete-button.png"></a>
                         </td>
                     </tr>

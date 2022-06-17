@@ -17,7 +17,19 @@
         <?php
         include './skins/'.Core::$SKIN.'/static/menu/header.tpl'; ?>
         <div class="conteiner-content">
-            <?= $content; ?>
+            <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) {
+            echo $content;
+             } elseif(!isset($_SESSION['user'])) { ?>
+                ПРИВЕТ <br>
+                <b style="color:red">НЕИЗВЕСТНЫЙ ПОЛЬЗОВАТЕЛЬ!</b><br>
+                ЭТОТ РАЗДЕЛ МОГУТ ПРОСМОТРИВАТЬ ТОЛЬКО ПОЛЬЗОВАТЕЛИ С ПРАВАМИ АДМИНА
+             <?php
+                include './skins/default/auth/login.tpl';
+            } else { ?>
+                ПРИВЕТ <?php if (!empty($_SESSION['user'])) { ?><br>
+                    <b style="color:red"> <?php echo $_SESSION['user']['login']; } ?></b><br>
+                ЭТОТ РАЗДЕЛ МОГУТ ПРОСМОТРИВАТЬ ТОЛЬКО ПОЛЬЗОВАТЕЛИ С ПРАВАМИ АДМИНА
+            <?php } ?>
         </div>
         <?php
         include './skins/'.Core::$SKIN.'/static/menu/footer.tpl'; ?>

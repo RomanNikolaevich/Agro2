@@ -69,7 +69,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
                         </td>
                         <td class="">
                             <?= mb_strimwidth($row['text'], 0, 150, "..."); ?>
-                            <a class="" href="/admin/comments/full&id=<?= $row['id'];
+                            <a class="" href="/admin/comments/full?id=<?= $row['id'];
                             ?>">(полная версия)</a>
                         </td>
                         <td class="" style="text-align: center; <?php echo $row['active'] == 1 ? 'color:green;'
@@ -77,11 +77,11 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
                             <?= $row['active'] == 1 ? 'show' : 'hide'; ?>
                         </td>
                         <td class="" style="text-align: center;">
-                            <a class="" href="/admin/comments&action=show&id=<?php echo $row['id'];
+                            <a class="" href="/admin/comments/main?action=show&id=<?php echo $row['id'];
                             ?>"><img style="width:40px" src="/skins/admin/img/show-button.png"></a>
                         </td>
                         <td class="" style="text-align: center;">
-                            <a class="" href="/admin/comments&action=hide&id=<?php echo $row['id'];
+                            <a class="" href="/admin/comments/main?action=hide&id=<?php echo $row['id'];
                             ?>"><img style="width:40px" src="/skins/admin/img/hide-button.png"></a>
                         </td>
                     </tr>

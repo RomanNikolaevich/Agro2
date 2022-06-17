@@ -46,5 +46,6 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
             </div>
         </div>
     </div>
-<?php
-} ?>
+<?php } else { ?>
+    ПРИВЕТ СТАНИСЛАВ!
+<?php } ?>

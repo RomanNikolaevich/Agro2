@@ -1,4 +1,4 @@
-<div class="container mt-4" xmlns="http://www.w3.org/1999/html">
+<div class="container mt-4">
     <div class="row">
         <div class="form-group">
             <div>

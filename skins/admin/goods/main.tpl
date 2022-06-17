@@ -36,37 +36,39 @@
                         <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>">
                     </td>
                     <td class="">
-                        <?php echo $row['id']; ?>
+                        <?= hsc($row['id']); ?>
                     </td>
                     <td class="">
-                        <?php echo $row['title']; ?>
+                        <?= hsc($row['title']); ?>
                     </td>
                     <td class="">
-                        <?php echo $row['cat']; ?>
+                        <?= ($row['cat']); ?>
                     </td>
                     <td class="">
-                        <?php echo mb_strimwidth($row['description'], 0, 150, "..."); ?>
-                        <a class="" href="/admin/goods/full&id=<?php echo $row['id'];
+                        <?= hsc(mb_strimwidth($row['description'], 0, 150, "...")); ?>
+                        <a class="" href="/admin/goods/full?id=<?php echo $row['id'];
                         ?>">(полная версия)</a>
                     </td>
                     <td class="">
-                        <?php echo mb_strimwidth($row['text'], 0, 150, "..."); ?>
-                        <a class="" href="/admin/goods/full&id=<?php echo $row['id'];
+                        <?= hsc(mb_strimwidth($row['text'], 0, 150, "...")); ?>
+                        <a class="" href="/admin/goods/full?id=<?php echo $row['id'];
                         ?>">(полная версия)</a>
                     </td>
                     <td class="">
-                        <?php echo $row['price']; ?>
+                        <?= (int)$row['price']; ?>
                     </td>
                     <td class="" style="text-align: center;">
-                        <a class="" href="/admin/goods/edit&id=<?php echo $row['id'];
+                        <a class="" href="/admin/goods/edit?id=<?= $row['id'];
                         ?>"><img style="width:40px" src="/skins/admin/img/rewrite-button-2.png"></a>
                     </td>
                     <td class="" style="text-align: center;">
-                        <a class="" href="/admin/goods&action=delete&id=<?php echo $row['id'];
+                        <a class="" href="/admin/goods/main?action=delete&id=<?= $row['id'];
                         ?>"><img style="width:40px" src="/skins/admin/img/delete-button.png"></a>
                     </td>
                 </tr>
             <?php } ?>
         </table>
     </form>
+<?php } else { ?>
+    ПРИВЕТ СТАНИСЛАВ!
 <?php } ?>

@@ -18,21 +18,21 @@
             <div class="card-body">
                 <!--Start: Доступ только админам: кнопки для каждой отдельной новости-->
                 <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
-                <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>">
-                <a class="btn btn-warning" href="/index.php?module=news&page=edit&id=<?php echo $row['id'];
+                <input type="checkbox" name="ids[]" value="<?= (int)$row['id']; ?>">
+                <a class="btn btn-warning" href="/news/edit?id=<?= (int)$row['id'];
                 ?>">Изменить</a>
-                <a class="btn btn-danger" href="/index.php?module=news&action=delete&id=<?php echo $row['id'];
-                ?> ">Удалить</a>
+                    <a class="btn btn-danger" href="/news/main?action=delete&id=<?= (int)$row['id'];
+                    ?> ">Удалить</a>
                 <?php } ?>
                 <!--End: Доступ только админам: кнопки для каждой отдельной новости-->
-                <b><?php echo $row['title']; ?></b> <!--вывод заглавия-->
-                <span style="color:#5c636a; font-size:10px;"><?= $row['date'] ?></span><!-- и даты, серым-->
+                <b><?= hsc($row['title']); ?></b> <!--вывод заглавия-->
+                <span style="color:#5c636a; font-size:10px;"><?= hsc($row['date']) ?></span><!-- и даты, серым-->
 
             </div>
             <div class="card-footer">
-                <p><?php echo $row['description']; ?></p>
-                <?php echo mb_strimwidth($row['text'], 0, 450, "..."); ?> <a class="" href="/index.php?module=news&page=full&id=<?php echo $row['id'];
-                ?>">(полная версия)</a>
+                <p><?= hsc($row['description']); ?></p>
+                <?= hsc(mb_strimwidth($row['text'], 0, 450, "...")); ?> <a class=""
+                    href="/news/full?id=<?= (int)$row['id']; ?>">(полная версия)</a>
             </div>
         </div>
             <hr>
@@ -45,8 +45,10 @@
             <!--End: Доступ только админам: кнопки для всех новостей-->
         </form>
         <!-- End "Видимый блок новостей для незабаненых пользователей" -->
+        <?php } elseif(isset($_SESSION['user']) && $_SESSION['user']['access']==5) { ?>
+        <span>К сожалению Ваш аккаунт был заблокирован, поэтому вы не сможете просматривать данные новости.</span><br>
         <?php } else { ?>
-            <span>К сожалению Ваш аккаунт был заблокирован или вы не авторизировались, поэтому вы не
+            <span>Вы не авторизировались, поэтому вы не
                 сможете просматривать данные новости.</span><br>
             <span>Для регистрации перейдите по ссылке: </span><a style=" text-decoration: none; color: red;"
                 href="/auth/regin">Регистрация</a><br>

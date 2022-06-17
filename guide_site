@@ -44,9 +44,9 @@ variables.php - функции с главной страницы
 GET:
     Модули (Controllers)
         index.php?module=auth&page=login
-            /module/auth/login.php
+            /modules/auth/login.php
         index.php?module=auth&page=logout
-            /module/auth/logout.php
+            /modules/auth/logout.php
     Шаблон (Views)
         index.php?module=auth&page=login
             /skins/default/auth/login.tpl

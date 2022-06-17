@@ -22,7 +22,7 @@
                             'Калийные удобрения',
                             'Комплексные минеральные удобрения',
                     ];
-                    wtf($category);
+                    //wtf($category);
 
                     foreach ($category as $v) {
                         echo '<option>'.htmlspecialchars($v).'</option>';

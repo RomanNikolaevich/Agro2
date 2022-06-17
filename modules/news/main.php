@@ -15,11 +15,11 @@ if (isset($_POST['delete'])){
     exit();
 }
 
-//измененный код из 26-го урока:
-if(isset($_GET['key1'], $_GET['key2']) && $_GET['key1']=='delete'){
+//удаление отдельных новостей:
+if(isset($_GET['action']) && $_GET['action']=='delete'){
     q("
 		DELETE FROM `news`
-		WHERE `id` = ".(int)$_GET['key2']."
+		WHERE `id` = ".(int)$_GET['id']."
 	");
     $_SESSION['info'] = 'Новость была удалена';
     header("Location: /news");

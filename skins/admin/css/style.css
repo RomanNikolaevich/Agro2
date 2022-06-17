@@ -273,13 +273,14 @@ main {
     z-index: 2;
 }*/
 
+
 .main-nav {
-    text-align: center;
+    display: block;
+    text-align: right;
 }
 
 .main-nav a {
-    margin-top: -10px;
-    background-color: orange;
+
     padding: 40px 15px 10px;
     color: white;
     display: inline-block;

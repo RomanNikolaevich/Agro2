@@ -13,8 +13,10 @@
             if (!empty($_SESSION['user'])) { ?>
             <p>С возвращением, <br>
                 <img src="/skins/admin/img/user-50.png" style="align-content:flex-start; height:30px">
-                    <?php echo $_SESSION['user']['login'];
-                } ?></p>
+                    <?php echo $_SESSION['user']['login']; ?>
+                <a class="nav-link" style="color:red"  href="/auth/logout">Выход</a>
+                <?php } ?>
+            </p>
         </div>
     </div>
 </div>
@@ -44,9 +46,12 @@
                 </li>
             </ul>
         </div>
-        <a class="nav-link" style="color:white" href="/">Вернуться на сайт</a>
+        <?php } ?>
+        <div class="admin-nav">
+            <a class="nav-link" style="color:white" href="/">Вернуться на сайт</a>
+        </div>
     </div>
-    <?php } ?>
+
 </nav>
 
 

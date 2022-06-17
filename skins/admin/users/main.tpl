@@ -61,15 +61,15 @@ if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
             <?php echo $row['access']; ?>
         </td>
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users&action=regular&id=<?php echo $row['id'];
+            <a class="" href="/admin/users/main?action=regular&id=<?php echo $row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/main-user-1.png"></a>
         </td>
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users&action=admin&id=<?php echo $row['id'];
+            <a class="" href="/admin/users/main?action=admin&id=<?php echo $row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/admin-user-3.png"></a>
         </td>
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users&action=blocked&id=<?php echo $row['id'];
+            <a class="" href="/admin/users/main?action=blocked&id=<?php echo $row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/blocked-user.png"></a>
         </td>
     </tr>
