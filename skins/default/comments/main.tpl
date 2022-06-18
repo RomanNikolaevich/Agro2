@@ -93,14 +93,7 @@
                             <!--End: "Блок админа: вывод уведомления о статусе отзыва"-->
 						</div>
                         <!--End "Блок вывода отзывов из БД"-->
-                        <!--Start "Блок админов"-->
-                        <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2){?>
-                                <form method="post" action="/index.php?module=comments&action=main&id=<?php echo $comment['id'];?>">
-                                    <input class="btn btn-secondary" name="hidecomment" type="submit" value="Скрыть">
-                                    <input class="btn btn-success" name="showcomment" type="submit" value="Одобрить">
-                                </form>
-                        <?php }?>
-                        <!--End "Блок админов"-->
+
 						<p></p>
                     <?php endforeach; ?>
 				</div>

@@ -1,5 +1,7 @@
 <?php
 
+include_once './'.Core::$CONT.'/admin/security/blocked.php';
+
 //удаление новостей помеченных чекбоксом:
 if (isset($_POST['delete'])){
     foreach ($_POST['ids'] as $k => $v) {

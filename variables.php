@@ -27,10 +27,11 @@ if(isset($_GET['route'])) {
 	}
 	unset($_GET['route']);
 }
-//wtf($_GET); //проверка вывода ЧПУ
+//dd($_GET); //проверка вывода ЧПУ
 //exit();
 
 //Проверка на существование страниц
+//добавляем исключение, чтобы массив $allowed не обрабатывался в админке:
 if(Core::$SKIN != 'admin') {
     $allowed = array('static', 'auth', 'comments', 'contacts', 'errors', 'game', 'goods', 'news','partners', 'services', 'voting');
 

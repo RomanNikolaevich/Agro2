@@ -1,5 +1,7 @@
 <?php
 
+include_once './'.Core::$CONT.'/admin/security/blocked.php';
+
 $news = q("
 	SELECT *
 	FROM `news`

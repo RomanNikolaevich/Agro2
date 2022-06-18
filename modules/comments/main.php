@@ -29,35 +29,6 @@ if (isset($_POST['do_signup'])) {
     }
 }
 
-//Админские функции:
-//Скрыть отзыв:
-if (isset($_POST['hidecomment'])){
-	q("
-        UPDATE `comments` SET
-       `active` = 0
-		WHERE `id` = ".(int)$_GET['id']."
-    ");
-	header("Location: /comments");
-}
-
-//Разрешить отзыв:
-if (isset($_POST['showcomment'])){
-	q("
-        UPDATE `comments` SET
-       `active` = 1
-		WHERE `id` = ".(int)$_GET['id']."
-    ");
-	header("Location: /comments");
-}
-//Проверка статуса отзыва:
-/*$statuscomment = q("SELECT * FROM `comments` SET `name`='$username', `text`='$comment'");
-if(isset($_GET['hash'], $_GET['id'])) {
-
-	$info = 'Вы активированы на сайте';
-} else {
-	$info = 'Вы прошли по неверной ссылке';
-}*/
-
 //Блок Пагинатора:
 //Поверка, есть ли GET запрос
 $pageno = $_GET['pageno'] ?? 1;

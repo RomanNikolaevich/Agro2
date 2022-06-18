@@ -57,7 +57,7 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
                         </td>
                         <td class="">
                             <?= hsc(mb_strimwidth($row['description'], 0, 150, "...")); ?>
-                            <a class="" href="/admin/news/full&id=<?= (int)$row['id'];
+                            <a class="" href="/admin/news/full?id=<?= (int)$row['id'];
                             ?>">(полная версия)</a>
                         </td>
                         <td class="">

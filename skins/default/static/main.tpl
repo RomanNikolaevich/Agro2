@@ -1,3 +1,6 @@
+<?php if (isset($info)) { ?>
+    <h1><?php echo $_SESSION['info']; ?></h1> <!--уведомление, о добавлении новой записи-->
+<?php } ?>
 <div class="conteiner-content">
 	<div class="conteiner-content-block">
 		<img src="/skins/default/img/page1_img_01.png" alt="">
