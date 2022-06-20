@@ -1,13 +1,14 @@
 <?php
-//Создание доступа к странице
-/*if (!isset($_SESSION['user']) || $_SESSION['user']['access'] != 1) {
+//Доступ к странице только не авторизированным
+/*if (isset($_SESSION['user'])) {
+    header("Location: /");
 	exit();
 }*/
 
 if (!empty($_POST['login']) && !empty($_POST['password'])) {
 	$login = $_POST['login'];
 	$password = $_POST['password'];
-	//Сверка даннх из формы авторизации с данными в БД:
+	//Сверка данных из формы авторизации с данными в БД:
 	$res = q("
 		SELECT *
 		FROM `users`
@@ -27,16 +28,17 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
 			//если галочку согласия с автоавторизацией пользователь отметил:
 			if (!empty($_POST['autoauthconfirm'])) {
 				$autoauthhash = myHash($_SESSION['user']['id'] . $_SESSION['user']['login'] . $_SESSION['user']['email']);
-				setcookie('autoauthid', $_COOKIE['PHPSESSID'], time() + 3600 * 30, '/');
+				setcookie('autoauthid', $_SESSION['user']['id'], time() + 3600 * 30, '/');
 				setcookie('autoauthhash', $autoauthhash, time() + 3600 * 30, '/');
 				q("
 			UPDATE `users` SET
-				`hash` = '" . mres($autoauthhash) . "'
+				`hash` = '" . mres($autoauthhash) . "',
+				`ip` = '" . ip2long($_SERVER['REMOTE_ADDR']) . "'
 				WHERE `users`.`id` = " . (int)$_SESSION['user']['id'] . "
 			");
-			} else {
-				$error = 'Вы не активировали свой аккаунт через почтовый ящик, завершите процесс активации';
 			}
-		}
+		} else {
+            $error = 'Вы не активировали свой аккаунт через почтовый ящик, завершите процесс активации';
+        }
 	}
 }

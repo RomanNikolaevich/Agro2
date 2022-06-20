@@ -8,7 +8,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user']['access'] != 2) {
         exit();
     }
 }
-
+//проверка доступа в адинку
 if(isset($_SESSION['user'])) {
     $res = q("
             SELECT *

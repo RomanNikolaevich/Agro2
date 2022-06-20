@@ -23,7 +23,7 @@ if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
         <th rowspan="2">
             <!-- th тег применяется для шапки таблицы-->
         </th>
-        <th colspan="6">Данные пользователей</th><!--растягивает ячейку на ширину трех нижних-->
+        <th colspan="7">Данные пользователей</th><!--растягивает ячейку на ширину трех нижних-->
         <th colspan="3">Редактирование доступа</th>
     </tr>
     <tr class="mytable-header">
@@ -31,6 +31,7 @@ if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
         <th>login</th>
         <th>email</th>
         <th>age</th>
+        <th>IP</th>
         <th>active</th>
         <th>access</th>
         <th>regular</th>
@@ -53,6 +54,9 @@ if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
         </td>
         <td class="" style="text-align: center;">
             <?php echo $row['age']; ?>
+        </td>
+        <td class="" style="text-align: center;">
+            <?php echo long2ip($row['ip']); ?>
         </td>
         <td class="" style="text-align: center;">
             <?php echo $row['active']; ?>
