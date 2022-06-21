@@ -17,12 +17,7 @@ if(isset($_SESSION['user'])) {
 				`hash` = '" . mres($hashzero) . "'
 				WHERE `users`.`id` = " . (int)$_SESSION['user']['id'] . "
 			");
-        session_unset();
-        session_destroy();
-        setcookie('autoauthid', '', time() - 3600 * 30, '/');
-        setcookie('autoauthhash', '', time() - 3600 * 30, '/');
-        header("Location: /");
-        exit();
+    logout();
     }
 } else {//если ($_SESSION['user'] не существует
     //для неавторизированных, но которые согласились на авто-авторизацию:
@@ -30,9 +25,9 @@ if(isset($_SESSION['user'])) {
         $res = q("
             SELECT *
             FROM `users`
-            WHERE `id` === '" . hsc($_COOKIE['autoauthid']) . "'
-            && `hash` === '" . hsc($_COOKIE['autoauthhash']) . "'
-            && `ip` === '" . ip2long($_SERVER['REMOTE_ADDR']) . "'
+            WHERE `id` = '" . hsc($_COOKIE['autoauthid']) . "'
+            && `hash` = '" . hsc($_COOKIE['autoauthhash']) . "'
+            && `ip` = '" . ip2long($_SERVER['REMOTE_ADDR']) . "'
         ");
         $_SESSION['user'] = mysqli_fetch_assoc($res);
         if($_COOKIE['autoauthhash'] != $_SESSION['user']['hash']) {
