@@ -10,7 +10,7 @@ if(isset($_SESSION['user'])) {
     $_SESSION['user'] = mysqli_fetch_assoc($res);
     if($_SESSION['user']['access'] ==5) {
         $_SESSION['info'] = 'К сожалению Ваш аккаунт был заблокирован, поэтому вы не сможете просматривать данную страницу.';
-        header("Location: /auth/logout");
+        logout(); //header("Location: /auth/logout");//
         exit();
     }
 } else {
