@@ -1,5 +1,5 @@
 <?php
-//Запрет доступа к странице заблокированным пользователям (access = 5) и не авторизированным
+//Запрет доступа к странице заблокированным пользователям (access = Blocked) и не авторизированным
 if(isset($_SESSION['user'])) {
     $res = q("
             SELECT *
@@ -8,7 +8,7 @@ if(isset($_SESSION['user'])) {
             LIMIT 1
         ");
     $_SESSION['user'] = mysqli_fetch_assoc($res);
-    if($_SESSION['user']['access'] ==5) {
+    if($_SESSION['user']['access'] == BLOCKED) {
         $_SESSION['info'] = 'К сожалению Ваш аккаунт был заблокирован, поэтому вы не сможете просматривать данную страницу.';
         logout(); //header("Location: /auth/logout");//
         exit();

@@ -65,6 +65,8 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 		`password` = '".myHash($password)."',
 		`email`    = '".mres($email)."',
 		`age`      = ".(int)$_POST['age'].",
+		`date_reg` = '" . date('Y-m-d H:i:s') . "',
+		`ip`       = '" . ip2long($_SERVER['REMOTE_ADDR']) . "',
 		`hash`     = '".myHash($_POST['login'].$_POST['age'])."'
 		");// or exit(mysqli_error($link)); //вывод ошибок БД нам не нужен - есть в функции
 			$id = mysqli_insert_id($link);
@@ -81,9 +83,6 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 			class_Mail::send();
 			$_SESSION['regok'] = 'OK';
 			header("Location: /auth/regin");
-			//$_SESSION['access'] = 1;
-			//$_SESSION['login'] = $login;
-			//setcookie('access', 1, time() + 3600, '/');
 			exit();
 		}
 	} /*else {

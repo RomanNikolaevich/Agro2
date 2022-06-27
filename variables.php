@@ -53,3 +53,6 @@ if(isset($_POST)) {
     $_POST =trimAll($_POST);
 }
 
+//выставил часовой пояс, чтобы корректно время на сайте совпадало
+date_default_timezone_set("Europe/Kiev");
+//echo date_default_timezone_get();

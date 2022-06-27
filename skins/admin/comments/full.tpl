@@ -1,5 +1,3 @@
-<?php
-if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
 <div class="container mt-4" xmlns="http://www.w3.org/1999/html">
     <div class="row">
         <div class="form-group">
@@ -21,5 +19,5 @@ if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
         </div>
     </div>
 </div>
-<?php } ?>
+
 

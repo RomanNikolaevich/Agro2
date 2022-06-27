@@ -12,7 +12,7 @@ $goods = q("
 
 if(!mysqli_num_rows($goods)) {
     $_SESSION['info'] = 'Данного товара не существует!';
-    header("Location: /goods");
+    header("Location: /admin/goods");
     exit();
 }
 

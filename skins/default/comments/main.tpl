@@ -71,7 +71,9 @@
                                 } ?> |
                                 user: <u><?= htmlspecialchars($comment['name'])?></u> |
                                 date: <u><?= $comment['date']?></u> | :
-                                <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
+                                <?php if(isset($_SESSION['user'])
+                                        && ($_SESSION['user']['access'] === ADMIN
+                                        || $_SESSION['user']['access'] === SUPER_ADMIN)) {?>
                                 <span style="color: green">отзыв одобрен</span><br>
                                  <?php } ?>
                                 <i><?= nl2br(htmlspecialchars($comment['text']));?></i><br>
@@ -79,7 +81,9 @@
                             //End: Общий просмотр "Одобренные отзывы"
 							//Start: Доступ админа "Скрытые отзывы"
                              else {
-								  if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
+                                 if(isset($_SESSION['user'])
+                                         && ($_SESSION['user']['access'] === ADMIN
+                                         || $_SESSION['user']['access'] === SUPER_ADMIN)) {?>
                                 # <?php //порядковый номер отзыва
                                 if ($currentCommentNumber > 0) {
                                     echo $currentCommentNumber--;

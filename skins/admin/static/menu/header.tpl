@@ -10,19 +10,20 @@
     <div class="col-md-4">
         <div class="d-flex flex-row-reverse">
             <?php
-            if (!empty($_SESSION['user'])) { ?>
+            if (isset($_SESSION['user'])) { ?>
             <p>С возвращением, <br>
                 <img src="/skins/admin/img/user-50.png" style="align-content:flex-start; height:30px">
-                    <?php echo $_SESSION['user']['login']; ?>
-                <a class="nav-link" style="color:red"  href="/auth/logout">Выход</a>
-                <?php } ?>
+                    <?= $_SESSION['user']['login']; } ?>
             </p>
+            <p style="color:#0d6efd"><?php dateWeek() ?></p>
         </div>
     </div>
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <?php if (isset($_SESSION['user']) && $_SESSION['user']['access'] == 2) { ?>
+        <?php if (isset($_SESSION['user'])
+                && ($_SESSION['user']['access'] === ADMIN
+                || $_SESSION['user']['access'] === SUPER_ADMIN)) { ?>
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -47,8 +48,12 @@
             </ul>
         </div>
         <?php } ?>
-        <div class="admin-nav">
-            <a class="nav-link" style="color:white" href="/">Вернуться на сайт</a>
+        <div class="">
+            <a class="" style="color:white;  text-decoration: none;" href="/">Вернуться на сайт</a>
+            <?php if(isset($_SESSION['user'])) { ?>
+            <a class="" style="color:white; text-decoration: none;"> | </a>
+            <a class="" style="color:red; text-decoration: none;"  href="/auth/logout">Выход</a>
+            <?php } ?>
         </div>
     </div>
 

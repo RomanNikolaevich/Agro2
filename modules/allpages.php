@@ -11,7 +11,7 @@ if(isset($_SESSION['user'])) {
 
 //убиваем сессию  и удаляем hash в БД для неактивированных и забаненых
     //if (isset($_GET['module'], $_GET['page']) && $_GET['module'] != 'auth' && $_GET['page'] != 'logout') {
-if ($_SESSION['user']['active'] != 1 || $_SESSION['user']['access'] == 5) {
+if ($_SESSION['user']['active'] != 1 || $_SESSION['user']['access'] == BLOCKED) {
         $hashzero = 0;
         q("
              UPDATE `users` SET

@@ -1,3 +1,8 @@
+<?php
+/**
+* @var $content
+ */
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,7 +22,9 @@
         <?php
         include './skins/'.Core::$SKIN.'/static/menu/header.tpl'; ?>
         <div class="conteiner-content">
-            <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) {
+            <?php if(isset($_SESSION['user'])
+                    && ($_SESSION['user']['access'] === ADMIN
+                    || $_SESSION['user']['access'] === SUPER_ADMIN)) {
             echo $content;
              } elseif(!isset($_SESSION['user'])) { ?>
                 ПРИВЕТ <br>

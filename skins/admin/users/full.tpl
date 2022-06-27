@@ -2,14 +2,14 @@
 <div>
 
     <table class="table table-hover">
-        <!--            <thead>
-                    <tr>
-                        <th scope="col">Band</th>
-                        <th scope="col">Year formed</th>
-                        <th scope="col">No. of Albums</th>
-                        <th scope="col">Most famous song</th>
-                    </tr>
-                    </thead>-->
+<!--            <thead>
+        <tr>
+            <th scope="col">Band</th>
+            <th scope="col">Year formed</th>
+            <th scope="col">No. of Albums</th>
+            <th scope="col">Most famous song</th>
+        </tr>
+        </thead>-->
         <tbody>
         <tr>
             <th scope="row">id</th>
@@ -39,19 +39,28 @@
             <th scope="row">access</th>
             <td colspan="1"><?=htmlspecialchars($row['access'] ?? '');?></td>
             <td colspan="1"><a class="" href="/admin/users/main?action=blocked&id=<?php echo $row['id'];
-                ?>"><img style="width:40px" src="/skins/admin/img/blocked-user.png"></a></td>
-            <td colspan="1"><a class="" href="/admin/users/main?action=regular&id=<?php echo $row['id'];
-                ?>"><img style="width:40px" src="/skins/admin/img/main-user-1.png"></a></td>
-            <td colspan="1"><a class="" href="/admin/users/main?action=admin&id=<?php echo $row['id'];
-                ?>"><img style="width:40px" src="/skins/admin/img/admin-user-3.png"></a></td>
+                ?>"><img style="width:40px" src="/skins/admin/img/blocked-user.png"></a>
+                <a class="" href="/admin/users/main?action=regular&id=<?php echo $row['id'];
+                ?>"><img style="width:40px" src="/skins/admin/img/main-user-1.png"></a>
+                <a class="" href="/admin/users/main?action=admin&id=<?php echo $row['id'];
+                ?>"><img style="width:40px" src="/skins/admin/img/admin-user-3.png"></a>
+                <?php if(isset($_SESSION['user'])
+                && $_SESSION['user']['access'] === SUPER_ADMIN) {?>
+
+                <a class="" href="/admin/users/main?action=superadmin&id=<?php echo $row['id'];
+                ?>"><img style="width:40px" src="/skins/admin/img/superadmin.png"></a>
+            <?php } ?>
+            </td>
+
+
         </tr>
         <tr>
             <th scope="row">Дата регистрации</th>
-            <td colspan="4"><?=htmlspecialchars($row['login'] ?? '');?></td>
+            <td colspan="4"><?=htmlspecialchars($row['date_reg'] ?? '');?></td>
         </tr>
         <tr>
             <th scope="row">Дата последней активности</th>
-            <td colspan="4"><?=htmlspecialchars($row['login'] ?? '');?></td>
+            <td colspan="4"><?php timeActivity($row); ?></td>
         </tr>
         <tr>
             <th scope="row">О себе</th>
@@ -72,7 +81,7 @@
         <tr>
             <th scope="row"></th>
             <td><a class="btn btn-primary" href="/admin/users/edit?id=<?= $row['id'];
-                ?>">Сохранить изменения</a></td>
+                ?>">Редактировать</a></td>
         </tr>
         </tfoot>
     </table>

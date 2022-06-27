@@ -3,7 +3,6 @@
  * @var $row array
  */
 ?>
-<?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
 <div class="row">
     <div class="form-group">
         <form action="" method="post">
@@ -49,7 +48,3 @@
         </form>
     </div>
 </div>
-<?php } else { ?>
-    ПРИВЕТ СТАНИСЛАВ!
-<?php } ?>
-

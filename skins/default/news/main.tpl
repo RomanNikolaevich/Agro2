@@ -6,7 +6,7 @@
 
 <div class="container mt-4">
         <h3> Все существующие новости: </h3>
-        <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']!=5) { ?>
+        <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']!=BLOCKED) { ?>
         <!-- Start "Видимый блок новостей для незабаненых пользователей" -->
         <form action="" method="post">
         <?php while($row = mysqli_fetch_assoc($news)) { ?>

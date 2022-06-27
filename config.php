@@ -17,3 +17,9 @@ class Core {
         'keywords' => 'k'
         );
 }
+
+const BLOCKED = 'Blocked';
+const NEWUSER = 'NewUser';
+const REGULAR = 'Regular';
+const ADMIN = 'Admin';
+const SUPER_ADMIN = 'SuperAdmin';

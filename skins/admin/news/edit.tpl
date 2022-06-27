@@ -1,4 +1,3 @@
-<?php if(isset($_SESSION['user']) && $_SESSION['user']['access']==2) { ?>
 <div class="container mt-4">
     <div class="row">
         <div class="form-group">
@@ -40,5 +39,3 @@
         </div>
     </div>
 </div>
-<?php } ?>
-

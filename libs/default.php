@@ -140,3 +140,22 @@ function logout() {
     header("Location: /");
     exit();
 }
+
+function activityUpdate() {
+    if(isset($_SESSION['user'])) {
+        q("
+		UPDATE `users` SET
+		`date_activ` = '" . time() . "',
+		`ip`         = '" . ip2long($_SERVER['REMOTE_ADDR']) . "'
+		WHERE `id`   = " . (int)$_SESSION['user']['id'] . "
+	");
+    }
+    //exit();
+}
+//не работает как функция
+function dateWeek(){
+    echo date('d-m-Y', time()).'<br>';
+    $week = ['воскресенье', 'понедельник', 'вторник', 'среда', 'чертверг', 'пятница', 'суббота'];
+    $day = date ('w', time());
+    echo $week[$day];
+}

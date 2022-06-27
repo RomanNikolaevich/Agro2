@@ -8,11 +8,22 @@ $userDb = q("
 ");
 
 //Выставляем права пользователям:
+//Заблокированный пользователь:
+if(isset($_GET['action']) && $_GET['action']=='blocked'){
+    q("
+        UPDATE `users` SET
+       `access` = 'Blocked'
+		WHERE `id` = ".(int)$_GET['id']."
+	");
+    header("Location: /admin/users");
+    exit();
+}
+
 //Обычный пользователь:
 if(isset($_GET['action']) && $_GET['action']=='regular'){
     q("
         UPDATE `users` SET
-       `access` = 1
+       `access` = 'Regular'
 		WHERE `id` = ".(int)$_GET['id']."
 	");
     header("Location: /admin/users");
@@ -23,20 +34,31 @@ if(isset($_GET['action']) && $_GET['action']=='regular'){
 if(isset($_GET['action']) && $_GET['action']=='admin'){
     q("
         UPDATE `users` SET
-       `access` = 2
+       `access` = 'Admin'
 		WHERE `id` = ".(int)$_GET['id']."
 	");
     header("Location: /admin/users");
     exit();
 }
 
-//Заблокированный пользователь:
-if(isset($_GET['action']) && $_GET['action']=='blocked'){
+//СуперАдмин пользователь:
+if(isset($_GET['action']) && $_GET['action']=='superadmin'){
     q("
         UPDATE `users` SET
-       `access` = 5
+       `access` = 'SuperAdmin'
 		WHERE `id` = ".(int)$_GET['id']."
 	");
+    header("Location: /admin/users");
+    exit();
+}
+
+//Удаление пользователя
+if(isset($_GET['action']) && $_GET['action']=='delete'){
+    q("
+		DELETE FROM `users`
+		WHERE `id` = ".(int)$_GET['id']."
+	");
+    $_SESSION['info'] = 'Пользователь id = '.$_GET['id'].' успешно удален';
     header("Location: /admin/users");
     exit();
 }
