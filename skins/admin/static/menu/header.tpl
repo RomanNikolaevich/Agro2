@@ -45,6 +45,10 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color:white" href="/admin/users">Пользователи</a>
                 </li>
+                <a class="nav-link" style="color:white"> | </a>
+                <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="/admin/statistics">Статистика</a>
+                </li>
             </ul>
         </div>
         <?php } ?>

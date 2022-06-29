@@ -19,7 +19,7 @@
             <div class="card-footer">
                 <p><?= hsc($row['description']); ?></p>
                 <?= hsc(mb_strimwidth($row['text'], 0, 450, "...")); ?> <a class=""
-                    href="/news/full?id=<?= (int)$row['id']; ?>">(полная версия)</a>
+                    style="text-decoration: none;" href="/news/full?id=<?= (int)$row['id']; ?>">(полная версия)</a>
             </div>
         </div>
             <hr>

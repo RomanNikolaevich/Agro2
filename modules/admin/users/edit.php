@@ -1,19 +1,18 @@
 <?php
-/**
- * @var $link
- */
 
-$users = q("
-	SELECT *
-	FROM `users`
-	WHERE 	`id` = ".(int)$_GET['id']."
-	Limit 1
+include './modules/admin/users/full.php';
+include './modules/admin/users/main.php';
+
+if(isset($_POST['ok'], $_POST['age'], $_POST['date'], $_POST['aboutme'],)) {
+    q("
+		UPDATE `users` SET
+		`age`         = '" . mres(trim($_POST['age'])) . "',
+		`date_reg`       = '" . mres(trim($_POST['date'])) . "',
+		`about`       = '" . mres(trim($_POST['aboutme'])) . "'
+		WHERE `id`    = " . (int)$_GET['id'] . "
 	");
 
-if(!mysqli_num_rows($users)) {
-    $_SESSION['info'] = 'Данного пользователя не существует!';
-    header("Location: /admin/users");
+    $_SESSION['info'] = 'Запись была изменена';
+    header('Location: /admin/users');
     exit();
 }
-
-$row = mysqli_fetch_assoc($users);

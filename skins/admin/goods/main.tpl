@@ -45,12 +45,12 @@ if (isset($info)) { ?>
                 </td>
                 <td class="">
                     <?= hsc(mb_strimwidth($row['description'], 0, 150, "...")); ?>
-                    <a class="" href="/admin/goods/full?id=<?php echo $row['id'];
+                    <a class="" style="text-decoration: none;" href="/admin/goods/full?id=<?php echo $row['id'];
                     ?>">(полная версия)</a>
                 </td>
                 <td class="">
                     <?= hsc(mb_strimwidth($row['text'], 0, 150, "...")); ?>
-                    <a class="" href="/admin/goods/full?id=<?php echo $row['id'];
+                    <a class="" style="text-decoration: none;" href="/admin/goods/full?id=<?php echo $row['id'];
                     ?>">(полная версия)</a>
                 </td>
                 <td class="">

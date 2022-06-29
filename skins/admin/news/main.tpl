@@ -57,12 +57,12 @@
                     </td>
                     <td class="">
                         <?= hsc(mb_strimwidth($row['description'], 0, 150, "...")); ?>
-                        <a class="" href="/admin/news/full?id=<?= (int)$row['id'];
+                        <a class="" style="text-decoration: none;" href="/admin/news/full?id=<?= (int)$row['id'];
                         ?>">(полная версия)</a>
                     </td>
                     <td class="">
                         <?= hsc(mb_strimwidth($row['text'], 0, 150, "...")); ?>
-                        <a class="" href="/admin/news/full?id=<?= (int)$row['id'];
+                        <a class="" style="text-decoration: none;" href="/admin/news/full?id=<?= (int)$row['id'];
                         ?>">(полная версия)</a>
                     </td>
                     <td class="" style="text-align: center;">

@@ -4,20 +4,28 @@
  */
 if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 	$errors = [];
-	$login = $_POST['login'];
+
+    $login = $_POST['login'];
 	$password = $_POST['password'];
 	$email = $_POST['email'];
 	$age = $_POST['age'];
-	$query = "SELECT * FROM users WHERE login='$login'";
 
+    $query = "SELECT * FROM users WHERE login='$login'";
 	$user = mysqli_fetch_assoc(q($query));
 
+    if(!empty($login)) {
+        if (!preg_match('#^[-A-Za-zА-ЯЁа-яё\d]{3,18}$#u', $login)) {
+            $errors['login'] = 'Для логина доступны только латинские и кирилические буквы (большие и маленькие),
+         цифры, тире и подчеркивание, от 3-х до 18 символов';
+        }
+    }
+
 	if(empty($login)) {
-		$errors['login'] = 'Вы не заполнили логин';
+		$errors['login2'] = 'Вы не заполнили логин';
 	} elseif (mb_strlen($login) < 2) {
-		$errors['login'] = 'Логин слишком короткий';
+		$errors['login2'] = 'Логин слишком короткий';
 	} elseif (mb_strlen($login) > 18) {
-		$errors['login'] = 'Логин слишком длинный';
+		$errors['login2'] = 'Логин слишком длинный';
 	}
 
 	if(empty($password)) {
@@ -35,7 +43,7 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 	} elseif ($age < 1 || $age > 150) {
 		$errors['age'] = 'Введите правильный возраст';
 	}
-	//Делаем проверку логина и email на уникальность:
+	//Делаем проверку логина и email на уникальность (на дубликаты):
 	if (!count($errors)) {
 		$res = q("
 				SELECT `id`
@@ -62,7 +70,7 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 			q("
 		INSERT INTO `users` SET
 		`login`    = '".mres($login)."',
-		`password` = '".myHash($password)."',
+		`password` = '".mres(myHash($password))."',
 		`email`    = '".mres($email)."',
 		`age`      = ".(int)$_POST['age'].",
 		`date_reg` = '" . date('Y-m-d H:i:s') . "',
@@ -85,8 +93,6 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 			header("Location: /auth/regin");
 			exit();
 		}
-	} /*else {
-		$errors['loginwrong'] = 'такой логин уже зарегистрирован на сайте, выберите другой';
-	}*/
+	}
 }
 

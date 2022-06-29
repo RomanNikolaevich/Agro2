@@ -7,6 +7,7 @@
                     <input type="text" class="form-control" name="title" value="<?=
                     htmlspecialchars($_POST['title'] ?? '');?>">
                 </div>
+                <span style="color:red"><?php echo $errors['title'] ?? '' ?></span>
                 <div>
                     <h4>Категория товара (выберите из списка):</h4>
                     <select class="form-control" name="cat" selected="selected">

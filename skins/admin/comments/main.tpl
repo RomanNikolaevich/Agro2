@@ -66,7 +66,7 @@ if (isset($info)) { ?>
                     </td>
                     <td class="">
                         <?= mb_strimwidth($row['text'], 0, 150, "..."); ?>
-                        <a class="" href="/admin/comments/full?id=<?= $row['id'];
+                        <a class="" style="text-decoration: none;" href="/admin/comments/full?id=<?= $row['id'];
                         ?>">(полная версия)</a>
                     </td>
                     <td class="" style="text-align: center; <?php echo $row['active'] == 1 ? 'color:green;'

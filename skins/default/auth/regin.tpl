@@ -11,6 +11,7 @@
 					   placeholder="Минимум 4 символа"
 					   value="<?php echo @htmlspecialchars($_POST['login']); ?>">
 				<span style="color:red"><?php if (isset($errors['login'])) {echo $errors['login'];} ?></span>
+                <span style="color:red"><?php if (isset($errors['login2'])) {echo $errors['login2'];} ?></span>
                 <p></p>
                 <p>Введите пароль *: </p>
 				<input type="password" name="password" class="form-control"

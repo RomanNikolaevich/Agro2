@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $userDb
+ * @var $errors string
  */
  ?>
 <h5>Управление пользователями:</h5>
@@ -18,25 +19,28 @@
 </p>
 <div class="clearfix2"></div>
     <p style="color:red"><?= $info ?? ''; ?></p>
-<form action="" method="post">
+
 <table class="mytable">
     <tr class="mytable-header">
         <th colspan="<?php if(isset($_SESSION['user'])
         && $_SESSION['user']['access'] === SUPER_ADMIN) {?> 15
             <?php } else {?>13<?php }?>" style="text-align: center;">Поиск пользователей</th>
     </tr>
+    <form method="post" action="">
         <td colspan="<?php if(isset($_SESSION['user'])
-                && $_SESSION['user']['access'] === SUPER_ADMIN) {?> 14
-            <?php } else {?>12<?php }?>" class="">
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                </form>
+                && $_SESSION['user']['access'] === SUPER_ADMIN) {?> 12
+            <?php } else {?>10<?php }?>" class="">
+            <input class="form-control mr-sm-2" type="search" name="search" style="color:blue"
+                   placeholder="<?= $errors ?? 'Поиск логина' ?>" aria-label="Search">
+        </td>
+        <td colspan="2" class="">
+                    <button class="btn btn-primary" name="submit" type="submit"
+                            style="align-items:center">Search</button>
         </td>
         <td colspan="1" class="">
-                <form class="form-inline">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </form>
+            <button class="btn btn-secondary" name="reset" type="submit">Reset</button>
         </td>
+    </form>
 
     <tr class="mytable-header">
         <th rowspan="2">
@@ -78,7 +82,7 @@
             <th>Delete</th>
         <?php } ?>
     </tr>
-    <?php while($row = mysqli_fetch_assoc($userDb)) { ?>
+    <?php while(isset($userDb) ? $row = mysqli_fetch_assoc($userDb) : '') { ?>
     <tr>
         <td class="">
             <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>">
@@ -87,7 +91,7 @@
             <?php echo $row['id']; ?>
         </td>
         <td class="">
-            <a class="" href="/admin/users/full?id=<?php echo $row['id'];
+            <a class="" style="text-decoration: none;" href="/admin/users/full?id=<?php echo $row['id'];
             ?>"><?php echo $row['login']; ?></a>
         </td>
         <td class="">
@@ -143,4 +147,4 @@
     </tr>
     <?php } ?>
     </table>
-</form>
+

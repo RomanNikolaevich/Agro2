@@ -84,13 +84,9 @@ function validateName($comment) {
     global $errors;
     $badWords = '/\.com|\.ru|\.net|\.xyz|\.html|\.https|\.club|\.http|\.httр|\.httрs|\.url|\.org|\.by/i';
     $match = preg_match($badWords, $comment);
-
-    if($match) {
+    if(isset($match)) {
          $errors['comment'] = 'Ваш комментарий был отклонен, так как вы используете запрещенные слова';
-         //return false;
-    } /*else {
-        return true;
-    }*/
+    }
 }
 //блок спама стоп слов через массив - не работает - доделать позже
 function containsStopWord($comment) {
