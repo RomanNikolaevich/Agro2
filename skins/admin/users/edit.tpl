@@ -14,7 +14,7 @@
         <tr>
             <th scope="row">password</th>
             <td colspan="4">
-                <input type="password" name="password" value="">
+                <input type="password" name="password" value="<?=htmlspecialchars($row['password'] ?? '');?>">
             </td>
         </tr>
         <tr>
@@ -66,7 +66,7 @@
         <tr>
             <th scope="row">Дата регистрации</th>
             <td colspan="4">
-                <?=htmlspecialchars($dateReg['date_reg'] ?? '');?>
+            <?=htmlspecialchars($row['date_reg'] ?? '');?>
                 <input type="datetime-local" name="date" value="">
             </td>
         </tr>

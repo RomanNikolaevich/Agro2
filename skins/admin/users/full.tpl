@@ -1,4 +1,4 @@
-<h4>Личные данные:</h4>
+<h4>Личные данные: </h4> <h4 style="color:red"><?= $error ?? '' ?></h4>
 <div>
 
     <table class="table table-hover">

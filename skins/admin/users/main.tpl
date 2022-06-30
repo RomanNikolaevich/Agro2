@@ -24,12 +24,12 @@
     <tr class="mytable-header">
         <th colspan="<?php if(isset($_SESSION['user'])
         && $_SESSION['user']['access'] === SUPER_ADMIN) {?> 15
-            <?php } else {?>13<?php }?>" style="text-align: center;">Поиск пользователей</th>
+            <?php } else {?>10<?php }?>" style="text-align: center;">Поиск пользователей</th>
     </tr>
     <form method="post" action="">
         <td colspan="<?php if(isset($_SESSION['user'])
                 && $_SESSION['user']['access'] === SUPER_ADMIN) {?> 12
-            <?php } else {?>10<?php }?>" class="">
+            <?php } else {?>7<?php }?>" class="">
             <input class="form-control mr-sm-2" type="search" name="search" style="color:blue"
                    placeholder="<?= $errors ?? 'Поиск логина' ?>" aria-label="Search">
         </td>
@@ -50,9 +50,8 @@
         <?php if(isset($_SESSION['user'])
                 && $_SESSION['user']['access'] === SUPER_ADMIN) {?>
         <th colspan="4" style="text-align: center;">Редактирование доступа</th>
-        <?php } else {?>
-        <th colspan="3" style="text-align: center;">Редактирование доступа</th>
         <?php } ?>
+
         <?php if(isset($_SESSION['user'])
                 && $_SESSION['user']['access'] === SUPER_ADMIN) {?>
             <th colspan="3" style="text-align: center;">Профиль пользователя</th>
@@ -68,11 +67,12 @@
         <th style="text-align: center;">IP</th>
         <th style="text-align: center;">active</th>
         <th style="text-align: center;">access</th>
+        <?php if(isset($_SESSION['user'])
+                && $_SESSION['user']['access'] === SUPER_ADMIN) {?>
         <th style="text-align: center;">Blocked</th>
         <th style="text-align: center;">Regular</th>
         <th style="text-align: center;">Admin</th>
-        <?php if(isset($_SESSION['user'])
-                && $_SESSION['user']['access'] === SUPER_ADMIN) {?>
+
         <th>SuperAdmin</th>
         <?php } ?>
         <th style="text-align: center;">View</th>
@@ -109,6 +109,9 @@
         <td class="" style="text-align: center;">
             <?php echo $row['access']; ?>
         </td>
+        <?php
+        if(isset($_SESSION['user'])
+                && $_SESSION['user']['access'] === SUPER_ADMIN) {?>
         <td class="" style="text-align: center;">
             <a class="" href="/admin/users/main?action=blocked&id=<?php echo $row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/blocked-user.png"></a>
@@ -121,9 +124,7 @@
             <a class="" href="/admin/users/main?action=admin&id=<?php echo $row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/admin-user-3.png"></a>
         </td>
-        <?php
-        if(isset($_SESSION['user'])
-                && $_SESSION['user']['access'] === SUPER_ADMIN) {?>
+
         <td class="" style="text-align: center;">
             <a class="" href="/admin/users/main?action=superadmin&id=<?php echo $row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/superadmin.png"></a>
