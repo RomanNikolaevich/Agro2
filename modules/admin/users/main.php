@@ -69,15 +69,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'admin') {
 }
 
 //СуперАдмин пользователь:
-if (isset($_GET['action']) && $_GET['action'] == 'superadmin') {
-    $id = (int)$_GET['id'];
-    q("
+if(isset($_SESSION['user']) && $_SESSION['user']['access'] == SUPER_ADMIN) {
+    if (isset($_GET['action']) && $_GET['action'] == 'superadmin') {
+        $id = (int)$_GET['id'];
+        q("
         UPDATE `users` SET
        `access` = 'SuperAdmin'
 		WHERE `id` = " . $id . "
 	");
-    header("Location: /admin/users/edit?id=$id");
-    exit();
+        header("Location: /admin/users/edit?id=$id");
+        exit();
+    }
 }
 
 //Активация пользователя:
@@ -104,17 +106,18 @@ if (isset($_GET['action']) && $_GET['action'] == 'activeoff') {
     exit();
 }
 
-//Удаление пользователя
-if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-    q("
+//Удаление пользователя - только для Суперадминов
+if(isset($_SESSION['user']) && $_SESSION['user']['access'] == SUPER_ADMIN) {
+    if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+        q("
 		DELETE FROM `users`
 		WHERE `id` = " . (int)$_GET['id'] . "
 	");
-    $_SESSION['info'] = 'Пользователь id = ' . $_GET['id'] . ' успешно удален';
-    header("Location: /admin/users");
-    exit();
+        $_SESSION['info'] = 'Пользователь id = ' . $_GET['id'] . ' успешно удален';
+        header("Location: /admin/users");
+        exit();
+    }
 }
-
 //выводим сообщение и чистим сессии
 if (isset($_SESSION['info'])) {
     $info = $_SESSION['info']; //передаем содержимое сессии в переменную инфо

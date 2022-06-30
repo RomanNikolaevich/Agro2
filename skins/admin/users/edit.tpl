@@ -12,6 +12,12 @@
             <td colspan="4"><?=htmlspecialchars($row['login'] ?? '');?></td>
         </tr>
         <tr>
+            <th scope="row">password</th>
+            <td colspan="4">
+                <input type="password" name="password" value="">
+            </td>
+        </tr>
+        <tr>
             <th scope="row">e-mail</th>
             <td colspan="4"><?=htmlspecialchars($row['email'] ?? '');?></td>
         </tr>
