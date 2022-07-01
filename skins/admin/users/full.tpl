@@ -12,6 +12,11 @@
         </thead>-->
         <tbody>
         <tr>
+            <th scope="row">avatar</th>
+            <td colspan="4"><img src="/uploaded/<?=htmlspecialchars($row['img'] ?? '');?>" alt=""
+                                 style="height:100px"></td>
+        </tr>
+        <tr>
             <th scope="row">id</th>
             <td colspan="4"><?=htmlspecialchars($row['id'] ?? '');?></td>
         </tr>

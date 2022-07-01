@@ -156,7 +156,7 @@ function dateWeek(){
     echo $week[$day];
 }
 
-function editUser() {
+function editUserAdmin() {
     if (isset($_POST['ok'], $_POST['age'], $_POST['date'], $_POST['aboutme'], $_POST['password'])) {
         q("
 		UPDATE `users` SET
@@ -170,5 +170,85 @@ function editUser() {
         $_SESSION['info'] = 'Запись была изменена';
         header('Location: /admin/users');
         exit();
+    }
+}
+
+function editUserCabinet() {
+    if (isset($_POST['ok'], $_POST['login'], $_POST['password'], $_POST['age'], $_POST['aboutme'])) {
+        q("
+		UPDATE `users` SET
+        `login`       = '" . mres(trim($_POST['login'])) . "',
+		`age`         = '" . mres(trim($_POST['age'])) . "',
+		`password`    = '" . mres(myHash($_POST['password'])) . "',
+		`about`       = '" . mres(trim($_POST['aboutme'])) . "'
+		WHERE `id`    = " . (int)$_GET['id'] . "
+	");
+
+        $_SESSION['info'] = 'Запись была изменена';
+        header('Location: /');
+        exit();
+    }
+}
+
+//Поиск времени последней активности пользователя
+function timeActivity($row)
+{
+    if (!empty($row['date_activ'])) {
+        $difference = time() - $row['date_activ'];
+        $diffDay = floor($difference / (60 * 60 * 24));
+        $diffHour = floor($difference / (60 * 60));
+        $diffMinute = round($difference / (60));
+        echo 'Последняя активность была: ';
+        echo $diffDay > 0 ? $diffDay . ' дней ' : 'сегодня ';
+        for ($i = $diffHour; $i >= 0; $i = $i - 24) {
+            if ($i < 24) {
+                echo $i . ' часов ';
+            }
+        }
+        for ($i = $diffMinute; $i > 0; $i = $i - 60) {
+            if ($i <= 59) {
+                echo $i . ' минут назад ';
+            }
+        }
+        echo '( ' . date('d.m.Y H:i:s', $row['date_activ']) . ' )';
+    } else {
+        echo 'Дата последней активности - неизвестна';
+    }
+}
+
+function uploadAvatarUser(){
+    $array = ['image/gif', 'image/jpeg', 'image/png'];
+    $array2 = ['jpg', 'jpeg', 'gif', 'png'];
+    if (isset($_POST['submit'])) {
+        if ($_FILES['file']['error'] == 0) {
+            if ($_FILES['file']['size'] < 5000 || $_FILES['file']['size'] > 50000000) {
+                echo 'Размер изображения нам не подходит';
+            } else {
+                preg_match('#\.([a-z]+)$#iu', $_FILES['file']['name'], $matches);
+                if (isset($matches[1])) {
+                    $matches[1] = mb_strtolower($matches[1]);
+                    $temp = getimagesize($_FILES['file']['tmp_name']);
+                    $name = '/uploaded/' . date('Ymd-His') . 'img' . rand(10000, 99999) . '.jpg';
+                    $pattern = '#^.{10}(.+)#ui';
+                    preg_match ($pattern, $name, $matches2);
+                    if (!in_array($matches[1], $array2)) {
+                        echo 'Не подходит расширение изображения';
+                    } elseif (!in_array($temp['mime'], $array)) {
+                        echo 'Не подходит тип файла, можно загружать только изображения';
+                    } elseif (!move_uploaded_file($_FILES['file']['tmp_name'], '.'.$name)) {
+                        echo 'Изображение еще не загружено! Ошибка';
+                    } else {
+                        echo 'Изображение загружено верно';
+                        q("
+                                UPDATE `users` SET
+                                `img`       = '" . mres($matches2[1]) . "'
+                                WHERE `id`    = " . (int)$_GET['id'] . "
+                            ");
+                    }
+                } else {
+                    echo 'Данный файл не являетися картинкой. Принимаемые типы файлов: jpg, png, gif';
+                }
+            }
+        }
     }
 }

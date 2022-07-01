@@ -33,7 +33,7 @@ if(isset($_GET['route'])) {
 //Проверка на существование страниц
 //добавляем исключение, чтобы массив $allowed не обрабатывался в админке:
 if(Core::$SKIN != 'admin') {
-    $allowed = array('static', 'auth', 'comments', 'contacts', 'errors', 'game', 'goods', 'news','partners', 'services', 'voting');
+    $allowed = array('static', 'auth', 'comments', 'contacts', 'errors', 'game', 'goods', 'news','partners', 'services', 'voting', 'users', 'uploaded');
 
     if(!isset($_GET['module'])) {
         $_GET['module'] = 'static';

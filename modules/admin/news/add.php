@@ -1,6 +1,5 @@
 <?php
-echo "ты попал на территорию завода Васи в админке";
-exit;
+
 if(isset($_POST['add'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['description'])) {
     q("
 		INSERT INTO `news` SET

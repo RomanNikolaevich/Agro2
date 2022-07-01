@@ -25,25 +25,3 @@ if(isset($_POST['add'], $_POST['title'], $_POST['text'], $_POST['cat'],
         exit();
     }
   }
-
-//Делаем проверку логина и email на уникальность (на дубликаты):
-if (!count($errors)) {
-    $res = q("
-				SELECT `id`
-				FROM `goods`
-				WHERE `login` = '".mres($_POST['login'])."'
-				LIMIT 1
-			");
-    if(mysqli_num_rows($res)) {
-        $errors['login'] = 'Такой логин уже занят';
-    }
-    $res = q("
-				SELECT `id`
-				FROM `users`
-				WHERE `email` = '".mres($_POST['email'])."'
-				LIMIT 1
-			");
-    if(mysqli_num_rows($res)) {
-        $errors['email'] = 'Такой email уже занят';
-    }
-}

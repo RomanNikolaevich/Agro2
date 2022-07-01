@@ -11,7 +11,8 @@ $id = $_GET['id'];
 if (isset($id)) {
     if ($row['access'] == 'SuperAdmin' && $_SESSION['user']['access'] == 'SuperAdmin') {
         //echo "SuperAdmin может заходить сюда, видеть эту строчку и что-то здесь делать даже с такими как он";
-        editUser();
+        uploadAvatarUser();
+        editUserAdmin();
     } elseif ($row['access'] == 'SuperAdmin' && $_SESSION['user']['access'] != 'SuperAdmin'){
 
         header("Location: /admin/users/full?id=$id");
@@ -19,6 +20,7 @@ if (isset($id)) {
         exit();
     } else {
         //echo 'Эту страницы можно  любому админу редактировать';
-        editUser();
+        uploadAvatarUser();
+        editUserAdmin();
     }
 }

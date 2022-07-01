@@ -14,6 +14,7 @@
             <p>С возвращением, <br>
                 <img src="/skins/admin/img/user-50.png" style="align-content:flex-start; height:30px">
                     <?= $_SESSION['user']['login']; } ?>
+                <br><a href="/admin/users/full?id=<?= $_SESSION['user']['id'] ?? '' ?>" style="text-decoration: none; color:black;">Ваш профиль</a>
             </p>
             <p style="color:#0d6efd"><?php dateWeek() ?></p>
         </div>
