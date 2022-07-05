@@ -17,7 +17,7 @@ if (!mysqli_num_rows($users)) {
 }
 
 $row = mysqli_fetch_assoc($users);
-
+//wtf($row);
 //Меняем формат вывода даты регистрации:
 $qDateReg = q("
 	SELECT *, DATE_FORMAT(date_reg, '%d.%m.%Y %T (%W)') AS 'date_reg'

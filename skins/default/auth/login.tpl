@@ -12,7 +12,7 @@
                 <h4 style="color: red"><?php echo @$error; ?></h4>
 			<form method="post">
 				Логин: <input type="text" class="form-control" name="login" id="login" placeholder="Введите логин"
-					   value="<?php echo $_POST['login'] ?? '' ?>" required><br>
+					   value="" required><br>
                 Пароль: <input type="password" class="form-control" name="password" id="password" placeholder="Введите пароль"
 					   required><br>
                 Запомнить меня <input type="checkbox" class="form-check-input" name="autoauthconfirm"

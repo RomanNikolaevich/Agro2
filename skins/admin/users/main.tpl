@@ -31,7 +31,8 @@
                 && $_SESSION['user']['access'] === SUPER_ADMIN) {?> 12
             <?php } else {?>7<?php }?>" class="">
             <input class="form-control mr-sm-2" type="search" name="search" style="color:blue"
-                   placeholder="<?= $errors ?? 'Поиск логина' ?>" aria-label="Search">
+                   placeholder="<?= $errors ?? 'Поиск логина' ?>" aria-label="Search"
+            value="<?php if(isset ($_POST['search'])) { echo htmlspecialchars($_POST['search']);} ?>">
         </td>
         <td colspan="2" class="">
                     <button class="btn btn-primary" name="submit" type="submit"
@@ -92,13 +93,13 @@
         </td>
         <td class="">
             <a class="" style="text-decoration: none;" href="/admin/users/full?id=<?php echo $row['id'];
-            ?>"><?php echo $row['login']; ?></a>
+            ?>"><?php echo hsc($row['login']); ?></a>
         </td>
         <td class="">
-            <?php echo $row['email']; ?>
+            <?php echo hsc($row['email']); ?>
         </td>
         <td class="" style="text-align: center;">
-            <?php echo $row['age']; ?>
+            <?php echo (int)$row['age']; ?>
         </td>
         <td class="" style="text-align: center;">
             <?php echo long2ip($row['ip']); ?>
@@ -107,41 +108,41 @@
             <?php echo $row['active']; ?>
         </td>
         <td class="" style="text-align: center;">
-            <?php echo $row['access']; ?>
+            <?php echo hsc($row['access']); ?>
         </td>
         <?php
         if(isset($_SESSION['user'])
                 && $_SESSION['user']['access'] === SUPER_ADMIN) {?>
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users/main?action=blocked&id=<?php echo $row['id'];
+            <a class="" href="/admin/users/main?action=blocked&id=<?php echo (int)$row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/blocked-user.png"></a>
         </td>
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users/main?action=regular&id=<?php echo $row['id'];
+            <a class="" href="/admin/users/main?action=regular&id=<?php echo (int)$row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/main-user-1.png"></a>
         </td>
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users/main?action=admin&id=<?php echo $row['id'];
+            <a class="" href="/admin/users/main?action=admin&id=<?php echo (int)$row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/admin-user-3.png"></a>
         </td>
 
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users/main?action=superadmin&id=<?php echo $row['id'];
+            <a class="" href="/admin/users/main?action=superadmin&id=<?php echo (int)$row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/superadmin.png"></a>
         </td>
         <?php } ?>
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users/full?id=<?= $row['id'];
+            <a class="" href="/admin/users/full?id=<?= (int)$row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/view.png"></a>
         </td>
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users/edit?id=<?= $row['id'];
+            <a class="" href="/admin/users/edit?id=<?= (int)$row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/rewrite-button-2.png"></a>
         </td>
         <?php if(isset($_SESSION['user'])
                 && $_SESSION['user']['access'] === SUPER_ADMIN) {?>
         <td class="" style="text-align: center;">
-            <a class="" href="/admin/users/main?action=delete&id=<?= $row['id'];
+            <a class="" href="/admin/users/main?action=delete&id=<?= (int)$row['id'];
             ?>"><img style="width:40px" src="/skins/admin/img/delete-button.png"></a>
         </td>
     <?php } ?>

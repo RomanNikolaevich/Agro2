@@ -2,27 +2,27 @@
 
 //вывод пользователей из БД в main.tpl
 if (isset($_POST['submit'], $_POST['search']) && !empty($_POST['search'])) {
-    if(preg_match('#^[-A-Za-zА-ЯЁа-яё\d]+$#u', $_POST['search'])){
-        $login = $_POST['search'];
+   // if(preg_match('#^[-A-Za-zА-ЯЁа-яё\d]+$#u', $_POST['search'])){
+        $search = $_POST['search'];
         $userDb = q("
         SELECT *
         FROM `users`
-        WHERE LOWER(`login`) LIKE LOWER('%".mres($login)."%')
+        WHERE `login` LIKE '%".mres($search)."%'
+        ORDER BY `id` DESC
 ");
-    } else {
+   /* } else {
         $errors = 'Вы используете недопустимые символы!';
         $userDb = q("
         SELECT *
         FROM `users`
         ORDER BY `id` DESC
     ");
-    }
+    }*/
+    //кнопка сброса - вывод полного списка логинов и очистка строки поиска
 } elseif (isset($_POST['reset'])) {
-    $userDb = q("
-    SELECT *
-    FROM `users`
-    ORDER BY `id` DESC
-");
+    $_POST['search'] = '';
+    header("Location: /admin/users");
+    exit();
 } else {
     $userDb = q("
     SELECT *

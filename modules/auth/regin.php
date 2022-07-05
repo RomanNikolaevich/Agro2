@@ -5,20 +5,20 @@
 if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 	$errors = [];
 
-    $login = $_POST['login'];
-	$password = $_POST['password'];
-	$email = $_POST['email'];
-	$age = $_POST['age'];
+    $login = mres($_POST['login']);
+	$password = mres($_POST['password']);
+	$email = mres($_POST['email']);
+	$age = (int)$_POST['age'];
 
-    $query = "SELECT * FROM users WHERE login='$login'";
-	$user = mysqli_fetch_assoc(q($query));
+    //$query = "SELECT * FROM users WHERE login='$login'";
+	//$user = mysqli_fetch_assoc(q($query));
 
-    if(!empty($login)) {
+/*    if(!empty($login)) {
         if (!preg_match('#^[-A-Za-zА-ЯЁа-яё\d]{3,18}$#u', $login)) {
             $errors['login'] = 'Для логина доступны только латинские и кирилические буквы (большие и маленькие),
          цифры, тире и подчеркивание, от 3-х до 18 символов';
         }
-    }
+    }*/
 
 	if(empty($login)) {
 		$errors['login2'] = 'Вы не заполнили логин';
@@ -48,7 +48,7 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 		$res = q("
 				SELECT `id`
 				FROM `users`
-				WHERE `login` = '".mres($_POST['login'])."'
+				WHERE `login` = '".$login."'
 				LIMIT 1
 			");
 		if(mysqli_num_rows($res)) {
@@ -57,7 +57,7 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 		$res = q("
 				SELECT `id`
 				FROM `users`
-				WHERE `email` = '".mres($_POST['email'])."'
+				WHERE `email` = '".$email."'
 				LIMIT 1
 			");
 		if(mysqli_num_rows($res)) {
@@ -69,13 +69,13 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 		if(!count($errors)) {
 			q("
 		INSERT INTO `users` SET
-		`login`    = '".mres($login)."',
-		`password` = '".mres(myHash($password))."',
-		`email`    = '".mres($email)."',
-		`age`      = ".(int)$_POST['age'].",
+		`login`    = '".$login."',
+		`password` = '".myHash($password)."',
+		`email`    = '".$email."',
+		`age`      = ".$age.",
 		`ip`       = '" . ip2long($_SERVER['REMOTE_ADDR']) . "',
 		`date_activ` = '" . time() . "',
-		`hash`     = '".myHash($_POST['login'].$_POST['age'])."'
+		`hash`     = '".myHash($login.$age)."'
 		");// or exit(mysqli_error($link)); //вывод ошибок БД нам не нужен - есть в функции
 			$id = mysqli_insert_id($link);
 
@@ -95,4 +95,3 @@ if(isset($_POST['login'], $_POST['email'], $_POST['password'])) {
 		}
 	}
 }
-

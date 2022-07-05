@@ -28,7 +28,7 @@
             <tr>
                 <th scope="row">password</th>
                 <td colspan="4">
-                    <input type="password" name="password" value="<?=htmlspecialchars($row['password'] ?? '');?>">
+                    <input type="password" name="password" value="">
                 </td>
             </tr>
             <tr>

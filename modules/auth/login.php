@@ -6,13 +6,13 @@
 }*/
 
 if (!empty($_POST['login']) && !empty($_POST['password'])) {
-	$login = $_POST['login'];
-	$password = $_POST['password'];
+	$login = mres($_POST['login']);
+	$password = mres($_POST['password']);
 	//Сверка данных из формы авторизации с данными в БД:
 	$res = q("
 		SELECT *
 		FROM `users`
-		WHERE `login`      = '" . mres($login) . "'
+		WHERE `login`      = '" . $login . "'
 			&& `password` = '" . myHash($password) . "'
 			LIMIT 1
 	");

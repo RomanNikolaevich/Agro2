@@ -25,12 +25,14 @@
             </tr>
             <tr>
                 <th scope="row">login</th>
-                <td colspan="4"><?=htmlspecialchars($row['login'] ?? '');?></td>
+                <td colspan="4">
+                <input type="text" name="login" value="<?=htmlspecialchars($row['login'] ?? '');?>">
+                </td>
             </tr>
             <tr>
                 <th scope="row">password</th>
                 <td colspan="4">
-                    <input type="password" name="password" value="<?=htmlspecialchars($row['password'] ?? '');?>">
+                    <input type="password" name="password" value="">
                 </td>
             </tr>
             <tr>
@@ -94,8 +96,7 @@
             <tr>
                 <th scope="row">Дата регистрации</th>
                 <td colspan="4">
-                    <?=htmlspecialchars($row['date_reg'] ?? '');?>
-                    <input type="datetime-local" name="date" value="">
+                    <input type="datetime-local" name="date" value="<?=htmlspecialchars($row['date_reg'] ?? '');?>">
                 </td>
             </tr>
             <tr>
@@ -115,7 +116,7 @@
             <th scope="row"></th>
             <td>
                 <input type="submit" name="ok" class="btn btn-primary" value="Сохранить изменения">
-                <a class="btn btn-secondary" href="/admin/users/">Вернуться</a>
+                <a class="btn btn-secondary" href="/admin/users/full?id=<?=$id ?>">Вернуться</a>
             </td>
         </tr>
         </form>

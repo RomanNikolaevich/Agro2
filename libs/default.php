@@ -156,37 +156,42 @@ function dateWeek(){
     echo $week[$day];
 }
 
-function editUserAdmin() {
-    if (isset($_POST['ok'], $_POST['age'], $_POST['date'], $_POST['aboutme'], $_POST['password'])) {
-        q("
-		UPDATE `users` SET
-		`age`         = '" . mres(trim($_POST['age'])) . "',
-		`password`    = '" . mres(myHash($_POST['password'])) . "',
-		`date_reg`    = '" . mres(trim($_POST['date'])) . "',
-		`about`       = '" . mres(trim($_POST['aboutme'])) . "'
-		WHERE `id`    = " . (int)$_GET['id'] . "
-	");
+function editUserAdmin($login, $age, $date, $aboutme, $password) {
+q("
+    UPDATE `users` SET
+    `login`       = '" . mres(trim($login)) . "',
+    `age`         = '" . (int)$age . "',
+    `date_reg`    = '" . mres($date) . "',
+    `about`       = '" . mres(trim($aboutme)) . "'
+    WHERE `id`    = " . (int)$_GET['id'] . "
+");
 
-        $_SESSION['info'] = 'Запись была изменена';
-        header('Location: /admin/users');
-        exit();
+  //если пользователь не менял пароль
+if (!empty($password)) {
+        q("
+            UPDATE `users` SET
+            `password`    = '" . myHash($password) . "'
+            WHERE `id`    = " . (int)$_GET['id'] . "
+        ");
     }
 }
 
-function editUserCabinet() {
-    if (isset($_POST['ok'], $_POST['login'], $_POST['password'], $_POST['age'], $_POST['aboutme'])) {
-        q("
-		UPDATE `users` SET
-        `login`       = '" . mres(trim($_POST['login'])) . "',
-		`age`         = '" . mres(trim($_POST['age'])) . "',
-		`password`    = '" . mres(myHash($_POST['password'])) . "',
-		`about`       = '" . mres(trim($_POST['aboutme'])) . "'
-		WHERE `id`    = " . (int)$_GET['id'] . "
-	");
+function editUserCabinet($login, $age, $aboutme, $password) {
+    q("
+    UPDATE `users` SET
+    `login`       = '" . mres(trim($login)) . "',
+    `age`         = '" . (int)$age . "',
+    `about`       = '" . mres(trim($aboutme)) . "'
+    WHERE `id`    = " . (int)$_GET['id'] . "
+");
 
-        $_SESSION['info'] = 'Запись была изменена';
-        header('Location: /');
-        exit();
+    //если пользователь не менял пароль
+    if (!empty($password)) {
+        q("
+            UPDATE `users` SET
+            `password`    = '" . myHash($password) . "'
+            WHERE `id`    = " . (int)$_GET['id'] . "
+        ");
     }
 }
 
@@ -221,6 +226,7 @@ function uploadAvatarUser(){
     $array2 = ['jpg', 'jpeg', 'gif', 'png'];
     if (isset($_POST['submit'])) {
         if ($_FILES['file']['error'] == 0) {
+            //wtf($_FILES['file']);
             if ($_FILES['file']['size'] < 5000 || $_FILES['file']['size'] > 50000000) {
                 echo 'Размер изображения нам не подходит';
             } else {
@@ -228,23 +234,39 @@ function uploadAvatarUser(){
                 if (isset($matches[1])) {
                     $matches[1] = mb_strtolower($matches[1]);
                     $temp = getimagesize($_FILES['file']['tmp_name']);
+                    //wtf($temp);
                     $name = '/uploaded/' . date('Ymd-His') . 'img' . rand(10000, 99999) . '.jpg';
                     $pattern = '#^.{10}(.+)#ui';
                     preg_match ($pattern, $name, $matches2);
-                    if (!in_array($matches[1], $array2)) {
-                        echo 'Не подходит расширение изображения';
-                    } elseif (!in_array($temp['mime'], $array)) {
-                        echo 'Не подходит тип файла, можно загружать только изображения';
-                    } elseif (!move_uploaded_file($_FILES['file']['tmp_name'], '.'.$name)) {
-                        echo 'Изображение еще не загружено! Ошибка';
+                    if($temp[1]/$temp[0] < 0.4 || $temp[0]/$temp[1] <0.4){
+                        echo 'не подходящая пропорция - выберите другое изображение';
                     } else {
-                        echo 'Изображение загружено верно';
-                        q("
+                        if (!in_array($matches[1], $array2)) {
+                            echo 'Не подходит расширение изображения';
+                        } elseif (!in_array($temp['mime'], $array)) {
+                            echo 'Не подходит тип файла, можно загружать только изображения';
+                        } elseif (!move_uploaded_file($_FILES['file']['tmp_name'], '.'.$name)) {
+                            echo 'Изображение еще не загружено! Ошибка';
+                        } else {
+                            echo 'Изображение загружено верно';
+                            q("
                                 UPDATE `users` SET
                                 `img`       = '" . mres($matches2[1]) . "'
                                 WHERE `id`    = " . (int)$_GET['id'] . "
                             ");
+                            $temp2 = imagecreatefromjpeg ($_FILES['file']['tmp_name']);
+                            wtf($temp2);
+                            $id = (int)$_GET['id'];
+                            if(isset($_SESSION['user'])
+                                && $_SESSION['user']['access'] === ADMIN
+                                || $_SESSION['user']['access'] == SUPER_ADMIN) {
+                                header("Location: /admin/users/edit?id=$id");
+                            } else {
+                                header("Location: /users/edit?id=$id");
+                            }
+                        }
                     }
+
                 } else {
                     echo 'Данный файл не являетися картинкой. Принимаемые типы файлов: jpg, png, gif';
                 }
