@@ -3,6 +3,12 @@
  * @var $link
  */
 
+$id = $_GET['id'];
+$size = 450;
+$file_path = './uploaded/goods/';
+$imageDB = 'goods';
+uploadImage($size, $file_path, $imageDB);
+
 $goods = q("
 	SELECT *
 	FROM `goods`

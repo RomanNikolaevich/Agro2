@@ -5,7 +5,8 @@
                 <?php while($row = mysqli_fetch_assoc($goods)) { ?>
                     <div class="product col-md-4 col-sm-4 col-xs-12">
                         <div class="card">
-                                <img class="card-img-top" src="/skins/default/img/azot-1.jpg" alt="Card image cap">
+                            <img class="rounded card-img-top" src="/uploaded/goods/<?=htmlspecialchars($row['img'] ?? '');?>"
+                                 alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">
                                      <a class="link-dark" style="text-decoration: none;"

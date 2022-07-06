@@ -16,8 +16,8 @@ if (isset($info)) { ?>
             <th rowspan="2">
                 <!-- th тег применяется для шапки таблицы-->
             </th>
-            <th colspan="6" style="text-align: center;">Содержимое новостей</th><!--растягивает ячейку на ширину трех нижних-->
-            <th colspan="2" style="text-align: center;">Редактирование новостей</th>
+            <th colspan="6" style="text-align: center;">Товары</th><!--растягивает ячейку на ширину трех нижних-->
+            <th colspan="2" style="text-align: center;">Редактирование товаров</th>
         </tr>
         <tr class="mytable-header" style="text-align: center;">
             <th>id</th>

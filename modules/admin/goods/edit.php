@@ -18,6 +18,13 @@ if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['p
     exit();
 }
 
+//Добавление изображений к товарам:
+$id = $_GET['id'];
+$size = 450;
+$file_path = './uploaded/goods/';
+$imageDB = 'goods';
+uploadImage($size, $file_path, $imageDB);
+
 $goods = q("
 	SELECT *
 	FROM `goods`

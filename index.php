@@ -4,6 +4,8 @@ ini_set('display_errors', 'on');
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 
+
+
 if (isset($_SERVER['REQUEST_URI'])) {
     $tmp = trim($_SERVER['REQUEST_URI'], '/');
     $tmp = explode('?', $tmp);
@@ -28,3 +30,11 @@ $content = ob_get_contents();
 ob_end_clean();
 
 include './skins/'.Core::$SKIN.'/index.tpl';
+
+/*$files1 = scandir('./uploaded');
+wtf($files1);
+$files2 = imagecreatefromjpeg('./uploaded/20220706-163851img69772.jpeg');
+wtf($files2);
+$files3 = file_exists('index.php');
+wtf($files3);
+exit();*/

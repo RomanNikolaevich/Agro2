@@ -11,7 +11,10 @@ $id = $_GET['id'];
 //wtf($row);
 if (isset($_SESSION['user']) && $_SESSION['user']['id'] == (int)$_GET['id']) {
     //загрузка аватарки:
-    uploadAvatarUser();
+    $size = 100;
+    $file_path = './uploaded/mini/';
+    $imageDB = 'users';
+    uploadImage($size, $file_path, $imageDB);
     //изменение пользовательских данных
     if (isset($_POST['ok'], $_POST['age'], $_POST['aboutme'], $_POST['password'])) {
         $login = $_POST['login'];

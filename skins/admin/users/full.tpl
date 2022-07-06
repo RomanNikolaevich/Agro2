@@ -13,7 +13,7 @@
         <tbody>
         <tr>
             <th scope="row">avatar</th>
-            <td colspan="4"><img src="/uploaded/<?=htmlspecialchars($row['img'] ?? '');?>" alt=""
+            <td colspan="4"><img src="/uploaded/mini/<?=htmlspecialchars($row['img'] ?? '');?>" alt=""
                                  style="height:100px"></td>
         </tr>
         <tr>

@@ -4,7 +4,8 @@
             <div>
                 <p><b><?= htmlspecialchars($row['title'] ?? ''); ?></b></p>
             </div>
-            <img class="rounded float-left" src="/skins/default/img/azot-1.jpg" style="width: 250px" alt="Card image cap">
+            <img class="rounded float-left" src="/uploaded/goods/<?=htmlspecialchars($row['img'] ?? '');?>"
+                 alt="Card image cap" style="width:350px">
             <div>
                 <p> <b>Категория товара:</b><br><?= htmlspecialchars($row['cat'] ?? ''); ?></p>
             </div>

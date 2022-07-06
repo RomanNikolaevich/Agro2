@@ -40,6 +40,7 @@
                 </div>
                 <br>
                 <input type="submit" name="add" class="btn btn-primary" value="Добавить товар">
+                <a class="btn btn-secondary" href="/admin/goods/">К списку товаров</a>
             </form>
             <br>
         </div>

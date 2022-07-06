@@ -4,7 +4,17 @@
             <div>
                 <p><b><?= htmlspecialchars($row['title'] ?? ''); ?></b></p>
             </div>
-            <img class="rounded float-left" src="/skins/default/img/azot-1.jpg" style="width: 250px" alt="Card image cap">
+            <div>
+                <img class="rounded float-left" src="/uploaded/goods/<?=htmlspecialchars($row['img'] ?? '');?>"
+                     alt="Card image cap" style="width:350px">
+            </div>
+            <div>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="50000000"/>
+                    <input type="file" class="btn btn-light" name="file">
+                    <input type="submit" name="submit" class="btn btn-light" value="Загрузить файл">
+                </form>
+            </div>
             <div>
                 <p> <b>Категория товара:</b><br><?= htmlspecialchars($row['cat'] ?? ''); ?></p>
             </div>
@@ -17,6 +27,12 @@
             <div>
                 <p><b>Цена:</b> <?= htmlspecialchars($row['price'] ?? ''); ?> грн.</p>
             </div>
+            <div>
+                <a class="btn btn-primary" href="/admin/goods/edit?id=<?= $row['id'];
+                ?>">Редактировать</a>
+                <a class="btn btn-secondary" href="/admin/goods/">К списку товаров</a>
+            </div>
+            <p></p>
         </div>
     </div>
 </div>
