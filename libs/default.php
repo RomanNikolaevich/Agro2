@@ -239,7 +239,7 @@ function timeActivity($row)
     }
 }
 
-function uploadImage($size, $file_path, $imageDB)
+/*function uploadImage($size, $file_path, $imageDB, $id)
 {
     $array = ['image/gif', 'image/jpeg', 'image/png'];
     $array2 = ['jpg', 'jpeg', 'gif', 'png'];
@@ -248,16 +248,16 @@ function uploadImage($size, $file_path, $imageDB)
         if ($_FILES['file']['error'] == 0) {
             //wtf($_FILES['file']);
             if ($_FILES['file']['size'] < 5000 || $_FILES['file']['size'] > 50000000) {
-                echo 'Размер изображения нам не подходит';
+                $_SESSION['info'] = 'Размер изображения нам не подходит';
             } else {
                 preg_match('#\.([a-z]+)$#iu', $_FILES['file']['name'], $matches);
                 if (isset($matches[1])) {
                     $matches[1] = mb_strtolower($matches[1]);
                     $temp = getimagesize($_FILES['file']['tmp_name']);
                     if (!in_array($matches[1], $array2)) {
-                        echo 'Не подходит расширение изображения';
+                        $_SESSION['info'] = 'Не подходит расширение изображения';
                     } elseif (!in_array($temp['mime'], $array)) {
-                        echo 'Не подходит тип файла, можно загружать только изображения';
+                        $_SESSION['info'] =  'Не подходит тип файла, можно загружать только изображения';
                     } else {
                         if ($temp['mime'] == 'image/jpeg') {
                             $type = 'jpeg';
@@ -272,12 +272,12 @@ function uploadImage($size, $file_path, $imageDB)
                         //wtf($matches2[1]); //[1] => 20220705-164551img16546.jpeg
                         //exit();
                         if ($temp[1] / $temp[0] < 0.4 || $temp[0] / $temp[1] < 0.4) {
-                            echo 'не подходящая пропорция - выберите другое изображение';
+                            $_SESSION['info'] = 'не подходящая пропорция - выберите другое изображение';
                         } else {
                             if (!move_uploaded_file($_FILES['file']['tmp_name'], $file_path . $name)) {
-                                echo 'Изображение еще не загружено! Ошибка';
+                                $_SESSION['info'] = 'Изображение еще не загружено! Ошибка';
                             } else {
-                                echo 'Изображение загружено верно';
+                                $_SESSION['info'] = 'Изображение загружено верно';
                                 //изменяем размер изображения:
                                 // Cоздаём исходное изображение (тип GdImage) на основе исходного файла
                                 if ($type == 'jpeg') {
@@ -299,7 +299,6 @@ function uploadImage($size, $file_path, $imageDB)
                                     $k = (int)round($img_height / $size, 3);
                                     $new_img_heigth = $size;
                                     $new_img_width = $img_width / $k;
-
                                 }
 
                                 // Создаём пустую картинку
@@ -320,7 +319,8 @@ function uploadImage($size, $file_path, $imageDB)
                                 imagedestroy($new_img);
                                 imagedestroy($img);
 
-                                uploadToDB ($name, $imageDB);
+                                //загрузка в базу картинки
+                                uploadToDB ($name, $imageDB, $id);
                             }
                         }
 
@@ -334,27 +334,24 @@ function uploadImage($size, $file_path, $imageDB)
     }
 }
 //запись картинок в БД
-function uploadToDB ($name, $imageDB){
-    $id = (int)$_GET['id'];
+function uploadToDB ($name, $imageDB, $id){
     if($imageDB == 'users') {
         q("
         UPDATE `users` SET
         `img`       = '" . mres($name) . "'
         WHERE `id`    = " . $id . "
     ");
-
-        if(isset($_SESSION['user'])
-            && $_SESSION['user']['access'] === ADMIN
-            || $_SESSION['user']['access'] == SUPER_ADMIN) {
-            header("Location: /admin/users/edit?id=$id");
-        } else {
-            header("Location: /users/edit?id=$id");
-        }
-    } else {
+    } elseif($imageDB == 'news') {
+        q("
+        UPDATE `news` SET
+        `img`       = '" . mres($name) . "'
+        WHERE `id`    = " . $id . "
+    ");
+    }else {
         q("
         UPDATE `goods` SET
         `img`       = '" . mres($name) . "'
         WHERE `id`    = " . $id . "
     ");
     }
-}
+}*/

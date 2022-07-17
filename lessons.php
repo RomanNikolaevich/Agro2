@@ -3390,7 +3390,7 @@ class Illustrator{
         echo $this->radius;
     }
     public function changeRadius($radius) { //функция специально создана для изменения свойства $radius
-    $this->radius = $radius; //
+        $this->radius = $radius; //
     }
     private function test() {
 

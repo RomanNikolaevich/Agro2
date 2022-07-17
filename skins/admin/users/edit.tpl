@@ -2,6 +2,14 @@
 <div>
     <table class="table table-hover">
         <tbody>
+        <?php
+        if (isset($info)) { ?>
+            <tr><h2><?php
+                echo $info; ?>
+                </h2>
+            </tr> <!--уведомление, о добавлении новой записи-->
+            <?php
+        } ?><br>
         <tr>
             <th scope="row">avatar</th>
             <td colspan="4"><img src="/uploaded/mini/<?=htmlspecialchars($row['img'] ?? '');?>" alt=""
