@@ -13,7 +13,8 @@
     "symfony/var-dumper": "^6.0"
   },
   "require" : {
-    "ext-mysqli": "*"
+    "ext-mysqli": "*",
+    "ext-gd": "*"
   }
 
 }

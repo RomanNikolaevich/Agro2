@@ -18,8 +18,19 @@ class Core {
         );
 }
 
+//права доступа
 const BLOCKED = 'Blocked';
 const NEWUSER = 'NewUser';
 const REGULAR = 'Regular';
 const ADMIN = 'Admin';
 const SUPER_ADMIN = 'SuperAdmin';
+
+//путь для загрузки изображений
+const IMG_MINI = './uploaded/mini/'; //уменьшенный размер для аватарок
+const IMG_GOODS = './uploaded/goods/'; // в большем размере для товаров
+
+//константы для БД:
+const DB_USERS = 'users';
+const DB_GOODS = 'goods';
+const DB_NEWS = 'news';
+const DB_COMMENTS = 'comments';

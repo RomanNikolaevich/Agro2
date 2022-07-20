@@ -13,7 +13,7 @@
             <td>
                 <form action="" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="MAX_FILE_SIZE" value="50000000"/>
-                    <input type="file" class="btn btn-light" name="file">
+                    <input type="file" class="btn btn-light" name="file" accept="image/*">
                     <input type="submit" name="submit" class="btn btn-light" value="Загрузить файл">
                 </form>
             </td>

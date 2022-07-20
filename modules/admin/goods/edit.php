@@ -2,6 +2,7 @@
 /**
  * @var $link
  */
+$id = $_GET['id'];
 if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['price'], $_POST['description'])) {
     q("
 		UPDATE `goods` SET
@@ -19,15 +20,20 @@ if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['p
 }
 
 //Добавление изображений к товарам:
-/*$id = $_GET['id'];
-$size = 450;
-$file_path = './uploaded/goods/';
-$imageDB = 'goods';
-uploadImage($size, $file_path, $imageDB, $id);*/
-class_Uploader::$id = $_GET['id'];
-class_Uploader::$size = 450;
-class_Uploader::$file_path = './uploaded/goods/';
-class_Uploader::$imageDB = 'goods';
+
+if (isset($_POST['submit'])) {
+
+    $imgGoods = new Uploader;
+    $imgGoods->uploadFile($_FILES['file']);
+    $imgGoods->resize(450, 450);
+    $info= $imgGoods->error;
+    $name = $imgGoods->name;
+    q("
+        UPDATE `goods` SET
+        `img`       = '" . mres($name) . "'
+        WHERE `id`    = " . $id . "
+    ");
+}
 
 $goods = q("
 	SELECT *

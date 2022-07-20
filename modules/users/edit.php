@@ -11,17 +11,15 @@ $id = $_GET['id'];
 //wtf($row);
 if (isset($_SESSION['user']) && $_SESSION['user']['id'] == (int)$_GET['id']) {
     //загрузка аватарки:
-/*    $size = 100;
-    $file_path = './uploaded/mini/';
-    $imageDB = 'users';
-    uploadImage($size, $file_path, $imageDB, $id);*/
-    //class_Uploader::$id = $_GET['id'];
-    class_Uploader::$size = 100;
-    class_Uploader::$file_path = './uploaded/mini/';
-    class_Uploader::$imageDB = 'users';
-    class_Uploader::uploadFile($_FILES['file']);
-    class_Uploader::resize(class_Uploader::$file_path, class_Uploader::$name, class_Uploader::$size, class_Uploader::$type);
-    class_Uploader::uploadToDB(class_Uploader::$name, class_Uploader::$imageDB, class_Uploader::$id);
+    if (isset($_POST['submit'])) {
+
+        $avatarUser=new Uploader;
+
+        $avatarUser->uploadFile($_FILES['file']);
+        $avatarUser->resize(100, 100);
+        $avatarUser->uploadToDB($id);
+        header("Location: /users/edit?id=$id");
+    }
 
 
     //изменение пользовательских данных
