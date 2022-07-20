@@ -23,11 +23,14 @@ if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['p
 
 if (isset($_POST['submit'])) {
 
-    $imgGoods = new Uploader;
-    $imgGoods->uploadFile($_FILES['file']);
-    $imgGoods->resize(450, 450);
-    $info= $imgGoods->error;
-    $name = $imgGoods->name;
+    $uploader = new Uploader;
+    $uploader->filePath=IMG_GOODS;
+    if($uploader->uploadFile($_FILES['file'])){
+        $uploader->resize(450,450);
+        $name=$uploader->name;
+    } else {
+        $errors['file'] = $uploader->error;
+    }
     q("
         UPDATE `goods` SET
         `img`       = '" . mres($name) . "'

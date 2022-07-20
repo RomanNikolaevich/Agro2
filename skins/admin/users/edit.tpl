@@ -1,11 +1,16 @@
+<?php
+/**
+ * @var int $id
+ */
+?>
 <h4>Редактирование личных данных:</h4>
 <div>
     <table class="table table-hover">
         <tbody>
         <?php
-        if (isset($info)) { ?>
+        if (isset($errors['file'])) { ?>
             <tr><h2><?php
-                echo $info; ?>
+                echo $errors['file']; ?>
                 </h2>
             </tr> <!--уведомление, о добавлении новой записи-->
             <?php

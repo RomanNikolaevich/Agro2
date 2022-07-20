@@ -13,12 +13,15 @@ if (isset($id)) {
         //это страница Суперадмина и ее могут редактировать только Суперадмины
         //загрузка аватарки:
         if (isset($_POST['submit'])) {
-            //$file = $_FILES['file'];
-            $avatarUser = new Uploader;
-            $avatarUser->uploadFile($_FILES['file'], IMG_MINI);
-            $avatarUser->resize(100, 100, IMG_MINI);
-            $info= $avatarUser->error;
-            $name = $avatarUser->name;
+
+            $uploader = new Uploader;
+            $uploader->filePath=IMG_MINI;
+            if($uploader->uploadFile($_FILES['file'])){
+                $uploader->resize(100,100);
+                $name=$uploader->name;
+            } else {
+                $errors['file'] = $uploader->error;
+            }
             q("
                 UPDATE `users` SET
                 `img`       = '" . mres($name) . "'
@@ -58,11 +61,14 @@ if (isset($id)) {
         //загрузка аватарки:
         if (isset($_POST['submit'])) {
 
-            $avatarUser = new Uploader;
-            $avatarUser->uploadFile($_FILES['file'], IMG_MINI);
-            $avatarUser->resize(100, 100, IMG_MINI);
-            $info= $avatarUser->error;
-            $name = $avatarUser->name;
+            $uploader = new Uploader;
+            $uploader->filePath=IMG_MINI;
+            if($uploader->uploadFile($_FILES['file'])){
+                $uploader->resize(100,100);
+                $name=$uploader->name;
+            } else {
+                $errors['file'] = $uploader->error;
+            }
             q("
                 UPDATE `users` SET
                 `img`       = '" . mres($name) . "'

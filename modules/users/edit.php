@@ -13,14 +13,21 @@ if (isset($_SESSION['user']) && $_SESSION['user']['id'] == (int)$_GET['id']) {
     //загрузка аватарки:
     if (isset($_POST['submit'])) {
 
-        $avatarUser=new Uploader;
-
-        $avatarUser->uploadFile($_FILES['file']);
-        $avatarUser->resize(100, 100);
-        $avatarUser->uploadToDB($id);
+        $uploader = new Uploader;
+        $uploader->filePath=IMG_MINI;
+        if($uploader->uploadFile($_FILES['file'])){
+            $uploader->resize(100,100);
+            $name=$uploader->name;
+        } else {
+            $errors['file'] = $uploader->error;
+        }
+        q("
+                UPDATE `users` SET
+                `img`       = '" . mres($name) . "'
+                WHERE `id`    = " . $id . "
+             ");
         header("Location: /users/edit?id=$id");
     }
-
 
     //изменение пользовательских данных
     if (isset($_POST['ok'], $_POST['age'], $_POST['aboutme'], $_POST['password'])) {

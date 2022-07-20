@@ -4,78 +4,67 @@ class Uploader
 {
     //public int $sizeWidth; //максимальная ширина
     //public int $sizeHeight; //максимальная высота
-    //public string $imageDB = 'users'; // BD_GOODS
-    //public int $id;
-    public string $filePath='./uploaded/goods/'; //= IMG_MINI; //IMG_GOODS;
+    public string $filePath; //='./uploaded/goods/'; //= IMG_MINI; //IMG_GOODS;
     public string $error;
     private string $imgType;
     public string $name;
 
-    public function uploadFile($file): void
+    public function uploadFile($file): bool
     {
         $array = ['image/gif', 'image/jpeg', 'image/png'];
         $array2 = ['jpg', 'jpeg', 'gif', 'png'];
 
-        if ($file['error'] == 0) {
-            //wtf($_FILES['file']);
-            if ($file['size'] < 5000 || $file['size'] > 50000000) {
-                $error = 'Размер изображения нам не подходит';
-            } else {
-                preg_match('#\.([a-z]+)$#iu', $file['name'], $matches);
-                if (isset($matches[1])) {
-                    $matches[1] = mb_strtolower($matches[1]);
-                    $temp = getimagesize($_FILES['file']['tmp_name']);
-                    //echo 111;
-                    //exit();
-                    if (!in_array($matches[1], $array2)) {
-                        $error = 'Не подходит расширение изображения';
-                    } elseif (!in_array($temp['mime'], $array)) {
-                        $error = 'Не подходит тип файла, можно загружать только изображения';
-                    } else {
-                        //echo 1;
-                        //exit();
-                        if ($temp['mime'] == 'image/jpeg') {
-                            $this->imgType = 'jpeg';
-                        } elseif ($temp['mime'] == 'image/png') {
-                            $this->imgType = 'png';
-                        } elseif ($temp['mime'] == 'image/gif') {
-                            $this->imgType = 'gif';
-                        }
-                        //echo 2;
-                        //exit();
-                        $this->name = date('Ymd-His') . 'img' . rand(10000, 99999) . '.' . $this->imgType;
-                        //$pattern = '#^.{10}(.+)#ui';
-                        //preg_match($pattern, $name, $matches2);
-                        //wtf($matches2[1]); //[1] => 20220705-164551img16546.jpeg
-                        //echo 3;
-                        //wtf($this->name);
-                        //exit();
-                        if ($temp[1] / $temp[0] < 0.4 || $temp[0] / $temp[1] < 0.4) {
-                            $error = 'не подходящая пропорция - выберите другое изображение';
-                        } else {
-                            //echo 4;
-                            if (!move_uploaded_file($_FILES['file']['tmp_name'], $this->filePath . $this->name)) {
-                                //echo 5;
-                                $error = 'Изображение еще не загружено! Ошибка';
-                                //exit();
-                            } else {
-                                //echo 6;
-                                $error = 'Изображение загружено верно';
-                                //exit();
-                            }
-                            //echo 7;
-                            //exit();
-                        }
-                        //echo 8;
-                        exit();
-                    }
-                } else {
-                    $error = 'Данный файл не являетися картинкой. Принимаемые типы файлов: jpg, png, gif';
-                }
-            }
+        if ($file['error'] != 0) {//если есть ошибки
+            $this->error = 'Файл не был загружен';
+            return false;
+        }
+
+        if ($file['size'] < 5000 || $file['size'] > 50000000) {
+            $this->error = 'Размер изображения нам не подходит' ;
+            return false;
+        }
+
+        preg_match('#\.([a-z]+)$#iu', $file['name'], $matches);
+        if (!isset($matches[1])) {
+            return false;
+        } else {
+            $matches[1] = mb_strtolower($matches[1]);
+            $temp = getimagesize($_FILES['file']['tmp_name']);
+        }
+
+        if (!in_array($matches[1], $array2)) {
+            $this->error = 'Не подходит расширение изображения';
+            return false;
+        }
+
+        if (!in_array($temp['mime'], $array)) {
+            $this->error = 'Не подходит тип файла, можно загружать только изображения';
+            return false;
+        }
+
+        if ($temp['mime'] == 'image/jpeg') {
+            $this->imgType = 'jpeg';
+        } elseif ($temp['mime'] == 'image/png') {
+            $this->imgType = 'png';
+        } elseif ($temp['mime'] == 'image/gif') {
+            $this->imgType = 'gif';
+        }
+
+        $this->name = date('Ymd-His') . 'img' . rand(10000, 99999) . '.' . $this->imgType;
+
+        if ($temp[1] / $temp[0] < 0.4 || $temp[0] / $temp[1] < 0.4) {
+            $this->error = 'не подходящая пропорция - выберите другое изображение';
+            return false;
+        }
+
+        if (!move_uploaded_file($_FILES['file']['tmp_name'], $this->filePath . $this->name)) {
+            $this->error = 'Изображение еще не загружено! Ошибка';
+            return false;
+        } else {
+            $this->error = 'Изображение загружено верно';
+            return true;
         }
     }
-
 
 //изменение размера изображения:
     public function resize($sizeWidth, $sizeHeight): void
@@ -132,29 +121,4 @@ class Uploader
         imagedestroy($newImg);
         imagedestroy($img);
     }
-
-/*//запись картинок в БД
-    public function uploadToDB($id): void
-    {
-        $name=$this->name;
-        if ($this->imageDB == 'users') {
-            q("
-        UPDATE `users` SET
-        `img`       = '" . mres($name) . "'
-        WHERE `id`    = " . $id . "
-    ");
-        } elseif ($this->imageDB == 'news') {
-            q("
-        UPDATE `news` SET
-        `img`       = '" . mres($name) . "'
-        WHERE `id`    = " . $id . "
-    ");
-        } else {
-            q("
-        UPDATE `goods` SET
-        `img`       = '" . mres($name) . "'
-        WHERE `id`    = " . $id . "
-    ");
-        }
-    }*/
 }
