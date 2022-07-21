@@ -31,7 +31,29 @@ if(isset($_GET['route'])) {
 //exit();
 
 //Проверка на существование страниц
-//добавляем исключение, чтобы массив $allowed не обрабатывался в админке:
+//Переделываем исключения и подключаем модуль статичных страниц с проверкой в БД:
+if(!isset($_GET['module'])) {
+    $_GET['module'] = 'static';
+} else {//формируем массив:
+    $res = q("
+        SELECT *
+        FROM `pages`
+        WHERE `module` = '".mres($_GET['module'])."'
+        LIMIT 1
+    ");
+    if (!mysqli_num_rows($res)) {//!$res->num_rows
+        header("Location: /errors/404");
+        exit();
+    } else { //проверка на статичность страницы:
+        $staticpage=mysqli_fetch_assoc($res);//$row=$res->fetch_assoc();
+        if ($staticpage['static']==1) {//проверка
+            $_GET['module'] = 'staticpage';
+            $_GET['page'] = 'main';
+        }
+    }
+}
+
+/*добавляем исключение, чтобы массив $allowed не обрабатывался в админке:
 if(Core::$SKIN != 'admin') {
     $allowed = array('static', 'auth', 'comments', 'contacts', 'errors', 'game', 'goods', 'news','partners', 'services', 'voting', 'users', 'uploaded');
 
@@ -42,7 +64,7 @@ if(Core::$SKIN != 'admin') {
         header("Location: /errors/404");
         exit();
     }
-}
+}*/
 
 if(!isset($_GET['page'])) {
 	$_GET['page'] = 'main';

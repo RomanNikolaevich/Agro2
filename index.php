@@ -4,8 +4,6 @@ ini_set('display_errors', 'on');
 header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-
-
 if (isset($_SERVER['REQUEST_URI'])) {
     $tmp = trim($_SERVER['REQUEST_URI'], '/');
     $tmp = explode('?', $tmp);

@@ -5430,17 +5430,45 @@ static - 0
 то у нас будет открываться по нашей стандартной схеме через контроллеры и вид.
 
 31.1.4 Вернемся снова в variables.php - доделаем под статичные странички (00:42:05 31b)
-Вот эту часть преобразуем в другой вид:
+Вот эту часть преобразуем в другой вид.
+Старый код:
 if(Core::$SKIN != 'admin') {
 $allowed = array('static', 'auth', 'comments', 'contacts', 'errors', 'game', 'goods', 'news','partners', 'services', 'voting', 'users', 'uploaded');
 
 if(!isset($_GET['module'])) {
-$_GET['module'] = 'static';
-} elseif(!in_array($_GET['module'],$allowed) && Core::$SKIN != 'admin') {
-//exit();
-header("Location: /errors/404");
-exit();
+        $_GET['module'] = 'static';
+    } elseif(!in_array($_GET['module'],$allowed) && Core::$SKIN != 'admin') {
+        //exit();
+        header("Location: /errors/404");
+        exit();
+    }
 }
+ Новый код:
+if(!isset($_GET['module'])) {
+    $_GET['module'] = 'static';
+} else {//формируем массив:
+    $res = q("
+            SELECT *
+            FROM `pages`
+            WHERE `module` = '".mres($_GET['module'])."'
+            LIMIT 1
+        ");
+    if (!mysqli_num_rows($res)) {//!$res->num_rows
+        header("Location: /errors/404");
+        exit();
+    } else { //проверка на статичность страницы:
+        $staticpage=mysqli_fetch_assoc($res);//$row=$res->fetch_assoc();
+            if ($staticpage['static']==1) {//проверка
+                $_GET['module'] = 'staticpage';
+                $_GET['page'] = 'main';
+        }
+    }
 }
 
-00:44:19
+31.1.5 Создаем модуль: '/modules/staticpage/main.php' (00:52:30 31b)
+И точно такой же скин: '/skins/default/staticpage/main.tpl'
+В main.tpl пишем:
+echo $staticpage['text'];
+
+31.1.6 Отладка ошибок кода (00:57:00 31b) до (01:02:30 31b)
+01-06-12
