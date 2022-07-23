@@ -41,10 +41,11 @@ if(!isset($_GET['module'])) {
         WHERE `module` = '".mres($_GET['module'])."'
         LIMIT 1
     ");
-    if (!mysqli_num_rows($res)) {//!$res->num_rows
+    if (!$res->num_rows) {//!mysqli_num_rows($res)
         error404 ();
     } else { //проверка на статичность страницы:
-        $staticpage=mysqli_fetch_assoc($res);//$row=$res->fetch_assoc();
+        $staticpage=$res->fetch_assoc(); //mysqli_fetch_assoc($res);
+        $res->close();//закрываем соединение
         if ($staticpage['static']==1) {//проверка
             $_GET['module'] = 'staticpage';
             $_GET['page'] = 'main';

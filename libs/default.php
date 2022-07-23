@@ -14,27 +14,22 @@ function wtf($variable, $stop = false)
 }
 
 //Запрос к БД с выводим ошибок
-function q($query)
-{
-    global $link;
-    $result = mysqli_query($link, $query);
-    if ($result === false) {
+function q($query,$key = 0) {
+    $res = DB::_($key)->query($query);
+    if($res === false) {
         $info = debug_backtrace();
-        $date = date("Y-m-d H:i:s");
-        //wtf($info);//распечатка ошибки на экран
-        $log = $date . "  QUERY: " . $query . '<br>'
-            . mysqli_error($link) . '<br>'
-            . 'FILE: ' . $info[0]['file'] .
-            ' LINE: ' . $info[0]['line'];//дебаг(перехват ошибки)
-        echo $log;
-        //отправляем на почту письмо об ошибке (учить будем это в последующих уроках)
-        //записываем ошибку в логи:
-        file_put_contents('./logs/mysql.log', strip_tags($log) . "\n\n", FILE_APPEND);
-        exit(); //остановим код
-    } else {
-        return $result; // запрос составлен верно, то вернем на страницу $result
+        $error = "QUERY: ".$query."<br>\n".DB::_($key)->error."<br>\n".
+            "file: ".$info[0]['file']."<br>\n".
+            "line: ".$info[0]['line']."<br>\n".
+            "date: ".date("Y-m-d H:i:s")."<br>\n".
+            "===================================";
+
+        file_put_contents('./logs/mysql.log',strip_tags($error)."\n\n",FILE_APPEND);
+        echo $error;
+        exit();
     }
-} // пример применения: $result = q("SELECT * FROM `users` ORDER BY `id`");
+    return $res;
+}
 
 /*Защищаем данные от пользователя в *.tpl.
  * В input добавляем в параметр value: value="<?php echo hsc($_POST[...])
@@ -53,15 +48,8 @@ function hsc($elem)
  * Пример: UPDATE `news` SET `cat` = '".mres(trim($_POST['cat']))."',
  *Экранирует специальные символы в строке для использования
 в SQL-выражении, используя текущий набор символов соединения*/
-function mres($elem)
-{
-    global $link;
-    if (!is_array($elem)) {
-        $elem = mysqli_real_escape_string($link, $elem);
-    } else {
-        $elem = array_map('mres', $elem);
-    }
-    return $elem;
+function mres($el,$key = 0) {
+    return DB::_($key)->real_escape_string($el);
 }
 
 //Удаляет пробелы (или другие символы) из начала и конца строки
