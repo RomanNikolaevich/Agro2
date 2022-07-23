@@ -22,17 +22,13 @@ include_once './variables.php';
 // Роутер
 ob_start();
 include './'.Core::$CONT.'/allpages.php';
+if(!file_exists('./'.Core::$CONT.'/'.$_GET['module'].'/'.$_GET['page'].'.php')
+    || !file_exists('./skins/'.Core::$SKIN.'/'.$_GET['module'].'/'.$_GET['page'].'.tpl')){
+    error404 ();
+}
 include './'.Core::$CONT.'/'.$_GET['module'].'/'.$_GET['page'].'.php';
 include './skins/'.Core::$SKIN.'/'.$_GET['module'].'/'.$_GET['page'].'.tpl';
 $content = ob_get_contents();
 ob_end_clean();
 
 include './skins/'.Core::$SKIN.'/index.tpl';
-
-/*$files1 = scandir('./uploaded');
-wtf($files1);
-$files2 = imagecreatefromjpeg('./uploaded/20220706-163851img69772.jpeg');
-wtf($files2);
-$files3 = file_exists('index.php');
-wtf($files3);
-exit();*/

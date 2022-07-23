@@ -150,6 +150,12 @@ function logout()
     exit();
 }
 
+function error404()
+{
+    header("Location: /errors/404");
+    exit();
+}
+
 function activityUpdate()
 {
     if (isset($_SESSION['user'])) {

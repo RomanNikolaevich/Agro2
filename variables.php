@@ -42,8 +42,7 @@ if(!isset($_GET['module'])) {
         LIMIT 1
     ");
     if (!mysqli_num_rows($res)) {//!$res->num_rows
-        header("Location: /errors/404");
-        exit();
+        error404 ();
     } else { //проверка на статичность страницы:
         $staticpage=mysqli_fetch_assoc($res);//$row=$res->fetch_assoc();
         if ($staticpage['static']==1) {//проверка
@@ -68,6 +67,10 @@ if(Core::$SKIN != 'admin') {
 
 if(!isset($_GET['page'])) {
 	$_GET['page'] = 'main';
+}
+
+if(!preg_match('#^[-a-z_\d]*$#iu', $_GET['page'])) {
+    error404 ();
 }
 
 //Обрезаем пост - проверить потом как работает
