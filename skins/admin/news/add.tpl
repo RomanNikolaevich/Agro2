@@ -9,21 +9,14 @@
                 </div>
                 <div>
                     <h4>Категория новости (выберите из списка):</h4>
-                    <select class="form-control" name="cat" selected="selected">
-                        <?php
-                        hsc($category = [
-                                'Функционал сайта',
-                                'Новые поступления, новинки',
-                                'Информация для поставщиков',
-                                'Информация для оптовых покупателей',
-                                'Информация для розничных покупателей',
-                        ]);
-                        //wtf($category);
-
-                        foreach ($category as $v) {
-                            echo '<option>'.htmlspecialchars($v).'</option>';
-                        } ?>
-                    </select>
+                    <?php
+                    echo '<select class="form-control" name="cat" selected="selected">'; //форма для выбора
+                    echo '<option value=""></option>';//пустая опция
+                    while ($row=$newsCatShow->fetch_assoc()) {
+                        echo '<option value="'.hsc($row['name']).'">'.hsc($row['name']).'</option>';
+                    }
+                    echo '</select>';
+                    ?>
                 </div>
                 <div>
                     <h4>Описание новости:</h4>
@@ -37,6 +30,7 @@
                 </div>
                 <br>
                 <input class="btn btn-primary" type="submit" name="add" value="Добавить новость">
+                <a class="btn btn-info" href="/admin/news/">К списку новостей</a>
             </form>
             <br>
         </div>

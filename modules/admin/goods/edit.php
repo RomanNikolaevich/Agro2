@@ -20,7 +20,6 @@ if(isset($_POST['ok'], $_POST['title'], $_POST['text'], $_POST['cat'], $_POST['p
 }
 
 //Добавление изображений к товарам:
-
 if (isset($_POST['submit'])) {
 
     $uploader = new Uploader;

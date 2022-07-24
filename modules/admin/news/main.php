@@ -26,12 +26,34 @@ if(isset($_GET['action']) && $_GET['action']=='delete'){
     exit();
 }
 
-//вывод новостей (переменная для main.tpl)
-$news = q("
-SELECT *
-FROM `news`
-ORDER BY `id` DESC
+//Выбор категории новостей в виде выпадающего списка
+$newsCatShow = q("
+    SELECT *
+    FROM `news_cat`
+    ORDER BY `id`
+    ");
+
+//вывод новостей согласно категорий из БД в main.tpl
+if (isset($_POST['search'])) {
+    $cat = $_POST['cat'];
+    $news = q("
+        SELECT *
+        FROM `news`
+        WHERE `cat` = '".$cat."'
+        ORDER BY `id` DESC
 ");
+} elseif (isset($_POST['reset'])) {
+    header("Location: /admin/news");
+    exit();
+} else {
+    $news = q("
+        SELECT *
+        FROM `news`
+        ORDER BY `id` DESC
+    ");
+}
+
+
 
 //делаем проверку сессии
 if(isset($_SESSION['info'])) {

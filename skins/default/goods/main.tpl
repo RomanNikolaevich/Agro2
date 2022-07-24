@@ -1,7 +1,10 @@
 <form action="" method="post">
     <div class="container">
         <div class="row">
-            <h4 class="text-center"> Предлагаемая нами продукция: </h4>
+            <div style="padding-bottom:20px; padding-top:40px;">
+                <h4 class="text-center"> Предлагаемая нами продукция: </h4>
+            </div>
+
                 <?php while($row = mysqli_fetch_assoc($goods)) { ?>
                     <div class="product col-md-4 col-sm-4 col-xs-12">
                         <div class="card">

@@ -225,3 +225,26 @@ span {
     color: red;
     font-weight: bold;
 }
+
+/*Боковая панель*/
+.sidebar {
+    height: 100%;
+    width: 150px;
+    position: fixed;
+    z-index: 1;
+
+    top: 0px;
+    float: right;
+    margin-top: 100px;
+    padding-top: 40px;
+    background-color: lightblue;
+}
+.sidebar div {
+    padding: 8px;
+    font-size: 24px;
+    display: block;
+}
+.body-text {
+    margin-right: 150px;
+    font-size: 18px;
+}

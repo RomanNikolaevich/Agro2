@@ -2,6 +2,7 @@
 
 /**
 * @var $news array
+ *@var $newsCatShow
 */
 
 ?>
@@ -14,12 +15,39 @@
     } ?><br>
     <h3> Все существующие новости: </h3>
     <form action="" method="post">
-    <div class="more-free-space">
-        <a class="btn btn-primary" href="/admin/news/add">Добавить новость</a>
+    <div>
+        <a class="btn btn-info" href="/admin/news/cat">Редактор категорий</a>
+        <a class="btn btn-success" href="/admin/news/add">Добавить новость</a>
         <input class="btn btn-danger" type="submit" name="delete" value="Удалить отмеченные записи">
     </div>
 
         <table class="mytable">
+            <tr class="mytable-header">
+                <th colspan="7" style="text-align: center;">Фильтр новостей по категориям</th><!--растягивает ячейку на ширину трех нижних-->
+                <th colspan="1" style="text-align: center;">Поиск</th>
+                <th colspan="1" style="text-align: center;">Сброс</th>
+            </tr>
+            <tr >
+                <th colspan="7" style="text-align: center;">
+                    <?php
+                    echo '<select class="form-control" name="cat" selected="selected">'; //форма для выбора
+                    echo '<option value=""></option>';//пустая опция
+                    while ($row=$newsCatShow->fetch_assoc()) {
+                        echo '<option value="'.hsc($row['name']).'">'.hsc($row['name']).'</option>';
+                    }
+                    echo '</select>';
+                    ?>
+                </th><!--растягивает ячейку на ширину трех нижних-->
+                <th colspan="1" style="text-align: center;">
+                    <!--<input type="image" name="search" style="width:40px" src="/skins/admin/img/view.png" alt="">-->
+                    <input type="submit" name="search" value="search" class="btn btn-primary">
+
+                </th>
+                <th colspan="1" style="text-align: center;">
+                    <!--<input type="image" name="reset" style="width:35px" src="/skins/admin/img/reset.png" alt="">-->
+                    <input type="submit" name="reset" value="reset" class="btn btn-secondary">
+                </th>
+            </tr>
             <tr class="mytable-header">
                 <th rowspan="2">
                     <!-- th тег применяется для шапки таблицы-->
