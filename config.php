@@ -28,6 +28,7 @@ const SUPER_ADMIN = 'SuperAdmin';
 //путь для загрузки изображений
 const IMG_MINI = './uploaded/mini/'; //уменьшенный размер для аватарок
 const IMG_GOODS = './uploaded/goods/'; // в большем размере для товаров
+const IMG_BOOKS = './uploaded/books/'; // в большем размере для книг
 
 //константы для БД:
 const DB_USERS = 'users';

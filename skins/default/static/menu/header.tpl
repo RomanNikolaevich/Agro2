@@ -7,7 +7,7 @@
 	<div class="item"><a href="/">main</a></div>
 	<div class="item"><a href="/news">news</a></div>
     <div class="item"><a href="/goods">goods</a></div>
-	<div class="item"><a href="/services">services</a></div>
+	<div class="item"><a href="/books">books</a></div>
 	<div class="item"><a href="/partners">partners</a></div>
 	<div class="item"><a href="/contacts">contacts</a></div>
 	<div class="item"><a href="/comments">comments</a></div>

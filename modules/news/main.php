@@ -11,7 +11,7 @@ $newsCatShow = q("
     ");
 
 //вывод новостей согласно категорий из БД в main.tpl
-if (isset($_POST['search'])) {
+if (isset($_POST['searchcat'])) {
     $cat = $_POST['cat'];
     $news = q("
         SELECT *

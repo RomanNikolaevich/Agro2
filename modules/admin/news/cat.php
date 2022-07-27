@@ -14,7 +14,7 @@ $newsCatShow = q("
 //создаем новую категорию для новостей
 if (isset($_POST['newcat'], $_POST['newcatsubmit'])) {
     if (!empty($_POST['newcat'])) {
-        $var = $_POST['newcat'];
+        $var = mres(trimAll($_POST['newcat']));
         q("
             INSERT INTO 
             `news_cat`(`name`)
@@ -28,8 +28,8 @@ if (isset($_POST['newcat'], $_POST['newcatsubmit'])) {
 //редактирование категорий для новостей
 if (isset($_POST['showcat'], $_POST['editcat'], $_POST['editcatsubmit'])) {
     if (!empty($_POST['editcat'])) {
-        $oldname = $_POST['showcat'];
-        $newname = $_POST['editcat'];
+        $oldname = trimAll($_POST['showcat']);
+        $newname = trimAll($_POST['editcat']);
         q("
             UPDATE `news_cat` SET
             `name` = '".mres($newname)."'

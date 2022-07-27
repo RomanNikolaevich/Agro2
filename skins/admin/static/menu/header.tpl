@@ -40,6 +40,10 @@
                 </li>
                 <a class="nav-link" style="color:white"> | </a>
                 <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="/admin/books">Книги</a>
+                </li>
+                <a class="nav-link" style="color:white"> | </a>
+                <li class="nav-item">
                     <a class="nav-link" style="color:white" href="/admin/comments">Отзывы</a>
                 </li>
                 <a class="nav-link" style="color:white"> | </a>

@@ -5,6 +5,9 @@
 ?>
 
 <div class="container">
+    <div style="text-align: center; padding-bottom:30px; padding-top:40px;">
+        <h3> Все новости по тематике удобрений в сельском хозайстве: </h3>
+    </div>
     <div class="row">
         <div class="col-3">
             <!-- Side navigation -->
@@ -40,7 +43,7 @@
             <!-- Page content -->
             <div class="main">
                 <div style="padding:10px 40px 10px;">
-                    <h3> Все существующие новости: </h3>
+
                     <?php if(isset($_SESSION['user']) && $_SESSION['user']['access']!=BLOCKED) { ?>
                         <!-- Start "Видимый блок новостей для незабаненых пользователей" -->
                         <form action="" method="post">
@@ -57,7 +60,7 @@
                                 <div style="padding:10px 40px 10px;">
                                     <p><?= hsc($row['description']); ?></p>
                                     <?= hsc(mb_strimwidth($row['text'], 0, 450, "...")); ?> <a class=""
-                                                                                               style="text-decoration: none;" href="/news/full?id=<?= (int)$row['id']; ?>">(полная версия)</a>
+                                    style="text-decoration: none;" href="/news/full?id=<?= (int)$row['id']; ?>">(полная версия)</a>
                                 </div>
                             </div>
                             <hr>

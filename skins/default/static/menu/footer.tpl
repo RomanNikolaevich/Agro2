@@ -4,7 +4,7 @@
 			<div class="item3"><a href="/">main</a></div>
             <div class="item3"><a href="/news">news</a></div>
             <div class="item3"><a href="/goods">goods</a></div>
-			<div class="item3"><a href="/services">services</a></div>
+			<div class="item3"><a href="/books">books</a></div>
 			<div class="item3"><a href="/partners">partners</a></div>
 			<div class="item3"><a href="/contacts">contacts</a></div>
 		</nav>

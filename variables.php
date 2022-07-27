@@ -55,7 +55,7 @@ if(!isset($_GET['module'])) {
 
 /*добавляем исключение, чтобы массив $allowed не обрабатывался в админке:
 if(Core::$SKIN != 'admin') {
-    $allowed = array('static', 'auth', 'comments', 'contacts', 'errors', 'game', 'goods', 'news','partners', 'services', 'voting', 'users', 'uploaded');
+    $allowed = array('static', 'auth', 'comments', 'contacts', 'errors', 'game', 'goods', 'news','partners', 'books', 'voting', 'users', 'uploaded');
 
     if(!isset($_GET['module'])) {
         $_GET['module'] = 'static';
