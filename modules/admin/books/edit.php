@@ -33,7 +33,7 @@ if(isset($_POST['addauthor']) && !empty($_POST['author'])) {
     q("
 		INSERT INTO `books2books_author` SET
 		`book_id` = '".mres(trim($id))."',
-		`author` = '".mres(trim($rowID))."'
+		`author_id` = '".mres(trim($rowID))."'
 	");
     header("Location: /admin/books/edit?id=$id");
     exit();
@@ -103,7 +103,7 @@ function booksAddAuthor () {
         $res2 = q("
             SELECT `name`
             FROM `books_author`
-            WHERE `id` = '".$row['author']."'
+            WHERE `id` = '".$row['author_id']."'
         ");
         $row2 = $res2->fetch_assoc();
         echo $row2['name'].'<br>';

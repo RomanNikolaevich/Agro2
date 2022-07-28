@@ -24,14 +24,14 @@
 
         <table class="mytable">
             <tr class="mytable-header">
-                <th colspan="6" style="text-align: center;">Фильтр книг по авторам</th><!--растягивает ячейку на ширину трех нижних-->
+                <th colspan="5" style="text-align: center;">Фильтр книг по авторам</th><!--растягивает ячейку на ширину трех нижних-->
                 <th colspan="1" style="text-align: center;">Поиск</th>
                 <th colspan="1" style="text-align: center;">Сброс</th>
             </tr>
             <tr >
-                <th colspan="6" style="text-align: center;">
+                <th colspan="5" style="text-align: center;">
                     <?php
-                    echo '<select class="form-control" name="cat" selected="selected">'; //форма для выбора
+                    echo '<select class="form-control" name="selectAuthor" selected="selected">'; //форма для выбора
                     echo '<option value=""></option>';//пустая опция
                     while ($row = $booksAuthorShow->fetch_assoc()) {
                         echo '<option value="'.hsc($row['name']).'">'.hsc($row['name']).'</option>';
@@ -53,14 +53,13 @@
                 <th rowspan="2">
                     <!-- th тег применяется для шапки таблицы-->
                 </th>
-                <th colspan="5" style="text-align: center;">Книги</th><!--растягивает ячейку на ширину трех нижних-->
+                <th colspan="4" style="text-align: center;">Книги</th><!--растягивает ячейку на ширину трех нижних-->
                 <th colspan="2" style="text-align: center;">Редактирование книг</th>
             </tr>
             <tr class="mytable-header" style="text-align: center;">
                 <th>id</th>
                 <th>название</th>
                 <th>автор</th>
-                <th>соавтор</th>
                 <th>описание</th>
                 <th>edit</th>
                 <th>delete</th>
@@ -73,14 +72,11 @@
                     <td class="">
                         <?= (int)$row['id']; ?>
                     </td>
-                    <td class="">
+                    <td style="text-align:left; width: 280px;">
                         <?= hsc($row['name']); ?>
                     </td>
-                    <td class="">
-
-                    </td>
-                    <td class="">
-
+                    <td style="text-align:left; width: 280px;">
+                        <?= hsc(booksMainShowAuthor($row['id']) ?? ''); ?>
                     </td>
                     <td class="">
                         <?= hsc(mb_strimwidth($row['text'], 0, 150, "...")); ?>

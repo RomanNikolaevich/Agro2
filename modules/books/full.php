@@ -29,7 +29,7 @@ function booksShowAuthor () {
         $res2 = q("
             SELECT `name`
             FROM `books_author`
-            WHERE `id` = ".$row['author']."
+            WHERE `id` = ".$row['author_id']."
         ");
         $row2 = $res2->fetch_assoc();
         echo $row2['name'].'<br>';

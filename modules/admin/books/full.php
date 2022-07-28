@@ -22,14 +22,14 @@ function booksShowAuthor () {
     $res = q("
     SELECT *
     FROM `books2books_author`
-    WHERE 	`book_id` = ".$id."
+    WHERE 	`book_id` = '".$id."'
     ");
     while($row=$res->fetch_assoc()){
         //Запрос к БД авторов для получения ФИО автора по идентификатору:
         $res2 = q("
             SELECT `name`
             FROM `books_author`
-            WHERE `id` = ".$row['author']."
+            WHERE `id` = '".$row['author_id']."'
         ");
         $row2 = $res2->fetch_assoc();
         echo $row2['name'].'<br>';
