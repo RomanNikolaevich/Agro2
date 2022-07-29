@@ -9,7 +9,7 @@
                 <div class="sidebar">
                     <div style="padding-bottom: 10px">
                         Поиск книг по описанию:
-                        <input class="form-control mr-sm-2" name="searchnews" type="search" placeholder="Поиск" aria-label="Search">
+                        <input class="form-control mr-sm-2" name="searchbooks" type="search" placeholder="Поиск" aria-label="Search">
                     </div>
                     <div style="padding-bottom: 30px">
                         <input type="submit" name="searchsubmit" value="Поиск" class="btn btn-outline-success my-2 my-sm-0">
@@ -18,7 +18,7 @@
                     <div style="padding-bottom: 10px">
                         Фильтр книг по автору:
                         <?php
-                        echo '<select class="form-control" name="cat" selected="selected">'; //форма для выбора
+                        echo '<select class="form-control" name="selectauthor" selected="selected">'; //форма для выбора
                         echo '<option>Выберите категорию для сортировки</option>';//пустая опция
                         while ($rowAuthor=$booksAuthorShow->fetch_assoc()) {
                             echo '<option value="'.hsc($rowAuthor['name']).'">'.hsc($rowAuthor['name']).'</option>';
@@ -27,7 +27,7 @@
                         ?>
                     </div>
                     <div>
-                        <input type="submit" name="searchcat" value="Поиск" class="btn btn-outline-success my-2 my-sm-0">
+                        <input type="submit" name="searchselect" value="Поиск" class="btn btn-outline-success my-2 my-sm-0">
                         <input type="submit" name="reset" value="Сброс" class="btn btn-outline-success my-2 my-sm-0">
                     </div>
                 </div>
@@ -50,19 +50,21 @@
             <div style="padding:5px;">
                <!-- <p><b>Авторы: </b><br><?/*=//htmlspecialchars(booksShowAuthorMain () ?? ''); */?></p>-->
             </div>
-
-            <div style="padding:5px">
-                <p><b>Количество страниц: </b><?=htmlspecialchars($row['page'] ?? '');?></p>
+            <div>
+                <br><b>Авторы: </b> <?= hsc(booksMainShowAuthor($row['id']) ?? ''); ?>
             </div>
             <div style="padding:5px">
-                <p><b>Год издания: </b><?=htmlspecialchars($row['year'] ?? '');?>г.</p>
+                <br><b>Количество страниц: </b><?=htmlspecialchars($row['page'] ?? '');?>
             </div>
             <div style="padding:5px">
-                <p><b>Цена: </b><?=htmlspecialchars($row['price'] ?? '');?> грн.</p>
+                <br><b>Год издания: </b><?=htmlspecialchars($row['year'] ?? '');?>г.
             </div>
             <div style="padding:5px">
-                <p><b>Описание книги: </b><?=
-                    htmlspecialchars(mb_strimwidth($row['text'], 0, 100, "...")); ?></p>
+                <br><b>Цена: </b><?=htmlspecialchars($row['price'] ?? '');?> грн.
+            </div>
+            <div style="padding:5px">
+                <br><b>Описание книги: </b><?=
+                    htmlspecialchars(mb_strimwidth($row['text'], 0, 100, "...")); ?>
             </div>
             <div style="padding-bottom:30px">
                <!-- <a class="btn btn-info" href="/admin/books/">К списку книг</a>-->

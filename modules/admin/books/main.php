@@ -5,7 +5,7 @@ if (isset($_POST['delete'])){
     foreach ($_POST['ids'] as $k => $v) {
         $_POST['ids'][$k] = (int)$v;
     }
-    $ids = implode(',', $_POST['ids']);
+    (int)$ids = implode(',', $_POST['ids']);
     q("
 			DELETE FROM `books`
 			WHERE `id` IN ('".$ids."')
@@ -60,22 +60,20 @@ $booksAuthorShow = q("
     ORDER BY `id`
     ");
 
-//вывод книг согласно категорий из БД в main.tpl
+//вывод книг согласно авторам или все из БД в main.tpl
 if (isset($_POST['search'])) {
-    $author = $_POST['selectAuthor']; // Выбираем Заяц
+    $author = $_POST['selectAuthor'];
     //получаем идентификатор автора
     $res1 = q("
         SELECT `id`
         FROM `books_author`
-        WHERE `name` = '".hsc($author)."'
+        WHERE `name` = '".mres($author)."'
     ");
     $row1=$res1->fetch_assoc();
-    //wtf($row1, 1);
     foreach ((array)$row1['id'] as $k1=>$v1) {
         $row['id']['$k1'] = (int)$v1;
     }
     $ids1 = (implode(',', $row1));
-    //wtf($ids1, 1); // получаем 7
     //делаем запрос на получение идентификатор книги или книг этого автора
     $res2 = q("
         SELECT `book_id`
@@ -85,9 +83,7 @@ if (isset($_POST['search'])) {
     //получаем список идентификаторов книг автора в виде массива
     $ids2 = [];
     while ($row2=$res2->fetch_assoc()) {
-        //wtf($row2); // получаем массив
-        //array_push($ids2, $row2['book_id']);
-        $ids2[] = $row2['book_id'];
+        (array)$ids2[] = $row2['book_id'];
     }
     //получаем список идентификаторов книг автора в виде строки
     $ids3 = (implode(',', $ids2));
@@ -117,14 +113,14 @@ function booksMainShowAuthor ($rowID) {
     $res = q("
     SELECT *
     FROM `books2books_author`
-    WHERE 	`book_id` = '".$rowID."'
+    WHERE 	`book_id` = '".(int)$rowID."'
     ");
     while($row=$res->fetch_assoc()){
         //Запрос к БД авторов для получения ФИО автора по идентификатору:
         $res2 = q("
             SELECT `name`
             FROM `books_author`
-            WHERE `id` = '".$row['author_id']."'
+            WHERE `id` = '".(int)$row['author_id']."'
         ");
         $row2 = $res2->fetch_assoc();
         echo $row2['name'].', '.'<br>';

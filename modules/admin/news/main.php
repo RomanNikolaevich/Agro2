@@ -39,7 +39,7 @@ if (isset($_POST['search'])) {
     $news = q("
         SELECT *
         FROM `news`
-        WHERE `cat` = '".$cat."'
+        WHERE `cat` = '".mres($cat)."'
         ORDER BY `id` DESC
 ");
 } elseif (isset($_POST['reset'])) {

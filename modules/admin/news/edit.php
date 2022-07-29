@@ -51,7 +51,7 @@ $newsCatShow = q("
 $newsCatFromDB = q("
     SELECT `name`
     FROM `news_cat`
-    WHERE `id` = ".$id."
+    WHERE `id` = '".$id."'
     ");
 
 //Добавление изображений к товарам:
