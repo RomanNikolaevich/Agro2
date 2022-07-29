@@ -62,7 +62,7 @@ $booksAuthorShow = q("
 
 //вывод книг согласно категорий из БД в main.tpl
 if (isset($_POST['search'])) {
-    $author = $_POST['selectAuthor'];
+    $author = $_POST['selectAuthor']; // Выбираем Заяц
     //получаем идентификатор автора
     $res1 = q("
         SELECT `id`
@@ -70,24 +70,35 @@ if (isset($_POST['search'])) {
         WHERE `name` = '".hsc($author)."'
     ");
     $row1=$res1->fetch_assoc();
-    //$row=implode($row);
-    //wtf($row, 1);
-    //получаем идентификатор книги или книг этого автора
+    //wtf($row1, 1);
+    foreach ((array)$row1['id'] as $k1=>$v1) {
+        $row['id']['$k1'] = (int)$v1;
+    }
+    $ids1 = (implode(',', $row1));
+    //wtf($ids1, 1); // получаем 7
+    //делаем запрос на получение идентификатор книги или книг этого автора
     $res2 = q("
         SELECT `book_id`
         FROM `books2books_author`
         WHERE `author_id` IN ('".hsc($row1['id'])."')
     ");
+    //получаем список идентификаторов книг автора в виде массива
+    $ids2 = [];
+    while ($row2=$res2->fetch_assoc()) {
+        //wtf($row2); // получаем массив
+        //array_push($ids2, $row2['book_id']);
+        $ids2[] = $row2['book_id'];
+    }
+    //получаем список идентификаторов книг автора в виде строки
+    $ids3 = (implode(',', $ids2));
+    //wtf($ids3,1); // тут уже получаю 5,6
     //получаем список книг автора из селектора
-    while($row2=$res2->fetch_assoc()) {
-        //wtf($row2, 1);
         $books = q("
         SELECT *
         FROM `books`
-        WHERE `id` IN ('".hsc(($row2['book_id']))."')
+        WHERE `id` IN ($ids3)
         ORDER BY `id` DESC
     ");
-    }
 
 } elseif (isset($_POST['reset'])) {
     header("Location: /admin/books");
