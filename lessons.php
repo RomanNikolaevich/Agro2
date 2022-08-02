@@ -2841,8 +2841,7 @@ if (isset($_POST['delete'])){
 if (isset($_POST['delete'])){
 		//циклом прогоняем массив, чтобы привести его к типу число (int):
 		foreach($_POST['ids'] as $k=>$v) {
-		$_POST['ids'][$k]
-		= (int)$v;
+		    $_POST['ids'][$k] = (int)$v;
 		}
 		//wtf($_POST['ids'],1); //выведет на экран массив
 		$ids = implode(',', $_POST['ids']);

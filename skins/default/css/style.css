@@ -229,15 +229,14 @@ span {
 /*Боковая панель*/
 .sidebar {
     height: 100%;
-    width: 250px;
-    position: fixed;
-    z-index: 1;
+    width: 350px;
+    position: relative;
+    /*z-index: 1;*/
 
     top: 0px;
-    float: right;
-    margin-top: 100px;
-    padding-top: 40px;
-    /*background-color: lightblue;*/
+    float: left;
+/*    margin-top: 10px;
+    padding-top: 10px;*/
 }
 .sidebar div {
     padding: 8px;
@@ -245,6 +244,6 @@ span {
     display: block;
 }
 .body-text {
-    margin-right: 250px;
+    margin-right: 350px;
     font-size: 16px;
 }

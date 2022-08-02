@@ -1,3 +1,7 @@
+<?php
+//Core::$JS[] = '<script type="text/javascript" src="/skins/default/js/script.js?1"></script>';
+?>
+
 <div class="container">
     <div style="text-align: center; padding-bottom:30px; padding-top:40px;">
         <h4> Книги по тематике удобрений</h4>
@@ -76,3 +80,7 @@
         <?php } ?>
     </div>
 </div>
+<script>
+    var error = '<?php echo $error; ?>';
+    alert(error);
+</script>
