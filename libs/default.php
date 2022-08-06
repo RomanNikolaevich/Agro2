@@ -16,6 +16,7 @@ function wtf($variable, $stop = false)
 //Запрос к БД с выводим ошибок
 function q($query,$key = 0) {
     $res = DB::_($key)->query($query);
+    //echo $query. '<br>';
     if($res === false) {
         $info = debug_backtrace();
         $error = "QUERY: ".$query."<br>\n".DB::_($key)->error."<br>\n".

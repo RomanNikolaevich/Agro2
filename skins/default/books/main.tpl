@@ -55,7 +55,7 @@
                <!-- <p><b>Авторы: </b><br><?/*=//htmlspecialchars(booksShowAuthorMain () ?? ''); */?></p>-->
             </div>
             <div>
-                <br><b>Авторы: </b> <?= hsc(booksMainShowAuthor($row['id']) ?? ''); ?>
+                <!--<br><b>Авторы: </b> --><?/*= $author; */?>
             </div>
             <div style="padding:5px">
                 <br><b>Количество страниц: </b><?=htmlspecialchars($row['page'] ?? '');?>

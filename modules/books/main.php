@@ -10,7 +10,7 @@ if (isset($_POST['searchselect'])) {
         WHERE `name` = '" . mres($author) . "'
     ");
     $row1 = $res1->fetch_assoc();
-    //wtf($row1,1);
+    //если запрос пустой
     if (empty($row1)) {
         $error = 'Вы не выбрали ничего в фильтре';
         $books = q("
@@ -18,12 +18,12 @@ if (isset($_POST['searchselect'])) {
         FROM `books`
         ORDER BY `id` DESC
     ");
+   //если запрос не пустой
     } else {
         foreach ((array)$row1['id'] as $k1 => $v1) {
             $row['id'][$k1] = (int)$v1;
         }
-        //$ids1 = (implode(',', $row1));
-        //делаем запрос на получение идентификатор книги или книг этого автора
+        //делаем запрос к БД связей на получение идентификатор книги или книг этого автора
         $res2 = q("
         SELECT `book_id`
         FROM `books2books_author`
@@ -36,22 +36,21 @@ if (isset($_POST['searchselect'])) {
         }
         //получаем список идентификаторов книг автора в виде строки
         $ids3 = (implode(',', $ids2));
-        //wtf($ids3,1);
         //получаем список книг автора из селектора
         if (empty($ids3)) {
             $error = 'У этого автора нет книг в нашем магазине';
             $books = q("
-        SELECT *
-        FROM `books`
-        ORDER BY `id` DESC
+                SELECT *
+                FROM `books`
+                ORDER BY `id` DESC
     ");
         } else {
             $books = q("
-        SELECT *
-        FROM `books`
-        WHERE `id` IN ($ids3)
-        ORDER BY `id` DESC
-    ");
+                SELECT *
+                FROM `books`
+                WHERE `id` IN ($ids3)
+                ORDER BY `id` DESC
+            ");
         }
     }
 
@@ -74,8 +73,78 @@ if (isset($_POST['searchselect'])) {
     ");
 }
 
+//получаем идентификаторы книг в виде строки
+$idss1 = [];
+while ($rowBooks = $books->fetch_assoc()) {
+    $idss1[] = $rowBooks['id'];
+    $rowBooks2[] = $rowBooks;
+    //wtf($rowBooks);
+/*    $resRelations = q("
+    SELECT *
+    FROM `books2books_author`
+    WHERE 	`book_id` = '".$rowBooks['id']."'
+    ");*/
+
+}
+$idss2 = (implode(',', $idss1));
+wtf($rowBooks2,1);
+//exit();
+$resRelations = q("
+    SELECT *
+    FROM `books2books_author`
+    WHERE 	`book_id` IN (".$idss2.")
+    ");
+//wtf($resRelations,1);
+while ($rowRelations = $resRelations->fetch_assoc()) {
+    $rowRelations['book_id'] = $rowRelations['author_id'];
+}
+wtf($rowRelations,1);
+//запрос к БД связей - по id книги получаем id авторов:
+/*foreach($idss1 as $elem) {
+    //wtf($elem);
+    $i = 0;
+    $resRelations = q("
+    SELECT *
+    FROM `books2books_author`
+    WHERE 	`book_id` = '".$elem."'
+    ");
+
+    //получаем список идентификаторов авторов для этой книги в виде массива
+    $idsxx = [];
+    while ($rowRelations = $resRelations->fetch_assoc()) {
+        $ids[] = $rowRelations['author_id'];
+    }
+
+    //получаем список идентификаторов авторов в виде строки
+    $idsxx2 = (implode(',', $idsxx));
+
+    //Запрос к БД авторов для получения ФИО автора по идентификатору:
+    $resRelations2 = q("
+            SELECT `name`
+            FROM `books_author`
+            WHERE `id` IN ('.$idsxx2.')
+        ");
+    //циклом выводим ФИО авторов на экран
+    while($rowRelations2 = $resRelations2->fetch_assoc()) {
+        $author =  ++$i . ')' . $rowRelations2['name'] . ', ' . '<br>';
+    }
+}*/
+
+
+
+/*    $resRelations = q("
+    SELECT *
+    FROM `books2books_author`
+    WHERE 	`book_id` IN ($idss2)
+    ");
+
+while ($rowRelations = $resRelations->fetch_assoc()) {
+    $idss3[] = $rowRelations['author_id'];
+}*/
+//wtf($idss3,1);
+
 //Вывод связей книг с автором в виде 'ФИО':
-function booksMainShowAuthor($rowID)
+/*function booksMainShowAuthor($rowID)
 {
     $i = 0;
     //запрос к БД связей - по id книги получаем id авторов:
@@ -84,20 +153,27 @@ function booksMainShowAuthor($rowID)
     FROM `books2books_author`
     WHERE 	`book_id` = '" . (int)$rowID . "'
     ");
-    //wtf($res);
-    //++$i;
+
+    //получаем список идентификаторов авторов для этой книги в виде массива
+    $ids = [];
     while ($row = $res->fetch_assoc()) {
-        //Запрос к БД авторов для получения ФИО автора по идентификатору:
-        $res2 = q("
+        $ids[] = $row['author_id'];
+    }
+
+    //получаем список идентификаторов авторов в виде строки
+    $ids2 = (implode(',', $ids));
+
+    //Запрос к БД авторов для получения ФИО автора по идентификатору:
+    $res2 = q("
             SELECT `name`
             FROM `books_author`
-            WHERE `id` = '" . (int)$row['author_id'] . "'
+            WHERE `id` IN ($ids2)
         ");
-        $row2 = $res2->fetch_assoc();
+    //циклом выводим ФИО авторов на экран
+    while($row2 = $res2->fetch_assoc()) {
         echo ++$i . ')' . $row2['name'] . ', ' . '<br>';
-        //echo ++$i.'<br>';
     }
-}
+}*/
 
 //Выбор авторов в виде выпадающего списка
 $booksAuthorShow = q("
@@ -111,3 +187,19 @@ if (isset($_SESSION['info'])) {
     $info = $_SESSION['info']; //передаем содержимое сессии в переменную инфо
     unset($_SESSION['info']); //удаляем сессию за ненужностью.
 }
+
+//сделал возможность одним запросом выводить всех авторов по книгам
+/*$books2 = q("
+        SELECT books.id as books_id,
+               books_author.name as books_author_name
+        FROM `books`
+        LEFT JOIN books2books_author ON books2books_author.book_id=books.id
+        LEFT JOIN books_author ON books2books_author.author_id=books_author.id
+        ORDER BY `books_id` DESC
+    ");
+}
+
+foreach ($books2 as $elem) {
+    $resBooks[$elem['books_id']][] = $elem['books_author_name'];
+}
+wtf($resBooks,1);*/
