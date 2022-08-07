@@ -74,21 +74,48 @@ if (isset($_POST['searchselect'])) {
 }
 
 //получаем идентификаторы книг в виде строки
-$idss1 = [];
 while ($rowBooks = $books->fetch_assoc()) {
-    $idss1[] = $rowBooks['id'];
-    $rowBooks2[] = $rowBooks;
-    //wtf($rowBooks);
-/*    $resRelations = q("
+    $allBooks[$rowBooks['id']] = $rowBooks;
+}
+//wtf($rowBooks2,1); // вывод массива книг без авторов
+
+//создаем массив авторов с ключом id книг
+$resRelations = q("
     SELECT *
     FROM `books2books_author`
-    WHERE 	`book_id` = '".$rowBooks['id']."'
-    ");*/
+    ORDER BY `book_id` DESC
+    ");
 
+//Делаем запрос к БД авторов, чтобы вместо идентификатора вывести ФИО
+$idAuthor2Name = q("
+    SELECT *
+    FROM `books_author`
+");
+
+//к массиву книг дописываем идентификаторы авторов
+while($rowRelations = $resRelations->fetch_assoc()){
+    $allBooks[$rowRelations['book_id']]['author_id'][$rowRelations['author_id']] = $rowRelations['author_id'];
+    while($authorName = $idAuthor2Name->fetch_assoc()){
+        //wtf($rowIdAuthor2Name);
+        $allBooks[5]['author_id'][$authorName['id']]=$authorName['name'];
+
+    }
 }
-$idss2 = (implode(',', $idss1));
-wtf($rowBooks2,1);
-//exit();
+//$allBooks[6]['author_id'][0]='Пушкин';
+  wtf($allBooks,1);
+
+
+/*while ($authorName = $idAuthor2Name->fetch_assoc()){
+    //wtf($authorName);
+}*/
+    //$rowBooks2[] = $authorName;
+    //wtf($rowBooks2,1);
+
+
+
+
+/*$idss2 = (implode(',', $idss1));
+
 $resRelations = q("
     SELECT *
     FROM `books2books_author`
@@ -98,7 +125,7 @@ $resRelations = q("
 while ($rowRelations = $resRelations->fetch_assoc()) {
     $rowRelations['book_id'] = $rowRelations['author_id'];
 }
-wtf($rowRelations,1);
+wtf($rowRelations,1);*/
 //запрос к БД связей - по id книги получаем id авторов:
 /*foreach($idss1 as $elem) {
     //wtf($elem);
