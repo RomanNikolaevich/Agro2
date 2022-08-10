@@ -1,5 +1,11 @@
 <?php
 //Core::$JS[] = '<script type="text/javascript" src="/skins/default/js/script.js?1"></script>';
+
+/**
+ * @var array $author
+ * @var array $books
+ * @var array $booksAuthorShow
+ */
 ?>
 
 <div class="container">
@@ -24,8 +30,8 @@
                         <?php
                         echo '<select class="form-control" name="selectauthor" selected="selected">'; //форма для выбора
                         echo '<option>Выберите категорию для сортировки</option>';//пустая опция
-                        while ($rowAuthor=$booksAuthorShow->fetch_assoc()) {
-                            echo '<option value="'.hsc($rowAuthor['name']).'">'.hsc($rowAuthor['name']).'</option>';
+                        foreach ($booksAuthorShow as $booksAuthor) {
+                            echo '<option value="'.hsc($booksAuthor).'">'.hsc($booksAuthor).'</option>';
                         }
                         echo '</select>';
                         ?>
@@ -37,44 +43,42 @@
                 </div>
             </form>
         </div>
-        <?php while($row=$books->fetch_assoc()) { ?>
+        <?php foreach ($books as $book) { ?>
         <div class="product col-md-4 col-sm-4 col-xs-12">
             <div style="padding:5px">
-                <!--<h4>Заголовок книги: <?/*=htmlspecialchars($row['name'] ?? '');*/?></h4>-->
                 <h5 class="card-title">
                     <a class="link-dark" style="text-decoration: none;"
                        href="/books/full?id=<?php
-                       echo $row['id']; ?>"><?php echo hsc($row['name']); ?></a>
+                       echo $book['id']; ?>"><?php echo hsc($book['name']); ?></a>
                 </h5>
             </div>
             <div style="padding:5px;">
-                <img src="/uploaded/books/<?=htmlspecialchars($row['img'] ?? '');?>"
+                <img src="/uploaded/books/<?=htmlspecialchars($book['img'] ?? '');?>"
                      alt="Card image cap" style="width:350px; float:left;">
             </div>
-            <div style="padding:5px;">
-               <!-- <p><b>Авторы: </b><br><?/*=//htmlspecialchars(booksShowAuthorMain () ?? ''); */?></p>-->
-            </div>
             <div>
-                <!--<br><b>Авторы: </b> --><?/*= $author; */?>
+                <br><b>Авторы: </b><?php foreach($book['author'] as $bookAuthor) {
+                    echo $author[$bookAuthor].'<br>';
+                } ?>
             </div>
             <div style="padding:5px">
-                <br><b>Количество страниц: </b><?=htmlspecialchars($row['page'] ?? '');?>
+                <br><b>Количество страниц: </b><?=htmlspecialchars($book['page'] ?? '');?>
             </div>
             <div style="padding:5px">
-                <br><b>Год издания: </b><?=htmlspecialchars($row['year'] ?? '');?>г.
+                <br><b>Год издания: </b><?=htmlspecialchars($book['year'] ?? '');?>г.
             </div>
             <div style="padding:5px">
-                <br><b>Цена: </b><?=htmlspecialchars($row['price'] ?? '');?> грн.
+                <br><b>Цена: </b><?=htmlspecialchars($book['price'] ?? '');?> грн.
             </div>
             <div style="padding:5px">
                 <br><b>Описание книги: </b><?=
-                    htmlspecialchars(mb_strimwidth($row['text'], 0, 100, "...")); ?>
+                    htmlspecialchars(mb_strimwidth($book['text'], 0, 100, "...")); ?>
             </div>
             <div style="padding-bottom:30px">
                <!-- <a class="btn btn-info" href="/admin/books/">К списку книг</a>-->
                 <a class="btn btn-info" style="text-decoration: none;"
                    href="/books/full?id=<?php
-                   echo $row['id']; ?>">Подробнее</a>
+                   echo $book['id']; ?>">Подробнее</a>
             </div>
         </div>
         <?php } ?>

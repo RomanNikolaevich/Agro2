@@ -3,6 +3,7 @@
 /**
  * @var $booksAuthorShow array
  * @var $books array
+ * @var $author array
  */
 
 ?>
@@ -17,7 +18,6 @@
     <form action="" method="post">
         <div>
             <a class="btn btn-info" href="/admin/books/author">Редактор авторов</a>
-            <!--<a class="btn btn-success" href="/admin/books/add">Добавить книгу</a>-->
             <input class="btn btn-success" type="submit" name="addbook" value="Добавить книгу">
             <input class="btn btn-danger" type="submit" name="delete" value="Удалить отмеченные книги">
         </div>
@@ -33,19 +33,17 @@
                     <?php
                     echo '<select class="form-control" name="selectAuthor" selected="selected">'; //форма для выбора
                     echo '<option value=""></option>';//пустая опция
-                    while ($row = $booksAuthorShow->fetch_assoc()) {
-                        echo '<option value="'.hsc($row['name']).'">'.hsc($row['name']).'</option>';
+                    foreach ($booksAuthorShow as $booksAuthor) {
+                        echo '<option value="'.hsc($booksAuthor).'">'.hsc($booksAuthor).'</option>';
                     }
                     echo '</select>';
                     ?>
                 </th><!--растягивает ячейку на ширину трех нижних-->
                 <th colspan="1" style="text-align: center;">
-                    <!--<input type="image" name="search" style="width:40px" src="/skins/admin/img/view.png" alt="">-->
                     <input type="submit" name="search" value="search" class="btn btn-primary">
 
                 </th>
                 <th colspan="1" style="text-align: center;">
-                    <!--<input type="image" name="reset" style="width:35px" src="/skins/admin/img/reset.png" alt="">-->
                     <input type="submit" name="reset" value="reset" class="btn btn-secondary">
                 </th>
             </tr>
@@ -64,31 +62,33 @@
                 <th>edit</th>
                 <th>delete</th>
             </tr>
-            <?php while($row = $books->fetch_assoc()) { ?>
+            <?php foreach ($books as $book) { ?>
                 <tr style="font-family:Tahoma, sans-serif, font-size:13px; text-align: justify;">
                     <td class="">
-                        <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>">
+                        <input type="checkbox" name="ids[]" value="<?php echo $book['id']; ?>">
                     </td>
                     <td class="">
-                        <?= (int)$row['id']; ?>
+                        <?= (int)$book['id']; ?>
                     </td>
                     <td style="text-align:left; width: 280px;">
-                        <?= hsc($row['name']); ?>
+                        <?= hsc($book['name']); ?>
                     </td>
                     <td style="text-align:left; width: 280px;">
-                        <?= hsc(booksMainShowAuthor($row['id']) ?? ''); ?>
+                        <?php foreach($book['author'] as $bookAuthor) {
+                            echo $author[$bookAuthor].'<br>';
+                        } ?>
                     </td>
                     <td class="">
-                        <?= hsc(mb_strimwidth($row['text'], 0, 150, "...")); ?>
-                        <a class="" style="text-decoration: none;" href="/admin/books/full?id=<?= (int)$row['id'];
+                        <?= hsc(mb_strimwidth($book['text'], 0, 150, "...")); ?>
+                        <a class="" style="text-decoration: none;" href="/admin/books/full?id=<?= (int)$book['id'];
                         ?>">(полная версия)</a>
                     </td>
                     <td class="" style="text-align: center;">
-                        <a class="" href="/admin/books/edit?id=<?= (int)$row['id'];
+                        <a class="" href="/admin/books/edit?id=<?= (int)$book['id'];
                         ?>"><img style="width:40px" src="/skins/admin/img/rewrite-button-2.png"></a>
                     </td>
                     <td class="" style="text-align: center;">
-                        <a class="" href="/admin/books/main?action=delete&id=<?= (int)$row['id'];
+                        <a class="" href="/admin/books/main?action=delete&id=<?= (int)$book['id'];
                         ?>"><img style="width:40px" src="/skins/admin/img/delete-button.png"></a>
                     </td>
                 </tr>
