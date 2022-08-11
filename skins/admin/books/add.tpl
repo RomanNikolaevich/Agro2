@@ -1,8 +1,18 @@
+<?php
+/**
+ * @var array $booksAuthorShow
+ * @var int $id
+ * @var array $books
+ * @var array $author
+ */
+?>
+
 <div class="container mt-4">
     <div class="row">
+        <?php foreach ($books as $book) { ?>
         <div class="form-group" style="padding-bottom:30px;">
             <div style="padding-bottom:20px">
-                <img class="rounded float-left" src="/uploaded/books/<?=htmlspecialchars($row['img'] ?? '');?>"
+                <img class="rounded float-left" src="/uploaded/books/<?=htmlspecialchars($book['img'] ?? '');?>"
                      alt="Card image cap" style="width:350px">
             </div>
             <div style="padding-bottom:20px">
@@ -18,8 +28,8 @@
                     <?php
                     echo '<select class="form-control" name="author" selected="selected">'; //форма для выбора
                     echo '<option value=""></option>';//пустая опция
-                    while ($row=$booksAuthorShow->fetch_assoc()) {
-                        echo '<option value="'.hsc($row['name']).'">'.hsc($row['name']).'</option>';
+                    foreach ($booksAuthorShow as $booksAuthor) {
+                        echo '<option value="'.hsc($booksAuthor).'">'.hsc($booksAuthor).'</option>';
                     }
                     echo '</select>';
                     ?>
@@ -29,7 +39,11 @@
                 </div>
                 <div style="padding-bottom:20px">
                     <h4>Авторы:</h4>
-                    <p><?php booksAddAuthor (); ?></p>
+                    <p><?php if (isset($book['author'])) {
+                            foreach ($book['author'] as $bookAuthor) {
+                                echo $author[$bookAuthor].'<br>';
+                            }
+                        }?></p>
                 </div>
                 <div style="padding-bottom:10px">
                     <h4>Добавление нового автора в список авторов:</h4>
@@ -69,5 +83,6 @@
             </form>
             <br>
         </div>
+        <?php } ?>
     </div>
 </div>

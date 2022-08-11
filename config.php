@@ -29,9 +29,3 @@ const SUPER_ADMIN = 'SuperAdmin';
 const IMG_MINI = './uploaded/mini/'; //уменьшенный размер для аватарок
 const IMG_GOODS = './uploaded/goods/'; // в большем размере для товаров
 const IMG_BOOKS = './uploaded/books/'; // в большем размере для книг
-
-//константы для БД:
-const DB_USERS = 'users';
-const DB_GOODS = 'goods';
-const DB_NEWS = 'news';
-const DB_COMMENTS = 'comments';

@@ -7,6 +7,7 @@
  */
 
 ?>
+<script type="text/javascript" src="/skins/default/js/script.js?2"></script>
 <div class="container mt-4">
     <?php
     if (isset($info)) { ?>
@@ -88,7 +89,7 @@
                         ?>"><img style="width:40px" src="/skins/admin/img/rewrite-button-2.png"></a>
                     </td>
                     <td class="" style="text-align: center;">
-                        <a class="" href="/admin/books/main?action=delete&id=<?= (int)$book['id'];
+                        <a onclick="return areYouSureDel()" href="/admin/books/main?action=delete&id=<?= (int)$book['id'];
                         ?>"><img style="width:40px" src="/skins/admin/img/delete-button.png"></a>
                     </td>
                 </tr>
@@ -99,3 +100,11 @@
 <div class="more-free-space">
 
 </div>
+<!--<script>
+    function areYouSureDel() {
+        var x = confirm('Вы уверены, что хотите удалить?');
+        if(!x) {//пользователь отказался
+            return false;
+        }
+    }
+</script>-->

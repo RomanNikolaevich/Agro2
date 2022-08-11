@@ -1,4 +1,5 @@
 <?php
+Core::$JS[] = '<script type="text/javascript" src="/skins/default/js/script.js?2.1"></script>';
 
 //удаление новостей помеченных чекбоксом:
 if (isset($_POST['delete'])){

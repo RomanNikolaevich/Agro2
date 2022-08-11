@@ -2,6 +2,7 @@
 
 /**
  * @var $booksAuthorShow
+ * @var $error string
  */
 
 ?>
@@ -25,7 +26,7 @@
                     <h4>Добавление нового автора</h4>
                     <p>Допустимо использовать только буквы и дефисы, каждое новое
                         слово должно начинаться с большой буквы!</p>
-                    <p style="color:red"><?= $error=$error ?? '' ?></p>
+
                     <input type="text" class="form-control" name="newauthor"
                            placeholder="Убедитесь, что такой автор отсутствует">
                 </div>
@@ -37,7 +38,7 @@
                     <p> 1. Выберите автора для редактировани (выберите из списка доступных авторов)</p>
                     <p> 2. Допустимо использовать только буквы и дефисы, каждое новое слово должно начинаться с большой буквы!</p>
                     <p> 3. Введите нового автора:</p>
-                    <p style="color:red"><?= $error2=$error2 ?? '' ?></p>
+
                     <input type="text" class="form-control" name="editauthor"
                            placeholder="Убедитесь, в правильности ФИО нового автора">
                 </div>
@@ -61,3 +62,7 @@
         </div>
     </div>
 </div>
+<script>
+    var error = '<?php echo $error; ?>';
+    alert(error);
+</script>
