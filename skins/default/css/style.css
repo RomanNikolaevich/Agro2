@@ -202,14 +202,6 @@ span {
   text-decoration: none;
 }
 
-/*.card-columns {
-@include media-breakpoint-only(lg) {
-    column-count: 2;
-}
-@include media-breakpoint-only(xl) {
-    column-count: 5;
-}*/
-
 /*картинка для раздела товаров*/
 .goods-link{
     text-decoration: none;
@@ -226,7 +218,7 @@ span {
     font-weight: bold;
 }
 
-/*Боковая панель*/
+/* ---------------------Боковая панель-------------------------*/
 .sidebar {
     height: 100%;
     width: 350px;
@@ -246,4 +238,116 @@ span {
 .body-text {
     margin-right: 350px;
     font-size: 16px;
+}
+
+/*-------------------------модальное окно:-------------------------------------*/
+/*кнопка запуска авторизации - размещение*/
+.button_auth {
+    margin-top:40px;
+    margin-bottom:40px;
+    text-align:center;
+}
+
+/*кнопка запуска авторизации - стиль кнопки*/
+.button_auth a {
+    font-family:Montserrat, serif;
+    background-color:orange;
+    padding:20px 50px;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+}
+
+/*фон модального окна*/
+.pop_up {
+    display:none; /*в обычном состоянии МО скрыто*/
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0;
+    top:0;
+    background-color:rgba(0, 0, 0, 0.6);
+    z-index:2; /*размещение поверх остального контента*/
+}
+
+.pop_up.active {/*добавляем открытие/скрытие*/
+    display:block;
+}
+
+.pop_up_container {
+    display:flex; /*для размещения окна по центру*/
+    width:100%;
+    height:100%;
+}
+
+/*модальное окно:*/
+.pop_up_body {
+    margin:auto;
+    width:500px;
+    background-color:white;
+    border-radius:10px;
+    text-align:center;
+    padding:100px 15px 110px 15px;
+    position:relative; /*выбираем relative, так как дальше буде крестик с absolut*/
+}
+
+.pop_up_body p { /*заголовок модального окна*/
+    font-size:28px;
+    font-family:Montserrat, serif;
+    font-weight:600;
+    color:black;
+    margin-bottom:40px;
+}
+
+.pop_up_body input { /*поле ввода модального окна*/
+    display:block;
+    margin:25px auto 0px;
+    width:330px;
+    padding:17px 20px;
+    background-color:#e5e5e5;
+    border-radius:10px;
+    border:none;
+    font-family:Montserrat, serif;
+    font-weight:500;
+    font-size:18px;
+    color:#605e5e;
+}
+
+.pop_up_body input:focus { /*убираем чёрную рамку при клике на поле ввода*/
+    outline:none;
+}
+
+.pop_up_body button { /*кнопка модального окна*/
+    cursor:pointer;
+    display:block;
+    width:330px;
+    margin:60px auto 0px auto;
+    padding:20px 0px;
+    font-family:Montserrat, serif;
+    font-weight:500;
+    font-size:16px;
+    color:#fff;
+    border-radius:10px;
+    border:none;
+    background-color:orange;
+}
+
+.pop_up_close {/*кнопка закрытия модального окна*/
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:21px;
+    cursor:pointer;
+}
+
+/* -------------- очистка стилей -------------------*/
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
 }

@@ -19,8 +19,10 @@
 </head>
 <body>
 <div class="block">
-	<?php include './skins/'.Core::$SKIN.'/static/menu/header.tpl'; ?>
-	<?php echo $content; ?>
+	<?php include './skins/'.Core::$SKIN.'/static/menu/header.tpl';
+    echo $content;
+    //include './skins/'.Core::$SKIN.'/auth/login.tpl';
+    ?>
 
     <div class="conteiner-content">
 		<?php include './skins/'.Core::$SKIN.'/static/menu/footer.tpl'; ?>
