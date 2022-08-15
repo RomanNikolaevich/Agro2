@@ -2,6 +2,7 @@
 /**
  * @var $pagePath
  * @var $content
+ * @var $error
  */
 ?>
 <!DOCTYPE html>
@@ -16,17 +17,23 @@
     <link href="/skins/default/css/normalize.css" rel="stylesheet"/>
     <link href="/skins/default/css/style.css" rel="stylesheet">
     <link rel="icon" href="/skins/default/img/favicon/favicon.ico" type="image/x-icon">
+    <script src="/skins/default/js/modal.js" defer></script>
 </head>
 <body>
 <div class="block">
 	<?php include './skins/'.Core::$SKIN.'/static/menu/header.tpl';
     echo $content;
-    //include './skins/'.Core::$SKIN.'/auth/login.tpl';
+    include './skins/'.Core::$SKIN.'/auth/login.tpl';
     ?>
 
     <div class="conteiner-content">
 		<?php include './skins/'.Core::$SKIN.'/static/menu/footer.tpl'; ?>
     </div>
 </div>
+<script>
+    var error = '<?php echo $error; ?>';
+    alert(error);
+    location.reload();
+</script>
 </body>
 </html>

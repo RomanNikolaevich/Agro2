@@ -284,12 +284,18 @@ span {
 /*модальное окно:*/
 .pop_up_body {
     margin:auto;
-    width:500px;
     background-color:white;
     border-radius:10px;
     text-align:center;
     padding:100px 15px 110px 15px;
     position:relative; /*выбираем relative, так как дальше буде крестик с absolut*/
+}
+.pop_up_body_login {
+    width:500px;
+}
+
+.pop_up_body_regin {
+    width:800px;
 }
 
 .pop_up_body p { /*заголовок модального окна*/
@@ -302,8 +308,8 @@ span {
 
 .pop_up_body input { /*поле ввода модального окна*/
     display:block;
-    margin:25px auto 0px;
-    width:330px;
+    margin:10px auto 0px;
+
     padding:17px 20px;
     background-color:#e5e5e5;
     border-radius:10px;
@@ -314,12 +320,48 @@ span {
     color:#605e5e;
 }
 
+.pop_up_body_login input { /*поле ввода модального окна*/
+    width:330px;
+}
+
+.pop_up_body_regin input { /*поле ввода модального окна*/
+    width:630px;
+}
+
 .pop_up_body input:focus { /*убираем чёрную рамку при клике на поле ввода*/
     outline:none;
 }
 
+
+#autoauthconfirm {
+    margin-top: 15px;
+    position: relative;
+    cursor: pointer;
+    text-align: start;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #555555;
+    border-radius: 3px;
+}
+
 .pop_up_body button { /*кнопка модального окна*/
     cursor:pointer;
+    display:block;
+    width:330px;
+    margin:60px auto 0px auto;
+    padding:20px 0px;
+    font-family:Montserrat, serif;
+    font-weight:500;
+    font-size:16px;
+    color:#fff;
+    border-radius:10px;
+    border:none;
+    background-color:orange;
+}
+
+#pop_up_body_reg_link {
+    cursor:pointer;
+    text-decoration: none;
     display:block;
     width:330px;
     margin:60px auto 0px auto;
@@ -340,6 +382,7 @@ span {
     font-size:21px;
     cursor:pointer;
 }
+
 
 /* -------------- очистка стилей -------------------*/
 .clearfix:before,

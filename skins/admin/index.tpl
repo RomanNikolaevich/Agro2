@@ -15,6 +15,7 @@
     <link href="/skins/default/css/normalize.css" rel="stylesheet"/>
     <link href="/skins/admin/css/style.css" rel="stylesheet">
     <link rel="icon" href="/skins/default/img/favicon/favicon.ico" type="image/x-icon">
+    <script src="/skins/default/js/modal.js" defer></script>
 </head>
 <body>
 <div class="wrapper">
@@ -31,7 +32,8 @@
                 <b style="color:red">НЕИЗВЕСТНЫЙ ПОЛЬЗОВАТЕЛЬ!</b><br>
                 ЭТОТ РАЗДЕЛ МОГУТ ПРОСМОТРИВАТЬ ТОЛЬКО ПОЛЬЗОВАТЕЛИ С ПРАВАМИ АДМИНА
              <?php
-                include './skins/default/auth/login.tpl';
+                header("Location: /",3);
+                exit();
             } else { ?>
                 ПРИВЕТ <?php if (!empty($_SESSION['user'])) { ?><br>
                     <b style="color:red"> <?php echo $_SESSION['user']['login']; } ?></b><br>

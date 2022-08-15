@@ -84,7 +84,3 @@
         <?php } ?>
     </div>
 </div>
-<script>
-    var error = '<?php echo $error; ?>';
-    alert(error);
-</script>

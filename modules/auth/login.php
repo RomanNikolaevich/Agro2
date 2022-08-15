@@ -24,7 +24,7 @@ if (!empty($_POST['login']) && !empty($_POST['password'])) {
 		$access = mysqli_fetch_assoc($res);
 		if ($access['active'] == 1) {
 			$_SESSION['user'] = $access;
-            $_SESSION['reg'] = 'Поздравляю, Вы авторизированы';
+            $error = 'Поздравляю, Вы авторизированы';
 //wtf($_SESSION['user'],1);
 			//если галочку согласия с автоавторизацией пользователь отметил:
 			if (!empty($_POST['autoauthconfirm'])) {
