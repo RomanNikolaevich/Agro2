@@ -20,10 +20,10 @@ if (empty($_SESSION['user'])) {
                     <label style="text-align:left; display: inline-flex; padding: 0px;">
                         <input type="checkbox" name="autoauthconfirm" id="autoauthconfirm">Запомнить меня
                      </label>
-                    <div class="pop_up_body_reg_link">
+<!--                    <div class="pop_up_body_reg_link">
                         <a style=" text-decoration: none; color: white;" id="pop_up_body_reg_link"
                            href="/auth/regin">Зарегистрироваться</a>
-                    </div>
+                    </div>-->
                 </form>
                 <div class="pop_up_close" id="pop_up_close">&#10006</div>
             </div>

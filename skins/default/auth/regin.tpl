@@ -1,5 +1,4 @@
 <?php
-
 if (!isset($_SESSION['regok'])) {
     include './modules/auth/regin.php';
     ?>
