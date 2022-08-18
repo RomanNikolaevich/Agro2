@@ -241,26 +241,8 @@ span {
 }
 
 /*-------------------------модальное окно:-------------------------------------*/
-/*кнопка запуска авторизации - размещение*/
-.button_auth {
-    margin-top:40px;
-    margin-bottom:40px;
-    text-align:center;
-}
-
-/*кнопка запуска авторизации - стиль кнопки*/
-.button_auth a {
-    font-family:Montserrat, serif;
-    background-color:orange;
-    padding:20px 50px;
-    border-radius:10px;
-    text-decoration:none;
-    color:white;
-    font-weight:500;
-}
-
 /*фон модального окна*/
-.pop_up {
+.modal_login {
     display:none; /*в обычном состоянии МО скрыто*/
     width:100%;
     height:100%;
@@ -268,37 +250,57 @@ span {
     left:0;
     top:0;
     background-color:rgba(0, 0, 0, 0.6);
-    z-index:2; /*размещение поверх остального контента*/
+    z-index:9998; /*размещение поверх остального контента*/
 }
 
-.pop_up.active {/*добавляем открытие/скрытие*/
+.modal_regin {
+    display:none; /*в обычном состоянии МО скрыто*/
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0;
+    top:0;
+    background-color:rgba(0, 0, 0, 0.6);
+    z-index:9999; /*размещение поверх остального контента*/
+}
+
+.modal_login.active {/*добавляем открытие/скрытие*/
     display:block;
 }
 
-.pop_up_container {
+.modal_regin.active {/*добавляем открытие/скрытие*/
+    display:block;
+}
+
+.modal_login_container, .modal_regin_container {
     display:flex; /*для размещения окна по центру*/
     width:100%;
     height:100%;
 }
 
 /*модальное окно:*/
-.pop_up_body {
+.modal_login_body {
     margin:auto;
+    width:500px;
     background-color:white;
     border-radius:10px;
     text-align:center;
     padding:100px 15px 110px 15px;
     position:relative; /*выбираем relative, так как дальше буде крестик с absolut*/
 }
-.pop_up_body_login {
-    width:500px;
-}
 
-.pop_up_body_regin {
+.modal_regin_body {
+    margin:auto;
     width:800px;
+    background-color:white;
+    border-radius:10px;
+    text-align:center;
+    padding:100px 15px 110px 15px;
+    position:relative; /*выбираем relative, так как дальше буде крестик с absolut*/
 }
 
-.pop_up_body p { /*заголовок модального окна*/
+
+.modal_login_body p, .modal_regin_body p { /*заголовок модального окна*/
     font-size:28px;
     font-family:Montserrat, serif;
     font-weight:600;
@@ -306,10 +308,9 @@ span {
     margin-bottom:40px;
 }
 
-.pop_up_body input { /*поле ввода модального окна*/
+.modal_login_body input,  .modal_regin_body input { /*поле ввода модального окна*/
     display:block;
     margin:10px auto 0px;
-
     padding:17px 20px;
     background-color:#e5e5e5;
     border-radius:10px;
@@ -320,31 +321,20 @@ span {
     color:#605e5e;
 }
 
-.pop_up_body_login input { /*поле ввода модального окна*/
+.modal_login_body input { /*поле ввода модального окна*/
     width:330px;
 }
 
-.pop_up_body_regin input { /*поле ввода модального окна*/
+.modal_regin_body input { /*поле ввода модального окна*/
     width:630px;
 }
 
-.pop_up_body input:focus { /*убираем чёрную рамку при клике на поле ввода*/
-    outline:none;
+.modal_login_body input:focus, .modal_regin_body input:focus {
+    outline:none; /*убираем чёрную рамку при клике на поле ввода*/
 }
 
 
-#autoauthconfirm {
-    margin-top: 15px;
-    position: relative;
-    cursor: pointer;
-    text-align: start;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #555555;
-    border-radius: 3px;
-}
-
-.pop_up_body button { /*кнопка модального окна*/
+.modal_login_body button, .modal_regin_body button { /*кнопка модального окна*/
     cursor:pointer;
     display:block;
     width:330px;
@@ -359,7 +349,7 @@ span {
     background-color:orange;
 }
 
-#pop_up_body_reg_link {
+/*#pop_up_body_reg_link {
     cursor:pointer;
     text-decoration: none;
     display:block;
@@ -373,9 +363,9 @@ span {
     border-radius:10px;
     border:none;
     background-color:orange;
-}
+}*/
 
-.pop_up_close {/*кнопка закрытия модального окна*/
+.modal_authorization_close, .modal_registration_close {/*кнопка закрытия модального окна*/
     position:absolute;
     top:15px;
     right:15px;
@@ -383,6 +373,17 @@ span {
     cursor:pointer;
 }
 
+/*чекбокс для  авторизации*/
+#autoauthconfirm {
+    margin-top: 15px;
+    position: relative;
+    cursor: pointer;
+    text-align: start;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #555555;
+    border-radius: 3px;
+}
 
 /* -------------- очистка стилей -------------------*/
 .clearfix:before,

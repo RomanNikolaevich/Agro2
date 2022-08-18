@@ -2,14 +2,10 @@
 if (empty($_SESSION['user'])) {
     include './modules/auth/login.php';
     ?>
-    <div class="clearfix"></div>
-<!--    <div class="button_auth">
-        <a id="open_pop_up" href="#">Авторизация</a>
-    </div>-->
-    <div class="pop_up" id="pop_up">
-        <div class="pop_up_container">
-            <div class="pop_up_body">
-            <div class="pop_up_body_login" id="pop_up_body_login">
+    <!-- Блок авторизации -->
+    <div class="modal_login" id="modal_login">
+        <div class="modal_login_container">
+            <div class="modal_login_body" id="modal_login_body">
                 <p>Форма входа</p>
                 <form method="post">
                     <input type="text" name="login" placeholder="Логин" required>
@@ -25,11 +21,11 @@ if (empty($_SESSION['user'])) {
                            href="/auth/regin">Зарегистрироваться</a>
                     </div>-->
                 </form>
-                <div class="pop_up_close" id="pop_up_close">&#10006</div>
+                <div class="modal_authorization_close" id="modal_authorization_close">&#10006</div>
             </div>
         </div>
     </div>
-    </div>
+    <!-- Конец блока авторизации -->
 <?php
 } else { ?>
     <div class="col"><?=$_SESSION['reg'] ?? ''?></div>

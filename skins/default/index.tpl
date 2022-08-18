@@ -31,9 +31,11 @@
     </div>
 </div>
 <script>
-    var error = '<?php echo $error; ?>';
-    alert(error);
-    location.reload();
+    var error = '<?php echo $error ?? ''; ?>';
+    if (error) {
+        alert(error);
+        location.reload();
+    }
 </script>
 </body>
 </html>

@@ -15,8 +15,8 @@
 
 	<?php
 		if(empty($_SESSION['user'])) { ?>
-			<!--<div class="item"><a id="open_pop_up_login" href="/auth/login">login</a></div>-->
-            <div class="item"><a id="open_pop_up" href="/auth/regin">regin</a></div>
+			<div class="item"><a id="modal_authorization_open" href="/auth/login">login</a></div>
+            <div class="item"><a id="modal_registration_open" href="/auth/regin">regin</a></div>
 			<?php
 		}
 		elseif(!empty($_SESSION['user'])) { ?>

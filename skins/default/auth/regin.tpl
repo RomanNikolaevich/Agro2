@@ -3,10 +3,9 @@ if (!isset($_SESSION['regok'])) {
     include './modules/auth/regin.php';
     ?>
     <!-- Блок регистрации> -->
-    <div class="pop_up" id="pop_up">
-        <div class="pop_up_container">
-            <div class="pop_up_body">
-                <div class="pop_up_body_regin" id="pop_up_body_regin">
+    <div class="modal_regin" id="modal_regin">
+        <div class="modal_regin_container">
+                <div class="modal_regin_body" id="modal_regin_body">
                     <h2>Регистрация нового пользователя:</h2>
                     <h4 style="color:red"><?php
                         echo @$errors['loginwrong']; ?></h4>
@@ -55,11 +54,10 @@ if (!isset($_SESSION['regok'])) {
                         <p style="font-size:12px;">* - поле обязательное для заполнения</p>
                         <button class="btn btn-suc" name="do_signup" type="submit">Зарегистрировать</button>
                     </form>
-                    <div class="pop_up_close" id="pop_up_close">&#10006</div>
+                    <div class="modal_registration_close" id="modal_registration_close">&#10006</div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- Конец блока регистрации> -->
     <?php
 } else {
