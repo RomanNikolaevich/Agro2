@@ -10,14 +10,12 @@ if (empty($_SESSION['user'])) {
                 <form method="post">
                     <input type="text" name="login" placeholder="Логин" required>
                     <input type="password" name="password" placeholder="Пароль" required>
-
                     <button name="do_login">Авторизироваться</button>
-                    <!--<div class="clearfix"></div>-->
                     <label style="text-align:left; display: inline-flex; padding: 0px;">
                         <input type="checkbox" name="autoauthconfirm" id="autoauthconfirm">Запомнить меня
                      </label>
-<!--                    <div class="pop_up_body_reg_link">
-                        <a style=" text-decoration: none; color: white;" id="pop_up_body_reg_link"
+<!--                    <div>
+                        <a class="modal_registration_open_btn" id="modal_registration_open"
                            href="/auth/regin">Зарегистрироваться</a>
                     </div>-->
                 </form>

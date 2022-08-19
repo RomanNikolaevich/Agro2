@@ -8,7 +8,6 @@ const openModalRegin = document.getElementById('modal_registration_open'); //reg
 const modalRegin = document.getElementById('modal_regin');
 const closeModalRegin = document.getElementById('modal_registration_close');
 
-if (openModalAuth){
     /*отслеживаем нажатие на кнопку: + отмена перехода по ссылке*/
     openModalAuth.addEventListener('click', function (e) {
         e.preventDefault();//отмена действия браузера по умолчанию
@@ -20,7 +19,6 @@ if (openModalAuth){
         modalAuth.classList.remove('active')//удалить класс
     })
 
-} else if (openModalRegin) {
     /*отслеживаем нажатие на кнопку: + отмена перехода по ссылке*/
     openModalRegin.addEventListener('click', function (e) {
         e.preventDefault();
@@ -31,4 +29,3 @@ if (openModalAuth){
     closeModalRegin.addEventListener('click', () => {
         modalRegin.classList.remove('active')
     })
-}

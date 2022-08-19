@@ -24,6 +24,7 @@
 	<?php include './skins/'.Core::$SKIN.'/static/menu/header.tpl';
     echo $content;
     include './skins/'.Core::$SKIN.'/auth/login.tpl';
+    include './skins/'.Core::$SKIN.'/auth/regin.tpl';
     ?>
 
     <div class="conteiner-content">

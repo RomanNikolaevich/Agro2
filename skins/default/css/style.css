@@ -333,7 +333,6 @@ span {
     outline:none; /*убираем чёрную рамку при клике на поле ввода*/
 }
 
-
 .modal_login_body button, .modal_regin_body button { /*кнопка модального окна*/
     cursor:pointer;
     display:block;
@@ -349,7 +348,7 @@ span {
     background-color:orange;
 }
 
-/*#pop_up_body_reg_link {
+/*.modal_registration_open_btn {
     cursor:pointer;
     text-decoration: none;
     display:block;

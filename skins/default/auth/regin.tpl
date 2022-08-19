@@ -65,4 +65,20 @@ if (!isset($_SESSION['regok'])) {
     <div>Вы успешно зарегистрировались на сайте!</div>
     <?php
 } ?>
+<!--<script>
 
+    //модальное окно для регистрации:
+    const openModalRegin = document.getElementById('modal_registration_open'); //regin
+    const modalRegin = document.getElementById('modal_regin');
+    const closeModalRegin = document.getElementById('modal_registration_close');
+    /*отслеживаем нажатие на кнопку: + отмена перехода по ссылке*/
+    openModalRegin.addEventListener('click', function (e) {
+        e.preventDefault();
+        modalRegin.classList.add('active');
+    })
+
+    /*выполненение действия по закрытию модального окна*/
+    closeModalRegin.addEventListener('click', () => {
+        modalRegin.classList.remove('active')
+    })
+</script>-->
