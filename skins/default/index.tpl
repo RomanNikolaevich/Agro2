@@ -32,9 +32,12 @@
     </div>
 </div>
 <script>
-    var error = '<?php echo $error ?? ''; ?>';
+    let error = '<?php echo $error ?? ''; ?>';
+    let notice = '<?php echo $notice ?? ''; ?>';
     if (error) {
         alert(error);
+    } else if (notice) {
+        alert(notice);
         location.reload();
     }
 </script>

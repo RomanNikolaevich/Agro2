@@ -7,13 +7,13 @@ if (!isset($_SESSION['regok'])) {
         <div class="modal_regin_container">
                 <div class="modal_regin_body" id="modal_regin_body">
                     <h2>Регистрация нового пользователя:</h2>
-                    <h4 style="color:red"><?php
+                    <h4 style="color:red"><?php //вывод ошибок
                         echo @$errors['loginwrong']; ?></h4>
-                    <form action="" method="post">
+                    <form method="post" onsubmit="return lengthCheckRegin();">
                         <p>Введите логин *: </p>
-                        <input type="text" name="login" class="form-control"
+                        <input type="text" name="login_reg" id="login_reg" class="form-control"
                                placeholder="Минимум 4 символа"
-                               value="<?php
+                               value="<?php //вывод логина
                                echo @htmlspecialchars($_POST['login']); ?>">
                         <span style="color:red"><?php
                             if (isset($errors['login'])) {
@@ -25,7 +25,7 @@ if (!isset($_SESSION['regok'])) {
                             } ?></span>
                         <p></p>
                         <p>Введите пароль *: </p>
-                        <input type="password" name="password" class="form-control"
+                        <input type="password" name="password_reg" id="password_reg" class="form-control"
                                placeholder="Минимум 4 символа"
                                value="<?php
                                echo @htmlspecialchars($_POST['password']); ?>">
@@ -65,20 +65,3 @@ if (!isset($_SESSION['regok'])) {
     <div>Вы успешно зарегистрировались на сайте!</div>
     <?php
 } ?>
-<!--<script>
-
-    //модальное окно для регистрации:
-    const openModalRegin = document.getElementById('modal_registration_open'); //regin
-    const modalRegin = document.getElementById('modal_regin');
-    const closeModalRegin = document.getElementById('modal_registration_close');
-    /*отслеживаем нажатие на кнопку: + отмена перехода по ссылке*/
-    openModalRegin.addEventListener('click', function (e) {
-        e.preventDefault();
-        modalRegin.classList.add('active');
-    })
-
-    /*выполненение действия по закрытию модального окна*/
-    closeModalRegin.addEventListener('click', () => {
-        modalRegin.classList.remove('active')
-    })
-</script>-->
