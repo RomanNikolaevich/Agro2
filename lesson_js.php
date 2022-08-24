@@ -1082,3 +1082,47 @@ $('#yyy').attr('data-color', 'red');
 
 38.4 Домашняя работа (00:27:00):
 сделать новые комментарии на ajax
+
+
+Урок 39: Окончание курса
+<!--План:
+Ajax и MVC
+Болтаем о будущем-->
+
+Добавляем скрипт в index.php после ob_end_clean():
+<?php
+if (isset($_POST['ajax'])) {
+    echo $content;
+    exit();
+}
+?>
+Если в запросе будет упоминаться ajax, то сработает верхний скрипт, пример запроса:
+agro.ua/news/ajax_news?ajax=1
+
+
+Для того, чтобы на нашем сайте выводились только самые последние новости есть такое
+обращение к БД в файле ajax_news.php:
+<?php
+$lasterest_news = q("
+    SELECT *
+    FROM `news`
+    WHERE `date` > NOW() - INTERVAL 1 MINUTE
+");
+?>
+Вместо MINUTE можно писать DAY, HOUR, SECOND...
+Можно составить более сложное условие:
+WHERE `date` >= NOW() - INTERVAL 2 MINUTE AND `date` <= NOW() - INTERVAL 1 MINUTE
+Это условие можно так же сократить:
+WHERE `date` BETWEEN NOW() - INTERVAL 2 MINUTE AND NOW() - INTERVAL 1 MINUTE
+Можно еще разнообразить условие:
+AND `id` BETWEEN 1 AND 5
+
+Далее проводим циклом в файле ajax_news.tpl:
+<?php
+while($row = $lasterest_news->fetch_assoc()) {
+    echo 'Новость'; //вывод новостей
+}
+
+
+
+

@@ -31,4 +31,9 @@ include './skins/'.Core::$SKIN.'/'.$_GET['module'].'/'.$_GET['page'].'.tpl';
 $content = ob_get_contents();
 ob_end_clean();
 
+if (isset($_POST['ajax'])) {
+    echo $content;
+    exit();
+}
+
 include './skins/'.Core::$SKIN.'/index.tpl';

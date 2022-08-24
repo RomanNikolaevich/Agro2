@@ -18,6 +18,10 @@ if (isset($_POST['do_signup'])) {
 	//Защита от спама со ссылками:
      validateName($comment);
 
+    $commentArray = [
+
+    ];
+
     if (!count($errors)) {
         $username = mres($username);
         $comment = mres($comment);
