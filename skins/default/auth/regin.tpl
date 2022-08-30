@@ -65,3 +65,4 @@ if (!isset($_SESSION['regok'])) {
     <div>Вы успешно зарегистрировались на сайте!</div>
     <?php
 } ?>
+<script src="/skins/default/js/modal.js" defer></script>

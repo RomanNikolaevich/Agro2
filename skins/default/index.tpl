@@ -17,14 +17,17 @@
     <link href="/skins/default/css/normalize.css" rel="stylesheet"/>
     <link href="/skins/default/css/style.css" rel="stylesheet">
     <link rel="icon" href="/skins/default/img/favicon/favicon.ico" type="image/x-icon">
-    <script src="/skins/default/js/modal.js" defer></script>
+    <script src="/skins/default/js/jquery-3.6.1.min.js"></script>
+    <script src="/skins/default/js/script.js"></script>
 </head>
 <body>
 <div class="block">
 	<?php include './skins/'.Core::$SKIN.'/static/menu/header.tpl';
     echo $content;
-    include './skins/'.Core::$SKIN.'/auth/login.tpl';
-    include './skins/'.Core::$SKIN.'/auth/regin.tpl';
+    if (!isset($_SESSION['user'])) {
+        include './skins/'.Core::$SKIN.'/auth/login.tpl';
+        include './skins/'.Core::$SKIN.'/auth/regin.tpl';
+    }
     ?>
 
     <div class="conteiner-content">

@@ -25,3 +25,4 @@ if (empty($_SESSION['user'])) {
     <div class="col"><?=$_SESSION['reg'] ?? ''?></div>
 <?php
 } ?>
+<script src="/skins/default/js/modal.js" defer></script>

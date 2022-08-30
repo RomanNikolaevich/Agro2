@@ -12,53 +12,27 @@
 
 ?>
 <!--Форма ввода отзывов:-->
-<div class="container mt-4">
-	<div class="row">
-		<div class="form-group">
-			<h2>ОТЗЫВЫ</h2>
-			<h5>Если Вы остались довольны услугами <span>"AGRO.UNITED"</span> или вам что-то не понравилось,
-				то можете оставить свой отзыв</h5>
-            <?php if(isset($_SESSION['user'])) { ?>
-            <!-- Start "Видимый блок отзывов для авторизированных пользователей" -->
-            <?php if (!isset($_SESSION['commentOk'])) { ?>
-				<form action="" method="post">
-					<textarea class="form-control" name="comment"
-							  placeholder="Оставьте свой отзыв *"></textarea><br>
-                    <?php if (!empty($errors['comment'])): ?>
-						<span style="color:red"><?=$errors['comment']?></span><br>
-                    <?php endif ?>
-					<p style="font-size:12px;">* - поле обязательное для заполнения</p>
-					<button class="btn btn-suc" name="do_signup" type="submit">Отправить</button>
-				</form>
-                <?php } else {
-                unset($_SESSION['commentOk']); ?>
-				<div>Спасибо за Ваш отзыв!</div>
-                <?php } ?>
-			<br>
-            <!-- End "Видимый блок отзывов для авторизированных пользователей" -->
-            <?php } else { ?>
-                <span>Отзывы могут оставлять только зарегистрированные
-                    пользователи.</span><br>
-                <span>Для регистрации перейдите по ссылке: </span><a style=" text-decoration: none; color: red;"
-                      href="/auth/regin">Регистрация</a><br>
-                <span>если вы уже зарегистрированы, то пройдите авторизацию:</span>
-                <a style=" text-decoration: none; color: red;"
-                   href="/auth/login">Авторизация</a><br>
-            <?php } ?>
-		</div>
-	</div>
-</div>
+<?php
+include './skins/'.Core::$SKIN.'/comments/add.tpl';
+?>
+<!--Конец формф ввода отзывов:-->
 <!--Вывод отзывов из БД на экран:-->
 <div class="container mt-4">
 	<div class="row">
 		<div class="col">
 			<h4>Отзывы наших клиентов:</h4>
-			<div class="comment-body">
+			<div class="comment-body" id="allComments">
 				<p>
                     <?=$commentCount
                         ? 'Всего '.$commentCount.' отзывов:<br>'
                         : 'Отзывов пока еще нет, вы будете первым';?>
 				</p>
+                <div id="addedComment" style="display: none">
+                    <div class="comment">
+                        <div id="addedCommentLoginAndDate" class="nameComment"></div>
+                        <div id="addedCommentText" class="textComment"></div>
+                    </div>
+                </div>
 				<div>
                     <?php foreach ($comments as $comment):?>
                         <!--Start "Блок вывода отзывов из БД:"-->
