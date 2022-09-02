@@ -31,29 +31,37 @@ function hideShow(id) {
 
 //;(function($, undefined){
 //$(function(){
-/*    function myAjaxComments() {
-        var comment = $('#comment').value;//document.getElementById('comment').value;
-        //alert(comment);
-        var login = $('#login').value;//document.getElementById('login').value;
-        //alert(login);
-        $.ajax({
-            url: '/comments/add',
-            type: "POST",
-            cache: false,
-            dataType: "json",
-            data: {login: login, comment: comment},
-            success: function (msg) {
-                var commentJson = JSON.parse(msg);
-                $('#login').attr("value", "");
-                $('#comment').attr("value", "");
-                //alert(commentJson);
-                //document.getElementById('commentWasAdded').style.display = 'block';
-                //document.getElementById('addedCommentLoginAndDate').innerHTML = commentJson.login + '<br>';
-                //document.getElementById('addedCommentText').innerHTML = commentJson.comment + '<hr>';
-            },
-        });
+function myAjaxComments() {
+    var login = document.getElementById('login').value;
+    var comment = document.getElementById('comment').value;
+    var l = document.getElementById('comment').value.length;
+    if(l < 10) {
+        alert('Вы не заполнили поле, минимум 10 символов! Вы ввели только'+l);
+        return false; //запрос поиска не выполнится
+    }
+    $.ajax({
+        url: '/comments/add',
+        type: "POST",
+        dataType: 'text',
+        cache: false,
+        data: {
+            login: login,
+            comment: comment
+        },
+        success: function (msg) {
+            var response = JSON.parse(msg);
+            if (response.status == 'ok') {
+                document.getElementById('addedComment').hidden = false;//отмена сокрытия блока
+                document.getElementById('addedCommentLogin').innerHTML = response.login + '<br>';
+                document.getElementById('addedCommentText').innerHTML = response.comment + '<hr>';
+                document.getElementById("comment").value = '';//очищаем поле ввода отзывов
+            }
+        },
+    });
 
-        //$('#allComments').innerHTML = $('#addedComment').innerHTML + $('#allComments').innerHTML;
-    }*/
+    document.getElementById('allComments').innerHTML =
+        document.getElementById('addedComment').innerHTML + document.getElementById('allComments').innerHTML;
+}
+
 //});
 //})(jQuery);

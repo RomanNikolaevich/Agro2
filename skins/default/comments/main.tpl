@@ -13,13 +13,48 @@
 ?>
 <!--Форма ввода отзывов:-->
 <?php
-include './skins/'.Core::$SKIN.'/comments/add.tpl';
+//include './skins/'.Core::$SKIN.'/comments/add.tpl';
 ?>
-<!--Конец формф ввода отзывов:-->
-<!--Вывод отзывов из БД на экран:-->
 <div class="container mt-4">
+    <div class="row">
+        <div class="form-group">
+            <h2>ОТЗЫВЫ</h2>
+            <h5>Если Вы остались довольны услугами <span>"AGRO.UNITED"</span> или вам что-то не понравилось,
+                то можете оставить свой отзыв</h5>
+            <?php if(isset($_SESSION['user'])) { ?>
+                <!-- Start "Видимый блок отзывов для авторизированных пользователей" -->
+                    <?php if (!empty($errors['comment'])): ?>
+                        <span style="color:red" id="commentError"><?=$errors['comment']?></span><br>
+                    <?php endif ?>
+                <form action="" method="post" onsubmit="myAjaxComments(); return false">
+                        <input type="hidden" name="login" id="login" placeholder="" value="<?= $_SESSION['user']['login'] ?>">
+                        <textarea class="form-control" name="comment" id="comment"
+                                  placeholder="Оставьте свой отзыв *"></textarea><br>
+                        <p style="font-size:12px;">* - поле обязательное для заполнения</p>
+                        <button class="btn btn-suc" name="do_signup" id="do_signup" type="submit">Отправить</button>
+                    </form>
+                <!-- End "Видимый блок отзывов для авторизированных пользователей" -->
+            <?php } else { ?>
+                <span>Отзывы могут оставлять только зарегистрированные
+                    пользователи.</span><br>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+<!--Конец формы ввода отзывов:-->
+
+
+
+
+<!--Вывод отзывов из БД на экран:-->
+<div class="container mt-4" id="allComments">
 	<div class="row">
 		<div class="col">
+            <div id="addedComment" hidden>
+                <h4>Ваш комментарий был добавлен:</h4>
+                <div id="addedCommentLogin" class="nameComment"></div>
+                <div id="addedCommentText" class="textComment"></div>
+            </div>
 			<h4>Отзывы наших клиентов:</h4>
 			<div class="comment-body" id="allComments">
 				<p>
@@ -27,12 +62,7 @@ include './skins/'.Core::$SKIN.'/comments/add.tpl';
                         ? 'Всего '.$commentCount.' отзывов:<br>'
                         : 'Отзывов пока еще нет, вы будете первым';?>
 				</p>
-                <div id="addedComment" style="display: none">
-                    <div class="comment">
-                        <div id="addedCommentLoginAndDate" class="nameComment"></div>
-                        <div id="addedCommentText" class="textComment"></div>
-                    </div>
-                </div>
+
 				<div>
                     <?php foreach ($comments as $comment):?>
                         <!--Start "Блок вывода отзывов из БД:"-->
@@ -124,3 +154,21 @@ include './skins/'.Core::$SKIN.'/comments/add.tpl';
 		</div>
 	</div>
 </div>
+
+<script>
+/*    window.onload = function (e) {
+        document.getElementById('feedBack').onsubmit = myAjaxComments;
+    }
+
+    const form = document.querySelector('#feedBack');
+    const comment = document.querySelector('#comment');
+    form.addEventListener('submit', function(evt) {
+        evt.preventDefault();
+        if(!comment.value) {
+            alert('Поле комментарий не заполнено');
+            return;
+        }
+
+        this.submit();
+    });*/
+</script>
