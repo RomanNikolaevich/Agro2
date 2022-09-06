@@ -1,8 +1,8 @@
 //Функция оповещения с подтверждением удаления
 //вызов функции: <a onclick="return areYouSureDel()">Удалить статью</a>
 function areYouSureDel() {
-    let x = confirm('Вы уверены, что хотите удалить?');
-    if (!x) {//пользователь отказался
+    let contentDeleteConfirm = confirm('Вы уверены, что хотите удалить?');
+    if (!contentDeleteConfirm) {//пользователь отказался
         return false;
     }
 }
@@ -10,33 +10,20 @@ function areYouSureDel() {
 //Функция сокрытие/отображение блока
 //вызов функции: <div style="font-size:16px;" onclick="hideShow('yyy')">НАЖМИ НА МЕНЯ</div>
 function hideShow(id) {
-    let x = document.getElementById(id);
-    if (x.style.display == 'block') {
-        x.style.display = 'none';
+    let hideShow = document.getElementById(id);
+    if (hideShow.style.display == 'block') {
+        hideShow.style.display = 'none';
     } else {
         x.style.display = 'block';
     }
 }
 
-/*function checkLength(id, errorId) {
-    let length = document.getElementById(id).value.length;
-    if (length < 3) {
-        document.getElementById(errorId).innerHTML = 'минимум 3 символа. Вы ввели: ' + length;
-        return false;
-    } else {
-        document.getElementById(errorId).innerHTML = '';
-        return true;
-    }
-}*/
-
-//;(function($, undefined){
-//$(function(){
 function myAjaxComments() {
     var login = document.getElementById('login').value;
     var comment = document.getElementById('comment').value;
-    var l = document.getElementById('comment').value.length;
-    if(l < 10) {
-        alert('Вы не заполнили поле, минимум 10 символов! Вы ввели только'+l);
+    var commentLengthInput = document.getElementById('comment').value.length;
+    if(commentLengthInput > 0 && commentLengthInput < 10) {
+        document.getElementById('commentError').innerHTML = 'Ваше сообщение слишком короткое, нужно минимум 10 символов! Вы ввели только  ' +commentLengthInput;
         return false; //запрос поиска не выполнится
     }
     $.ajax({
@@ -55,13 +42,12 @@ function myAjaxComments() {
                 document.getElementById('addedCommentLogin').innerHTML = response.login + '<br>';
                 document.getElementById('addedCommentText').innerHTML = response.comment + '<hr>';
                 document.getElementById("comment").value = '';//очищаем поле ввода отзывов
+                document.getElementById('commentError').innerHTML = '';//очищаем ошибки
+            } else {
+                //console.log(response.errors);
+                document.getElementById('commentError').innerHTML = response.errors.comment;//вывод ошибок из php
+
             }
         },
     });
-
-    document.getElementById('allComments').innerHTML =
-        document.getElementById('addedComment').innerHTML + document.getElementById('allComments').innerHTML;
 }
-
-//});
-//})(jQuery);

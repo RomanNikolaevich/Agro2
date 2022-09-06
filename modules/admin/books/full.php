@@ -16,9 +16,10 @@ if(!$books->num_rows) {
 }
 
 //Вывод связей книг с автором в виде 'ФИО':
-function booksShowAuthor () {
+$id = (int)$_GET['id'];
+function booksShowAuthor ($id) {
     //запрос к БД связей:
-    $id = (int)$_GET['id'];
+
     $res = q("
     SELECT *
     FROM `books2books_author`
@@ -35,9 +36,3 @@ function booksShowAuthor () {
         echo $row2['name'].'<br>';
     }
 }
-
-//wtf($row); //видим нашу новости в виде массива
-
-/*if(isset($_POST['title'])) {
-    $row['title'] = $_POST['title'];
-}*/

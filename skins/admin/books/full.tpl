@@ -7,7 +7,7 @@
              alt="Card image cap" style="width:350px; float:left;">
     </div>
     <div style="padding:10px;">
-        <p><b>Авторы: </b><br><?=htmlspecialchars(booksShowAuthor () ?? '');?></p>
+        <p><b>Авторы: </b><br><?=htmlspecialchars(booksShowAuthor ((int)$_GET['id']) ?? '');?></p>
     </div>
 
     <div style="padding:10px">

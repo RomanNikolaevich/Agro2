@@ -8,7 +8,6 @@ class Core {
     static $DB_PASS    = 'yAjD8lu4SHe';
     static $DB_NAME    = 'roman';
     static $DOMAIN     = 'http://agro2.ua:8081/';
-    //static $DOMAIN     = 'https://roman.school-php.com/';
     static $JS         = array();
     static $CSS        = array();
     static $META       = array(

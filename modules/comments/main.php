@@ -11,7 +11,11 @@ $limit = 5;
 //OFFSET задает количество строк, которые нужно пропустить.
 $offset = ($pageno - 1) * $limit;
 
-$comments = getComments($link, $limit, $offset);
+//выводим отзывов из БД на страницу с учетом пагинатора
+$commentQuery = "SELECT * FROM `comments` ORDER BY `date` DESC LIMIT $limit OFFSET $offset";
+$commentResult = q($commentQuery);
+$comments = mysqli_fetch_all($commentResult, MYSQLI_ASSOC);//MYSQLI_ASSOC указывает на тип массива
+
 
 //счетчик отзывов:
 $commentResult = q("SELECT * FROM `comments` WHERE `active` = 1"); //запрос к БД отзывов

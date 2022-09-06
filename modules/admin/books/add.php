@@ -140,28 +140,3 @@ if(isset($_POST['add'])) {
     header('Location: /admin/books'); //переадресацию на главную страничку на main
     exit();
 }
-
-
-
-
-
-//Вывод связей книг с автором в виде 'ФИО':
-/*function booksAddAuthor () {
-    //запрос к БД связей:
-    $id = (int)$_GET['id'];
-    $res = q("
-    SELECT *
-    FROM `books2books_author`
-    WHERE 	`book_id` = ".$id."
-    ");
-    while($row=$res->fetch_assoc()){
-        //Запрос к БД авторов для получения ФИО автора по идентификатору:
-        $res2 = q("
-            SELECT `name`
-            FROM `books_author`
-            WHERE `id` = ".$row['author']."
-        ");
-        $row2 = $res2->fetch_assoc();
-        echo $row2['name'].'<br>';
-    }
-}*/

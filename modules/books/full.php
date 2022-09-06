@@ -16,9 +16,9 @@ if(!$books->num_rows) {
 }
 
 //Вывод связей книг с автором в виде 'ФИО':
-function booksShowAuthor () {
+$id = (int)$_GET['id'];
+function booksShowAuthor ($id) {
     //запрос к БД связей:
-    $id = (int)$_GET['id'];
     $res = q("
     SELECT *
     FROM `books2books_author`

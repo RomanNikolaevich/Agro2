@@ -23,9 +23,7 @@
                 то можете оставить свой отзыв</h5>
             <?php if(isset($_SESSION['user'])) { ?>
                 <!-- Start "Видимый блок отзывов для авторизированных пользователей" -->
-                    <?php if (!empty($errors['comment'])): ?>
-                        <span style="color:red" id="commentError"><?=$errors['comment']?></span><br>
-                    <?php endif ?>
+                        <span style="color:red" id="commentError"><?=$errors['comment'] ?? ''?></span><br>
                 <form action="" method="post" onsubmit="myAjaxComments(); return false">
                         <input type="hidden" name="login" id="login" placeholder="" value="<?= $_SESSION['user']['login'] ?>">
                         <textarea class="form-control" name="comment" id="comment"
@@ -42,9 +40,6 @@
     </div>
 </div>
 <!--Конец формы ввода отзывов:-->
-
-
-
 
 <!--Вывод отзывов из БД на экран:-->
 <div class="container mt-4" id="allComments">
@@ -154,21 +149,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-/*    window.onload = function (e) {
-        document.getElementById('feedBack').onsubmit = myAjaxComments;
-    }
-
-    const form = document.querySelector('#feedBack');
-    const comment = document.querySelector('#comment');
-    form.addEventListener('submit', function(evt) {
-        evt.preventDefault();
-        if(!comment.value) {
-            alert('Поле комментарий не заполнено');
-            return;
-        }
-
-        this.submit();
-    });*/
-</script>
