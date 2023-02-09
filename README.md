@@ -1,5 +1,5 @@
 # Agro2
-Это доработанная и улученная версия моих предыдущих версий на php : <a href="https://github.com/RomanNikolaevich/php_school_1st_course">php_school_1st_course</a> и <a href="https://github.com/RomanNikolaevich/TestSite_Agro">TestSite_Agro</a><br>. 
+Это доработанная и улученная версия моих предыдущих версий на php : <a href="https://github.com/RomanNikolaevich/php_school_1st_course">php_school_1st_course</a> и <a href="https://github.com/RomanNikolaevich/TestSite_Agro">TestSite_Agro</a><br>
 В процессе которого на нем изучались основы PHP, а так же HTML, CSS, JS и jQuerry.<br>
 Сайте несколько раз рефакторился по мере получения новых знаний.<br>
 <a href="https://roman.school-php.com/">Ссылка на онлайн версию проекта</a><br>
